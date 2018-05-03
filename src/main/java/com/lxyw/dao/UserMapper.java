@@ -1,15 +1,16 @@
 package com.lxyw.dao;
 
+
 import com.lxyw.entity.User;
 
-public interface UserDao {
-    int deleteByPrimaryKey(Integer id);
+public interface UserMapper {
+    int deleteByPrimaryKey(Long id);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(User record);
 

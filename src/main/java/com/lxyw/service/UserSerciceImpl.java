@@ -1,7 +1,5 @@
 package com.lxyw.service;
 
-import com.lxyw.dao.UserDao;
-import com.lxyw.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

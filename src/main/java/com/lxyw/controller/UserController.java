@@ -1,6 +1,5 @@
 package com.lxyw.controller;
 
-import com.lxyw.entity.User;
 import com.lxyw.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +16,14 @@ public class UserController {
     @RequestMapping("/showUser")
     @ResponseBody
     public User toIndex(HttpServletRequest request){
+        int userId = Integer.parseInt(request.getParameter("id"));
+        User user = this.userService.getUserById(userId);
+        return user;
+    }
+
+    @RequestMapping("/addUser")
+    @ResponseBody
+    public User addUser(HttpServletRequest request){
         int userId = Integer.parseInt(request.getParameter("id"));
         User user = this.userService.getUserById(userId);
         return user;
