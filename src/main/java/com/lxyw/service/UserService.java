@@ -1,9 +1,8 @@
 package com.lxyw.service;
 
 import com.lxyw.entity.User;
+import com.lxyw.util.PageBean;
 
 public interface UserService {
-    public User getUserById(int userId);
-
-    boolean addUser(User record);
+    public User getUserById(Long userId);
 }

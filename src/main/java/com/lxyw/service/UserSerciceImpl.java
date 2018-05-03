@@ -1,5 +1,7 @@
 package com.lxyw.service;
 
+import com.lxyw.dao.UserMapper;
+import com.lxyw.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -9,22 +11,11 @@ public class UserSerciceImpl implements  UserService {
 
 
     @Resource
-    private UserDao userDao;
+    private UserMapper userMapper;
 
 
-    public User getUserById(int userId) {
-        return userDao.selectByPrimaryKey(userId);
+    public User getUserById(Long userId) {
+        return userMapper.selectByPrimaryKey(userId);
     }
 
-    public boolean addUser(User record){
-        boolean result = false;
-        try {
-            userDao.insertSelective(record);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
 }
