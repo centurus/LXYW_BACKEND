@@ -1,7 +1,6 @@
 package com.lxyw.service;
 
 import com.lxyw.entity.UserInfo;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

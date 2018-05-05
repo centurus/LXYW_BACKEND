@@ -1,5 +1,6 @@
 package com.lxyw.controller;
 
+import com.lxyw.entity.StockListFee;
 import com.lxyw.entity.UserInfo;
 import com.lxyw.service.UserInfoService;
 import com.lxyw.util.Response;
@@ -41,9 +42,9 @@ public class UserController {
         return response;
     }
 
-    @RequestMapping("/updateUserInfo")
+    @RequestMapping("/deleteUserInfo")
     @ResponseBody
-    public Response updateUserInfo(HttpServletRequest request){
+    public Response deleteUserInfo(HttpServletRequest request){
         Response response=new Response();
         String userId = request.getParameter("id");
         this.userInfoService.deleteByPrimaryKey(userId);

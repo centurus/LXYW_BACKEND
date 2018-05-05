@@ -1,9 +1,10 @@
-package com.lxyw.dao;
+package com.lxyw.service;
 
 import com.lxyw.entity.SupplierIndividual;
-import org.apache.ibatis.annotations.Param;
 
-public interface SupplierIndividualMapper {
+import java.util.List;
+
+public interface SupplierIndividualService {
     int deleteByPrimaryKey(String id);
 
     int insert(SupplierIndividual record);
@@ -16,5 +17,5 @@ public interface SupplierIndividualMapper {
 
     int updateByPrimaryKey(SupplierIndividual record);
 
-    int batchInsert(@Param("list") java.util.List<SupplierIndividual> list);
+    int batchInsert(List<SupplierIndividual> list);
 }

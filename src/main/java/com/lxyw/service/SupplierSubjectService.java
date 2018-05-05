@@ -1,9 +1,11 @@
-package com.lxyw.dao;
+package com.lxyw.service;
 
 import com.lxyw.entity.SupplierSubject;
-import org.apache.ibatis.annotations.Param;
 
-public interface SupplierSubjectMapper {
+import java.util.List;
+
+public interface SupplierSubjectService {
+
     int deleteByPrimaryKey(String id);
 
     int insert(SupplierSubject record);
@@ -16,5 +18,5 @@ public interface SupplierSubjectMapper {
 
     int updateByPrimaryKey(SupplierSubject record);
 
-    int batchInsert(@Param("list") java.util.List<SupplierSubject> list);
+    int batchInsert(List<SupplierSubject> list);
 }

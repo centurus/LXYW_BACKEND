@@ -1,9 +1,11 @@
-package com.lxyw.dao;
+package com.lxyw.service;
 
 import com.lxyw.entity.StockList;
-import org.apache.ibatis.annotations.Param;
 
-public interface StockListMapper {
+import java.util.List;
+
+public interface StockListService {
+
     int deleteByPrimaryKey(String id);
 
     int insert(StockList record);
@@ -16,5 +18,5 @@ public interface StockListMapper {
 
     int updateByPrimaryKey(StockList record);
 
-    int batchInsert(@Param("list") java.util.List<StockList> list);
+    int batchInsert(List<StockList> list);
 }
