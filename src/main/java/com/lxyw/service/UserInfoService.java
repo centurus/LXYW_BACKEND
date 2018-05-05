@@ -1,6 +1,7 @@
 package com.lxyw.service;
 
 import com.lxyw.entity.UserInfo;
+import com.lxyw.util.PageBean;
 
 import java.util.List;
 
@@ -18,14 +19,9 @@ public interface UserInfoService {
 
     int updateByPrimaryKey(UserInfo record);
 
-    /**
-     * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
-     * This method corresponds to the database table user_info
-     *
-     * @mbg.generated
-     * @author hewei
-     */
     int batchInsert( List<UserInfo> list);
+
+   // PageBean<UserInfo> getUserInfoPageInfo(UserInfo record);
 
 
 }

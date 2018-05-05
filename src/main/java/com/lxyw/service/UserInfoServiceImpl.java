@@ -2,6 +2,7 @@ package com.lxyw.service;
 
 import com.lxyw.dao.UserInfoMapper;
 import com.lxyw.entity.UserInfo;
+import com.lxyw.util.PageBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,4 +48,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     public int batchInsert(List<UserInfo> list) {
         return userInfoMapper.batchInsert(list);
     }
+
+    /*@Override
+    public PageBean<UserInfo> getUserInfoPageInfo(UserInfo record) {
+        PageBean<UserInfo> userPageInfo=new PageBean<UserInfo>();
+        userInfoMapper.
+        userPageInfo.setData()
+        return null;
+    }*/
 }
