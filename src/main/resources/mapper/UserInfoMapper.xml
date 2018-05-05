@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxyw.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lxyw.entity.UserInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="SEX" jdbcType="CHAR" property="sex" />
+    <result column="BIRTHDAY" jdbcType="DATE" property="birthday" />
+    <result column="GREDUATE_FROM" jdbcType="VARCHAR" property="greduateFrom" />
+    <result column="GREDUATE_LEVEL" jdbcType="VARCHAR" property="greduateLevel" />
+    <result column="IDCARD_NO" jdbcType="VARCHAR" property="idcardNo" />
+    <result column="CELLPHONE_NO" jdbcType="VARCHAR" property="cellphoneNo" />
+    <result column="WECHAT" jdbcType="VARCHAR" property="wechat" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="POST_CODE" jdbcType="VARCHAR" property="postCode" />
+    <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="VERSION" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL, 
+    IDCARD_NO, CELLPHONE_NO, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, 
+    UPDATE_DATE, VERSION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lxyw.entity.UserInfo">
+    insert into user_info (ID, USERNAME, PASSWORD, 
+      NAME, STATE, SEX, BIRTHDAY, 
+      GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, 
+      CELLPHONE_NO, WECHAT, ADDRESS, 
+      POST_CODE, CREATED_BY, CREATED_DATE, 
+      UPDATE_BY, UPDATE_DATE, VERSION
+      )
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, 
+      #{greduateFrom,jdbcType=VARCHAR}, #{greduateLevel,jdbcType=VARCHAR}, #{idcardNo,jdbcType=VARCHAR}, 
+      #{cellphoneNo,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{postCode,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxyw.entity.UserInfo">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY,
+      </if>
+      <if test="greduateFrom != null">
+        GREDUATE_FROM,
+      </if>
+      <if test="greduateLevel != null">
+        GREDUATE_LEVEL,
+      </if>
+      <if test="idcardNo != null">
+        IDCARD_NO,
+      </if>
+      <if test="cellphoneNo != null">
+        CELLPHONE_NO,
+      </if>
+      <if test="wechat != null">
+        WECHAT,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="postCode != null">
+        POST_CODE,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="greduateFrom != null">
+        #{greduateFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="greduateLevel != null">
+        #{greduateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardNo != null">
+        #{idcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphoneNo != null">
+        #{cellphoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxyw.entity.UserInfo">
+    update user_info
+    <set>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="greduateFrom != null">
+        GREDUATE_FROM = #{greduateFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="greduateLevel != null">
+        GREDUATE_LEVEL = #{greduateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardNo != null">
+        IDCARD_NO = #{idcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphoneNo != null">
+        CELLPHONE_NO = #{cellphoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        WECHAT = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxyw.entity.UserInfo">
+    update user_info
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=CHAR},
+      BIRTHDAY = #{birthday,jdbcType=DATE},
+      GREDUATE_FROM = #{greduateFrom,jdbcType=VARCHAR},
+      GREDUATE_LEVEL = #{greduateLevel,jdbcType=VARCHAR},
+      IDCARD_NO = #{idcardNo,jdbcType=VARCHAR},
+      CELLPHONE_NO = #{cellphoneNo,jdbcType=VARCHAR},
+      WECHAT = #{wechat,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="batchInsert" parameterType="java.util.List">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into user_info (ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, CELLPHONE_NO, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    values
+    <foreach collection="list" item="item" separator=",">
+       (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.sex,jdbcType=CHAR}, #{item.birthday,jdbcType=DATE}, #{item.greduateFrom,jdbcType=VARCHAR}, #{item.greduateLevel,jdbcType=VARCHAR}, #{item.idcardNo,jdbcType=VARCHAR}, #{item.cellphoneNo,jdbcType=VARCHAR}, #{item.wechat,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.postCode,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

@@ -1,7 +1,8 @@
 package com.lxyw.controller;
 
-import com.lxyw.entity.User;
-import com.lxyw.service.UserService;
+import com.lxyw.entity.UserInfo;
+import com.lxyw.service.UserInfoService;
+import com.lxyw.util.Response;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,24 +10,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/userInfo")
 public class UserController {
     @Resource
-    private UserService userService;
+    private UserInfoService userInfoService;
 
-    @RequestMapping("/showUser")
+    @RequestMapping("/showUserInfo")
     @ResponseBody
-    public User toIndex(HttpServletRequest request){
-        long userId = Long.parseLong(request.getParameter("id"));
-        User user = this.userService.getUserById(userId);
-        return user;
+    public Response showUser(HttpServletRequest request){
+        String userId = request.getParameter("id");
+        Response response=new Response();
+        UserInfo user=this.userInfoService.selectByPrimaryKey(userId);
+        response.setData(user);
+        return response;
     }
 
-    @RequestMapping("/addUser")
+    @RequestMapping("/addUserInfo")
     @ResponseBody
-    public User addUser(HttpServletRequest request){
-        long userId = Long.parseLong(request.getParameter("id"));
-        User user = this.userService.getUserById(userId);
-        return user;
+    public Response addUser(UserInfo userInfo){
+        Response response=new Response();
+        this.userInfoService.insert(userInfo);
+        return response;
     }
+
+    @RequestMapping("/updateUserInfo")
+    @ResponseBody
+    public Response updateUserInfo(UserInfo userInfo){
+        Response response=new Response();
+        this.userInfoService.updateByPrimaryKey(userInfo);
+        return response;
+    }
+
+    @RequestMapping("/updateUserInfo")
+    @ResponseBody
+    public Response updateUserInfo(HttpServletRequest request){
+        Response response=new Response();
+        String userId = request.getParameter("id");
+        this.userInfoService.deleteByPrimaryKey(userId);
+        return response;
+    }
+
+
 }

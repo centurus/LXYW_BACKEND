@@ -2,7 +2,7 @@ package com.lxyw.util;
 
 import java.io.Serializable;
 
-public class ControllerResponse implements Serializable {
+public class Response implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /** 应答编码  */
