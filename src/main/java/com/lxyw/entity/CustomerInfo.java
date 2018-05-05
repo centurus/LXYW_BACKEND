@@ -2,7 +2,7 @@ package com.lxyw.entity;
 
 import java.util.Date;
 
-public class customerInfo {
+public class CustomerInfo {
     private String id;
 
     private String customerName;

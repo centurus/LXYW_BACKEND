@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxyw.dao.SupplierSubjectMapper">
+  <resultMap id="BaseResultMap" type="com.lxyw.entity.SupplierSubject">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SUPPLIER_NAME" jdbcType="VARCHAR" property="supplierName" />
+    <result column="SUPPLIER_TYPE" jdbcType="VARCHAR" property="supplierType" />
+    <result column="SUPPLIER_EMAIL" jdbcType="VARCHAR" property="supplierEmail" />
+    <result column="SUPPLIER_LOCATION" jdbcType="VARCHAR" property="supplierLocation" />
+    <result column="SUPPLIER_PHONE" jdbcType="VARCHAR" property="supplierPhone" />
+    <result column="SUPPLIER_ADDRESS" jdbcType="VARCHAR" property="supplierAddress" />
+    <result column="SUPPLIER_STATE" jdbcType="VARCHAR" property="supplierState" />
+    <result column="SUPPLIER_REMARK" jdbcType="VARCHAR" property="supplierRemark" />
+    <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="VERSION" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SUPPLIER_NAME, SUPPLIER_TYPE, SUPPLIER_EMAIL, SUPPLIER_LOCATION, SUPPLIER_PHONE, 
+    SUPPLIER_ADDRESS, SUPPLIER_STATE, SUPPLIER_REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, 
+    UPDATE_DATE, VERSION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier_subject
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from supplier_subject
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lxyw.entity.SupplierSubject">
+    insert into supplier_subject (ID, SUPPLIER_NAME, SUPPLIER_TYPE, 
+      SUPPLIER_EMAIL, SUPPLIER_LOCATION, SUPPLIER_PHONE, 
+      SUPPLIER_ADDRESS, SUPPLIER_STATE, SUPPLIER_REMARK, 
+      CREATED_BY, CREATED_DATE, UPDATE_BY, 
+      UPDATE_DATE, VERSION)
+    values (#{id,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, #{supplierType,jdbcType=VARCHAR}, 
+      #{supplierEmail,jdbcType=VARCHAR}, #{supplierLocation,jdbcType=VARCHAR}, #{supplierPhone,jdbcType=VARCHAR}, 
+      #{supplierAddress,jdbcType=VARCHAR}, #{supplierState,jdbcType=VARCHAR}, #{supplierRemark,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxyw.entity.SupplierSubject">
+    insert into supplier_subject
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="supplierName != null">
+        SUPPLIER_NAME,
+      </if>
+      <if test="supplierType != null">
+        SUPPLIER_TYPE,
+      </if>
+      <if test="supplierEmail != null">
+        SUPPLIER_EMAIL,
+      </if>
+      <if test="supplierLocation != null">
+        SUPPLIER_LOCATION,
+      </if>
+      <if test="supplierPhone != null">
+        SUPPLIER_PHONE,
+      </if>
+      <if test="supplierAddress != null">
+        SUPPLIER_ADDRESS,
+      </if>
+      <if test="supplierState != null">
+        SUPPLIER_STATE,
+      </if>
+      <if test="supplierRemark != null">
+        SUPPLIER_REMARK,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierType != null">
+        #{supplierType,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierEmail != null">
+        #{supplierEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierLocation != null">
+        #{supplierLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierPhone != null">
+        #{supplierPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null">
+        #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierState != null">
+        #{supplierState,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierRemark != null">
+        #{supplierRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxyw.entity.SupplierSubject">
+    update supplier_subject
+    <set>
+      <if test="supplierName != null">
+        SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierType != null">
+        SUPPLIER_TYPE = #{supplierType,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierEmail != null">
+        SUPPLIER_EMAIL = #{supplierEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierLocation != null">
+        SUPPLIER_LOCATION = #{supplierLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierPhone != null">
+        SUPPLIER_PHONE = #{supplierPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierAddress != null">
+        SUPPLIER_ADDRESS = #{supplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierState != null">
+        SUPPLIER_STATE = #{supplierState,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierRemark != null">
+        SUPPLIER_REMARK = #{supplierRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxyw.entity.SupplierSubject">
+    update supplier_subject
+    set SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR},
+      SUPPLIER_TYPE = #{supplierType,jdbcType=VARCHAR},
+      SUPPLIER_EMAIL = #{supplierEmail,jdbcType=VARCHAR},
+      SUPPLIER_LOCATION = #{supplierLocation,jdbcType=VARCHAR},
+      SUPPLIER_PHONE = #{supplierPhone,jdbcType=VARCHAR},
+      SUPPLIER_ADDRESS = #{supplierAddress,jdbcType=VARCHAR},
+      SUPPLIER_STATE = #{supplierState,jdbcType=VARCHAR},
+      SUPPLIER_REMARK = #{supplierRemark,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="batchInsert" parameterType="java.util.List">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into supplier_subject (ID, SUPPLIER_NAME, SUPPLIER_TYPE, SUPPLIER_EMAIL, SUPPLIER_LOCATION, SUPPLIER_PHONE, SUPPLIER_ADDRESS, SUPPLIER_STATE, SUPPLIER_REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    values
+    <foreach collection="list" item="item" separator=",">
+       (#{item.id,jdbcType=VARCHAR}, #{item.supplierName,jdbcType=VARCHAR}, #{item.supplierType,jdbcType=VARCHAR}, #{item.supplierEmail,jdbcType=VARCHAR}, #{item.supplierLocation,jdbcType=VARCHAR}, #{item.supplierPhone,jdbcType=VARCHAR}, #{item.supplierAddress,jdbcType=VARCHAR}, #{item.supplierState,jdbcType=VARCHAR}, #{item.supplierRemark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

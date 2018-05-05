@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxyw.dao.StockListMapper">
+  <resultMap id="BaseResultMap" type="com.lxyw.entity.StockList">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="STOCK_PRODUCT_NAME" jdbcType="VARCHAR" property="stockProductName" />
+    <result column="STOCK_PRODUCT_QNO" jdbcType="VARCHAR" property="stockProductQno" />
+    <result column="STOCK_PRODUCT_LOCATION" jdbcType="VARCHAR" property="stockProductLocation" />
+    <result column="STOCK_PRODUCT_NUM" jdbcType="DECIMAL" property="stockProductNum" />
+    <result column="STOCK_PRODUCT_POSITION" jdbcType="VARCHAR" property="stockProductPosition" />
+    <result column="STOCK_PRODUCT_PLUS_NUM" jdbcType="DECIMAL" property="stockProductPlusNum" />
+    <result column="STOCK_PRODUCT_PLUS_POSITION" jdbcType="VARCHAR" property="stockProductPlusPosition" />
+    <result column="STOCK_PRODUCT_FORMAT_NUM" jdbcType="DECIMAL" property="stockProductFormatNum" />
+    <result column="STOCK_PRODUCT_GUARANTEE_TIME" jdbcType="VARCHAR" property="stockProductGuaranteeTime" />
+    <result column="STOCK_PRODUCT_SINGLE_NETWEIGHT" jdbcType="DECIMAL" property="stockProductSingleNetweight" />
+    <result column="STOCK_PRODUCT_SINGLE_CAPACITY" jdbcType="DECIMAL" property="stockProductSingleCapacity" />
+    <result column="STOCK_PRODUCT_BATCH" jdbcType="VARCHAR" property="stockProductBatch" />
+    <result column="STOCK_PRODUCT_STATE" jdbcType="VARCHAR" property="stockProductState" />
+    <result column="STOCK_PRODUCT_STORAGE" jdbcType="VARCHAR" property="stockProductStorage" />
+    <result column="STOCK_PRODUCT_WASTAGE" jdbcType="DECIMAL" property="stockProductWastage" />
+    <result column="STOCK_PRODUCT_STORAGE_FEE" jdbcType="DECIMAL" property="stockProductStorageFee" />
+    <result column="STOCK_PRODUCT_SUPPLIER_SUBJECT_ID" jdbcType="VARCHAR" property="stockProductSupplierSubjectId" />
+    <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="VERSION" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, 
+    STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, 
+    STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, STOCK_PRODUCT_SINGLE_CAPACITY, 
+    STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, 
+    STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, CREATED_BY, CREATED_DATE, 
+    UPDATE_BY, UPDATE_DATE, VERSION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock_list
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from stock_list
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lxyw.entity.StockList">
+    insert into stock_list (ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, 
+      STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, 
+      STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, 
+      STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, 
+      STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, 
+      STOCK_PRODUCT_SINGLE_CAPACITY, STOCK_PRODUCT_BATCH, 
+      STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, 
+      STOCK_PRODUCT_WASTAGE, STOCK_PRODUCT_STORAGE_FEE, 
+      STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, CREATED_BY, 
+      CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
+      VERSION)
+    values (#{id,jdbcType=VARCHAR}, #{stockProductName,jdbcType=VARCHAR}, #{stockProductQno,jdbcType=VARCHAR}, 
+      #{stockProductLocation,jdbcType=VARCHAR}, #{stockProductNum,jdbcType=DECIMAL}, 
+      #{stockProductPosition,jdbcType=VARCHAR}, #{stockProductPlusNum,jdbcType=DECIMAL}, 
+      #{stockProductPlusPosition,jdbcType=VARCHAR}, #{stockProductFormatNum,jdbcType=DECIMAL}, 
+      #{stockProductGuaranteeTime,jdbcType=VARCHAR}, #{stockProductSingleNetweight,jdbcType=DECIMAL}, 
+      #{stockProductSingleCapacity,jdbcType=DECIMAL}, #{stockProductBatch,jdbcType=VARCHAR}, 
+      #{stockProductState,jdbcType=VARCHAR}, #{stockProductStorage,jdbcType=VARCHAR}, 
+      #{stockProductWastage,jdbcType=DECIMAL}, #{stockProductStorageFee,jdbcType=DECIMAL}, 
+      #{stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxyw.entity.StockList">
+    insert into stock_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="stockProductName != null">
+        STOCK_PRODUCT_NAME,
+      </if>
+      <if test="stockProductQno != null">
+        STOCK_PRODUCT_QNO,
+      </if>
+      <if test="stockProductLocation != null">
+        STOCK_PRODUCT_LOCATION,
+      </if>
+      <if test="stockProductNum != null">
+        STOCK_PRODUCT_NUM,
+      </if>
+      <if test="stockProductPosition != null">
+        STOCK_PRODUCT_POSITION,
+      </if>
+      <if test="stockProductPlusNum != null">
+        STOCK_PRODUCT_PLUS_NUM,
+      </if>
+      <if test="stockProductPlusPosition != null">
+        STOCK_PRODUCT_PLUS_POSITION,
+      </if>
+      <if test="stockProductFormatNum != null">
+        STOCK_PRODUCT_FORMAT_NUM,
+      </if>
+      <if test="stockProductGuaranteeTime != null">
+        STOCK_PRODUCT_GUARANTEE_TIME,
+      </if>
+      <if test="stockProductSingleNetweight != null">
+        STOCK_PRODUCT_SINGLE_NETWEIGHT,
+      </if>
+      <if test="stockProductSingleCapacity != null">
+        STOCK_PRODUCT_SINGLE_CAPACITY,
+      </if>
+      <if test="stockProductBatch != null">
+        STOCK_PRODUCT_BATCH,
+      </if>
+      <if test="stockProductState != null">
+        STOCK_PRODUCT_STATE,
+      </if>
+      <if test="stockProductStorage != null">
+        STOCK_PRODUCT_STORAGE,
+      </if>
+      <if test="stockProductWastage != null">
+        STOCK_PRODUCT_WASTAGE,
+      </if>
+      <if test="stockProductStorageFee != null">
+        STOCK_PRODUCT_STORAGE_FEE,
+      </if>
+      <if test="stockProductSupplierSubjectId != null">
+        STOCK_PRODUCT_SUPPLIER_SUBJECT_ID,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductName != null">
+        #{stockProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductQno != null">
+        #{stockProductQno,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductLocation != null">
+        #{stockProductLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductNum != null">
+        #{stockProductNum,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductPosition != null">
+        #{stockProductPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductPlusNum != null">
+        #{stockProductPlusNum,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductPlusPosition != null">
+        #{stockProductPlusPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductFormatNum != null">
+        #{stockProductFormatNum,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductGuaranteeTime != null">
+        #{stockProductGuaranteeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductSingleNetweight != null">
+        #{stockProductSingleNetweight,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductSingleCapacity != null">
+        #{stockProductSingleCapacity,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductBatch != null">
+        #{stockProductBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductState != null">
+        #{stockProductState,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductStorage != null">
+        #{stockProductStorage,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductWastage != null">
+        #{stockProductWastage,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductStorageFee != null">
+        #{stockProductStorageFee,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductSupplierSubjectId != null">
+        #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxyw.entity.StockList">
+    update stock_list
+    <set>
+      <if test="stockProductName != null">
+        STOCK_PRODUCT_NAME = #{stockProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductQno != null">
+        STOCK_PRODUCT_QNO = #{stockProductQno,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductLocation != null">
+        STOCK_PRODUCT_LOCATION = #{stockProductLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductNum != null">
+        STOCK_PRODUCT_NUM = #{stockProductNum,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductPosition != null">
+        STOCK_PRODUCT_POSITION = #{stockProductPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductPlusNum != null">
+        STOCK_PRODUCT_PLUS_NUM = #{stockProductPlusNum,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductPlusPosition != null">
+        STOCK_PRODUCT_PLUS_POSITION = #{stockProductPlusPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductFormatNum != null">
+        STOCK_PRODUCT_FORMAT_NUM = #{stockProductFormatNum,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductGuaranteeTime != null">
+        STOCK_PRODUCT_GUARANTEE_TIME = #{stockProductGuaranteeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductSingleNetweight != null">
+        STOCK_PRODUCT_SINGLE_NETWEIGHT = #{stockProductSingleNetweight,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductSingleCapacity != null">
+        STOCK_PRODUCT_SINGLE_CAPACITY = #{stockProductSingleCapacity,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductBatch != null">
+        STOCK_PRODUCT_BATCH = #{stockProductBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductState != null">
+        STOCK_PRODUCT_STATE = #{stockProductState,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductStorage != null">
+        STOCK_PRODUCT_STORAGE = #{stockProductStorage,jdbcType=VARCHAR},
+      </if>
+      <if test="stockProductWastage != null">
+        STOCK_PRODUCT_WASTAGE = #{stockProductWastage,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductStorageFee != null">
+        STOCK_PRODUCT_STORAGE_FEE = #{stockProductStorageFee,jdbcType=DECIMAL},
+      </if>
+      <if test="stockProductSupplierSubjectId != null">
+        STOCK_PRODUCT_SUPPLIER_SUBJECT_ID = #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxyw.entity.StockList">
+    update stock_list
+    set STOCK_PRODUCT_NAME = #{stockProductName,jdbcType=VARCHAR},
+      STOCK_PRODUCT_QNO = #{stockProductQno,jdbcType=VARCHAR},
+      STOCK_PRODUCT_LOCATION = #{stockProductLocation,jdbcType=VARCHAR},
+      STOCK_PRODUCT_NUM = #{stockProductNum,jdbcType=DECIMAL},
+      STOCK_PRODUCT_POSITION = #{stockProductPosition,jdbcType=VARCHAR},
+      STOCK_PRODUCT_PLUS_NUM = #{stockProductPlusNum,jdbcType=DECIMAL},
+      STOCK_PRODUCT_PLUS_POSITION = #{stockProductPlusPosition,jdbcType=VARCHAR},
+      STOCK_PRODUCT_FORMAT_NUM = #{stockProductFormatNum,jdbcType=DECIMAL},
+      STOCK_PRODUCT_GUARANTEE_TIME = #{stockProductGuaranteeTime,jdbcType=VARCHAR},
+      STOCK_PRODUCT_SINGLE_NETWEIGHT = #{stockProductSingleNetweight,jdbcType=DECIMAL},
+      STOCK_PRODUCT_SINGLE_CAPACITY = #{stockProductSingleCapacity,jdbcType=DECIMAL},
+      STOCK_PRODUCT_BATCH = #{stockProductBatch,jdbcType=VARCHAR},
+      STOCK_PRODUCT_STATE = #{stockProductState,jdbcType=VARCHAR},
+      STOCK_PRODUCT_STORAGE = #{stockProductStorage,jdbcType=VARCHAR},
+      STOCK_PRODUCT_WASTAGE = #{stockProductWastage,jdbcType=DECIMAL},
+      STOCK_PRODUCT_STORAGE_FEE = #{stockProductStorageFee,jdbcType=DECIMAL},
+      STOCK_PRODUCT_SUPPLIER_SUBJECT_ID = #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="batchInsert" parameterType="java.util.List">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into stock_list (ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, STOCK_PRODUCT_SINGLE_CAPACITY, STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    values
+    <foreach collection="list" item="item" separator=",">
+       (#{item.id,jdbcType=VARCHAR}, #{item.stockProductName,jdbcType=VARCHAR}, #{item.stockProductQno,jdbcType=VARCHAR}, #{item.stockProductLocation,jdbcType=VARCHAR}, #{item.stockProductNum,jdbcType=DECIMAL}, #{item.stockProductPosition,jdbcType=VARCHAR}, #{item.stockProductPlusNum,jdbcType=DECIMAL}, #{item.stockProductPlusPosition,jdbcType=VARCHAR}, #{item.stockProductFormatNum,jdbcType=DECIMAL}, #{item.stockProductGuaranteeTime,jdbcType=VARCHAR}, #{item.stockProductSingleNetweight,jdbcType=DECIMAL}, #{item.stockProductSingleCapacity,jdbcType=DECIMAL}, #{item.stockProductBatch,jdbcType=VARCHAR}, #{item.stockProductState,jdbcType=VARCHAR}, #{item.stockProductStorage,jdbcType=VARCHAR}, #{item.stockProductWastage,jdbcType=DECIMAL}, #{item.stockProductStorageFee,jdbcType=DECIMAL}, #{item.stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

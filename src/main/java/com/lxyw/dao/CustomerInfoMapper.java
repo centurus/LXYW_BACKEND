@@ -1,11 +1,9 @@
-package com.lxyw.service;
+package com.lxyw.dao;
 
 import com.lxyw.entity.CustomerInfo;
+import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-public interface CustomerInfoService {
-
+public interface CustomerInfoMapper {
     int deleteByPrimaryKey(String id);
 
     int insert(CustomerInfo record);
@@ -18,5 +16,5 @@ public interface CustomerInfoService {
 
     int updateByPrimaryKey(CustomerInfo record);
 
-    int batchInsert( List<CustomerInfo> list);
+    int batchInsert(@Param("list") java.util.List<CustomerInfo> list);
 }

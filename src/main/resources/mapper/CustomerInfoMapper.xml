@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lxyw.dao.customerInfoMapper">
-  <resultMap id="BaseResultMap" type="com.lxyw.entity.customerInfo">
+<mapper namespace="com.lxyw.dao.CustomerInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lxyw.entity.CustomerInfo">
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="CUSTOMER_NAME" jdbcType="VARCHAR" property="customerName" />
     <result column="CUSTOMER_TYPE" jdbcType="VARCHAR" property="customerType" />
@@ -31,7 +31,7 @@
     delete from customer_info
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.lxyw.entity.customerInfo">
+  <insert id="insert" parameterType="com.lxyw.entity.CustomerInfo">
     insert into customer_info (ID, CUSTOMER_NAME, CUSTOMER_TYPE, 
       CUSTOMER_STATE, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, 
       CUSTOMER_ADDRESS, CUSTOMER_REMARK, CREATED_BY, 
@@ -43,7 +43,7 @@
       #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{version,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.lxyw.entity.customerInfo">
+  <insert id="insertSelective" parameterType="com.lxyw.entity.CustomerInfo">
     insert into customer_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -128,7 +128,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lxyw.entity.customerInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxyw.entity.CustomerInfo">
     update customer_info
     <set>
       <if test="customerName != null">
@@ -170,7 +170,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lxyw.entity.customerInfo">
+  <update id="updateByPrimaryKey" parameterType="com.lxyw.entity.CustomerInfo">
     update customer_info
     set CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
       CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
