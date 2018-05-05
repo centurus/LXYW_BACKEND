@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxyw.dao.customerInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lxyw.entity.customerInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CUSTOMER_NAME" jdbcType="VARCHAR" property="customerName" />
+    <result column="CUSTOMER_TYPE" jdbcType="VARCHAR" property="customerType" />
+    <result column="CUSTOMER_STATE" jdbcType="VARCHAR" property="customerState" />
+    <result column="CUSTOMER_CELLPHONE" jdbcType="VARCHAR" property="customerCellphone" />
+    <result column="CUSTOMER_EMAIL" jdbcType="VARCHAR" property="customerEmail" />
+    <result column="CUSTOMER_ADDRESS" jdbcType="VARCHAR" property="customerAddress" />
+    <result column="CUSTOMER_REMARK" jdbcType="VARCHAR" property="customerRemark" />
+    <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy" />
+    <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="VERSION" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CUSTOMER_NAME, CUSTOMER_TYPE, CUSTOMER_STATE, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, 
+    CUSTOMER_ADDRESS, CUSTOMER_REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
+    VERSION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from customer_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lxyw.entity.customerInfo">
+    insert into customer_info (ID, CUSTOMER_NAME, CUSTOMER_TYPE, 
+      CUSTOMER_STATE, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, 
+      CUSTOMER_ADDRESS, CUSTOMER_REMARK, CREATED_BY, 
+      CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
+      VERSION)
+    values (#{id,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerType,jdbcType=VARCHAR}, 
+      #{customerState,jdbcType=VARCHAR}, #{customerCellphone,jdbcType=VARCHAR}, #{customerEmail,jdbcType=VARCHAR}, 
+      #{customerAddress,jdbcType=VARCHAR}, #{customerRemark,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxyw.entity.customerInfo">
+    insert into customer_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="customerName != null">
+        CUSTOMER_NAME,
+      </if>
+      <if test="customerType != null">
+        CUSTOMER_TYPE,
+      </if>
+      <if test="customerState != null">
+        CUSTOMER_STATE,
+      </if>
+      <if test="customerCellphone != null">
+        CUSTOMER_CELLPHONE,
+      </if>
+      <if test="customerEmail != null">
+        CUSTOMER_EMAIL,
+      </if>
+      <if test="customerAddress != null">
+        CUSTOMER_ADDRESS,
+      </if>
+      <if test="customerRemark != null">
+        CUSTOMER_REMARK,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerType != null">
+        #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerState != null">
+        #{customerState,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCellphone != null">
+        #{customerCellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerEmail != null">
+        #{customerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAddress != null">
+        #{customerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customerRemark != null">
+        #{customerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxyw.entity.customerInfo">
+    update customer_info
+    <set>
+      <if test="customerName != null">
+        CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerType != null">
+        CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="customerState != null">
+        CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCellphone != null">
+        CUSTOMER_CELLPHONE = #{customerCellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerEmail != null">
+        CUSTOMER_EMAIL = #{customerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAddress != null">
+        CUSTOMER_ADDRESS = #{customerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customerRemark != null">
+        CUSTOMER_REMARK = #{customerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxyw.entity.customerInfo">
+    update customer_info
+    set CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+      CUSTOMER_CELLPHONE = #{customerCellphone,jdbcType=VARCHAR},
+      CUSTOMER_EMAIL = #{customerEmail,jdbcType=VARCHAR},
+      CUSTOMER_ADDRESS = #{customerAddress,jdbcType=VARCHAR},
+      CUSTOMER_REMARK = #{customerRemark,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="batchInsert" parameterType="java.util.List">
+    <!--
+      WARNING - @mbg.generated
+      这个节点为代码生成工具生成，请不要修改!
+      @author hewei
+    -->
+    insert into customer_info (ID, CUSTOMER_NAME, CUSTOMER_TYPE, CUSTOMER_STATE, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, CUSTOMER_ADDRESS, CUSTOMER_REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    values
+    <foreach collection="list" item="item" separator=",">
+       (#{item.id,jdbcType=VARCHAR}, #{item.customerName,jdbcType=VARCHAR}, #{item.customerType,jdbcType=VARCHAR}, #{item.customerState,jdbcType=VARCHAR}, #{item.customerCellphone,jdbcType=VARCHAR}, #{item.customerEmail,jdbcType=VARCHAR}, #{item.customerAddress,jdbcType=VARCHAR}, #{item.customerRemark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>
