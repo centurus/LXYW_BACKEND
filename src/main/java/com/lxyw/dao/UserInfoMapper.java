@@ -22,5 +22,7 @@ public interface UserInfoMapper {
 
     List<UserInfo> selectUserInfoListByCondition(@Param("condition") UserInfo userInfo);
 
+    List<UserInfo> selectUserInfoPageByCondition(@Param("condition") UserInfo userInfo,@Param("startIndex")int startIndex,@Param("limit")int limit);
+
     int selectUserInfoCountByCondition(@Param("condition") UserInfo userInfo);
 }
