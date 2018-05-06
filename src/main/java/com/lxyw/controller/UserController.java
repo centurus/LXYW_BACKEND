@@ -1,6 +1,7 @@
 package com.lxyw.controller;
 
 import com.lxyw.entity.UserInfo;
+import com.lxyw.entityVo.UserInfoVo;
 import com.lxyw.service.UserInfoService;
 import com.lxyw.util.PageBean;
 import com.lxyw.util.Response;
@@ -72,7 +73,7 @@ public class UserController {
         Response response=new Response();
         UserInfo userInfo=new UserInfo();
         userInfo.setUsername(username);userInfo.setName(name);userInfo.setCellphoneNo(cellphoneNo);
-        PageBean<UserInfo> userInfoPageInfo= this.userInfoService.getUserInfoPageInfo(userInfo,pageIndex,pageSize);
+        PageBean<UserInfoVo> userInfoPageInfo= this.userInfoService.getUserInfoPageInfo(userInfo,pageIndex,pageSize);
         response.setData(userInfoPageInfo);
         return response;
     }

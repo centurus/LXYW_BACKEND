@@ -1,11 +1,16 @@
 package com.lxyw.service;
 
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.lxyw.dao.UserInfoMapper;
 import com.lxyw.entity.UserInfo;
+import com.lxyw.entityVo.UserInfoVo;
+import com.lxyw.util.DateUtil;
 import com.lxyw.util.PageBean;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("userService")
@@ -50,11 +55,20 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public PageBean<UserInfo> getUserInfoPageInfo(UserInfo record,int startIndex,int limit) {
-        PageBean<UserInfo> userPageInfo=new PageBean<UserInfo>();
+    public PageBean<UserInfoVo> getUserInfoPageInfo(UserInfo record,int startIndex,int limit) {
+        PageBean<UserInfoVo> userPageInfo=new PageBean<UserInfoVo>();
         List<UserInfo> userInfoList=userInfoMapper.selectUserInfoPageByCondition(record, startIndex, limit);
         int userInfoCount=userInfoMapper.selectUserInfoCountByCondition(record);
-        userPageInfo.setList(userInfoList);
+        List<UserInfoVo> userInfoVoList=new ArrayList<UserInfoVo>();
+        for (UserInfo user:userInfoList){
+            UserInfoVo userInfoVo=new UserInfoVo();
+            BeanUtils.copyProperties(user,userInfoVo);
+            userInfoVo.setBirthdayStr(DateUtil.DateFormat_YMD(user.getBirthday()));
+            userInfoVo.setCreatedDateStr(DateUtil.DateFormat_YMD_HMS(user.getCreatedDate()));
+            userInfoVo.setUpdateDateStr(DateUtil.DateFormat_YMD_HMS(user.getUpdateDate()));
+            userInfoVoList.add(userInfoVo);
+        }
+        userPageInfo.setList(userInfoVoList);
         userPageInfo.setTotalSize(userInfoCount);
         return userPageInfo;
     }

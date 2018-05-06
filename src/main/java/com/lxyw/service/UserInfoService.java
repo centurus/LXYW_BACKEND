@@ -1,8 +1,8 @@
 package com.lxyw.service;
 
 import com.lxyw.entity.UserInfo;
+import com.lxyw.entityVo.UserInfoVo;
 import com.lxyw.util.PageBean;
-import com.lxyw.util.Response;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface UserInfoService {
 
     int batchInsert( List<UserInfo> list);
 
-    PageBean<UserInfo> getUserInfoPageInfo(UserInfo record,int startIndex,int limit);
+    PageBean<UserInfoVo> getUserInfoPageInfo(UserInfo record, int startIndex, int limit);
 
     boolean isUniqueUserName(String userName);
 

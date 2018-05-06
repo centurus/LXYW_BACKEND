@@ -270,58 +270,58 @@
     from user_info
     where
     1=1
-    <if test="condition.username != null ">
-     and USERNAME = #{condition.username,jdbcType=VARCHAR}
+    <if test="condition.username != null and condition.username !=''">
+      and USERNAME = #{condition.username,jdbcType=VARCHAR}
     </if>
-    <if test="condition.password != null">
+    <if test="condition.password != null and condition.password !=''">
       and  PASSWORD = #{condition.password,jdbcType=VARCHAR}
     </if>
-    <if test="condition.name != null">
+    <if test="condition.name != null and condition.name !=''">
       and NAME = #{condition.name,jdbcType=VARCHAR}
     </if>
-    <if test="condition.state != null">
+    <if test="condition.state != null and condition.state !=''">
       and STATE = #{condition.state,jdbcType=VARCHAR}
     </if>
-    <if test="condition.sex != null">
+    <if test="condition.sex != null and condition.sex !=''">
       and SEX = #{condition.sex,jdbcType=CHAR}
     </if>
-    <if test="condition.birthday != null">
+    <if test="condition.birthday != null ">
       and BIRTHDAY = #{condition.birthday,jdbcType=DATE}
     </if>
-    <if test="condition.greduateFrom != null">
+    <if test="condition.greduateFrom != null and condition.greduateFrom !=''">
       and GREDUATE_FROM = #{condition.greduateFrom,jdbcType=VARCHAR}
     </if>
-    <if test="condition.greduateLevel != null">
+    <if test="condition.greduateLevel != null and condition.greduateLevel !=''">
       and GREDUATE_LEVEL = #{condition.greduateLevel,jdbcType=VARCHAR}
     </if>
-    <if test="condition.idcardNo != null">
+    <if test="condition.idcardNo != null and condition.idcardNo !=''">
       and IDCARD_NO = #{condition.idcardNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.cellphoneNo != null">
+    <if test="condition.cellphoneNo != null and condition.cellphoneNo !=''">
       and CELLPHONE_NO = #{condition.cellphoneNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.wechat != null">
+    <if test="condition.wechat != null and condition.wechat !=''">
       and WECHAT = #{condition.wechat,jdbcType=VARCHAR}
     </if>
-    <if test="condition.address != null">
+    <if test="condition.address != null and condition.address !=''">
       and ADDRESS = #{condition.address,jdbcType=VARCHAR}
     </if>
-    <if test="condition.postCode != null">
+    <if test="condition.postCode != null and condition.postCode !=''">
       and POST_CODE = #{condition.postCode,jdbcType=VARCHAR}
     </if>
-    <if test="condition.createdBy != null">
+    <if test="condition.createdBy != null and condition.createdBy !=''">
       and CREATED_BY = #{condition.createdBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.createdDate != null">
       and CREATED_DATE = #{condition.createdDate,jdbcType=TIMESTAMP}
     </if>
-    <if test="condition.updateBy != null">
+    <if test="condition.updateBy != null and condition.updateBy !=''">
       and  UPDATE_BY = #{condition.updateBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.updateDate != null">
       and UPDATE_DATE = #{condition.updateDate,jdbcType=TIMESTAMP}
     </if>
-    <if test="condition.version != null">
+    <if test="condition.version != null ">
       and VERSION = #{condition.version,jdbcType=BIGINT}
     </if>
   </select>
@@ -332,58 +332,58 @@
     from user_info
     where
     1=1
-    <if test="condition.username != null">
+    <if test="condition.username != null and condition.username !=''">
       and USERNAME = #{condition.username,jdbcType=VARCHAR}
     </if>
-    <if test="condition.password != null">
+    <if test="condition.password != null and condition.password !=''">
       and  PASSWORD = #{condition.password,jdbcType=VARCHAR}
     </if>
-    <if test="condition.name != null">
+    <if test="condition.name != null and condition.name !=''">
       and NAME = #{condition.name,jdbcType=VARCHAR}
     </if>
-    <if test="condition.state != null">
+    <if test="condition.state != null and condition.state !=''">
       and STATE = #{condition.state,jdbcType=VARCHAR}
     </if>
-    <if test="condition.sex != null">
+    <if test="condition.sex != null and condition.sex !=''">
       and SEX = #{condition.sex,jdbcType=CHAR}
     </if>
-    <if test="condition.birthday != null">
+    <if test="condition.birthday != null ">
       and BIRTHDAY = #{condition.birthday,jdbcType=DATE}
     </if>
-    <if test="condition.greduateFrom != null">
+    <if test="condition.greduateFrom != null and condition.greduateFrom !=''">
       and GREDUATE_FROM = #{condition.greduateFrom,jdbcType=VARCHAR}
     </if>
-    <if test="condition.greduateLevel != null">
+    <if test="condition.greduateLevel != null and condition.greduateLevel !=''">
       and GREDUATE_LEVEL = #{condition.greduateLevel,jdbcType=VARCHAR}
     </if>
-    <if test="condition.idcardNo != null">
+    <if test="condition.idcardNo != null and condition.idcardNo !=''">
       and IDCARD_NO = #{condition.idcardNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.cellphoneNo != null">
+    <if test="condition.cellphoneNo != null and condition.cellphoneNo !=''">
       and CELLPHONE_NO = #{condition.cellphoneNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.wechat != null">
+    <if test="condition.wechat != null and condition.wechat !=''">
       and WECHAT = #{condition.wechat,jdbcType=VARCHAR}
     </if>
-    <if test="condition.address != null">
+    <if test="condition.address != null and condition.address !=''">
       and ADDRESS = #{condition.address,jdbcType=VARCHAR}
     </if>
-    <if test="condition.postCode != null">
+    <if test="condition.postCode != null and condition.postCode !=''">
       and POST_CODE = #{condition.postCode,jdbcType=VARCHAR}
     </if>
-    <if test="condition.createdBy != null">
+    <if test="condition.createdBy != null and condition.createdBy !=''">
       and CREATED_BY = #{condition.createdBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.createdDate != null">
       and CREATED_DATE = #{condition.createdDate,jdbcType=TIMESTAMP}
     </if>
-    <if test="condition.updateBy != null">
+    <if test="condition.updateBy != null and condition.updateBy !=''">
       and  UPDATE_BY = #{condition.updateBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.updateDate != null">
       and UPDATE_DATE = #{condition.updateDate,jdbcType=TIMESTAMP}
     </if>
-    <if test="condition.version != null">
+    <if test="condition.version != null ">
       and VERSION = #{condition.version,jdbcType=BIGINT}
     </if>
   </select>
@@ -394,58 +394,58 @@
     from user_info
     where
     1=1
-    <if test="condition.username != null">
+    <if test="condition.username != null and condition.username !=''">
       and USERNAME = #{condition.username,jdbcType=VARCHAR}
     </if>
-    <if test="condition.password != null">
+    <if test="condition.password != null and condition.password !=''">
       and  PASSWORD = #{condition.password,jdbcType=VARCHAR}
     </if>
-    <if test="condition.name != null">
+    <if test="condition.name != null and condition.name !=''">
       and NAME = #{condition.name,jdbcType=VARCHAR}
     </if>
-    <if test="condition.state != null">
+    <if test="condition.state != null and condition.state !=''">
       and STATE = #{condition.state,jdbcType=VARCHAR}
     </if>
-    <if test="condition.sex != null">
+    <if test="condition.sex != null and condition.sex !=''">
       and SEX = #{condition.sex,jdbcType=CHAR}
     </if>
-    <if test="condition.birthday != null">
+    <if test="condition.birthday != null ">
       and BIRTHDAY = #{condition.birthday,jdbcType=DATE}
     </if>
-    <if test="condition.greduateFrom != null">
+    <if test="condition.greduateFrom != null and condition.greduateFrom !=''">
       and GREDUATE_FROM = #{condition.greduateFrom,jdbcType=VARCHAR}
     </if>
-    <if test="condition.greduateLevel != null">
+    <if test="condition.greduateLevel != null and condition.greduateLevel !=''">
       and GREDUATE_LEVEL = #{condition.greduateLevel,jdbcType=VARCHAR}
     </if>
-    <if test="condition.idcardNo != null">
+    <if test="condition.idcardNo != null and condition.idcardNo !=''">
       and IDCARD_NO = #{condition.idcardNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.cellphoneNo != null">
+    <if test="condition.cellphoneNo != null and condition.cellphoneNo !=''">
       and CELLPHONE_NO = #{condition.cellphoneNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.wechat != null">
+    <if test="condition.wechat != null and condition.wechat !=''">
       and WECHAT = #{condition.wechat,jdbcType=VARCHAR}
     </if>
-    <if test="condition.address != null">
+    <if test="condition.address != null and condition.address !=''">
       and ADDRESS = #{condition.address,jdbcType=VARCHAR}
     </if>
-    <if test="condition.postCode != null">
+    <if test="condition.postCode != null and condition.postCode !=''">
       and POST_CODE = #{condition.postCode,jdbcType=VARCHAR}
     </if>
-    <if test="condition.createdBy != null">
+    <if test="condition.createdBy != null and condition.createdBy !=''">
       and CREATED_BY = #{condition.createdBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.createdDate != null">
       and CREATED_DATE = #{condition.createdDate,jdbcType=TIMESTAMP}
     </if>
-    <if test="condition.updateBy != null">
+    <if test="condition.updateBy != null and condition.updateBy !=''">
       and  UPDATE_BY = #{condition.updateBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.updateDate != null">
       and UPDATE_DATE = #{condition.updateDate,jdbcType=TIMESTAMP}
     </if>
-    <if test="condition.version != null">
+    <if test="condition.version != null ">
       and VERSION = #{condition.version,jdbcType=BIGINT}
     </if>
        limit #{startIndex},#{limit}

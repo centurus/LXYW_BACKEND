@@ -1,12 +1,13 @@
 package com.lxyw.service;
 
+import com.lxyw.entity.UserInfo;
+import com.lxyw.entityVo.UserInfoVo;
+import com.lxyw.util.PageBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -17,7 +18,10 @@ public class UserInfoServiceImplTest {
 
     @Test
     public void isUniqueUserName() {
-        boolean success=userInfoService.isUniqueUserName("1");
-        System.out.print(success);
+        UserInfo userInfo=new UserInfo();
+        userInfo.setName("");userInfo.setUsername("");
+        userInfo.setCellphoneNo("");
+        PageBean<UserInfoVo> userInfoList=userInfoService.getUserInfoPageInfo(userInfo,0,20);
+        System.out.print(userInfoList);
     }
 }
