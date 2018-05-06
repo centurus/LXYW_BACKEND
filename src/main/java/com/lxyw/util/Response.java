@@ -8,7 +8,7 @@ public class Response implements Serializable {
     /** 应答编码  */
     private Integer code = 0;
     /** 应答消息 */
-    private String message = null;
+    private String message = "success";
     /** 应答数据 */
     private Object data = null;
 

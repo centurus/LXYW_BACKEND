@@ -263,15 +263,76 @@
        (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.sex,jdbcType=CHAR}, #{item.birthday,jdbcType=DATE}, #{item.greduateFrom,jdbcType=VARCHAR}, #{item.greduateLevel,jdbcType=VARCHAR}, #{item.idcardNo,jdbcType=VARCHAR}, #{item.cellphoneNo,jdbcType=VARCHAR}, #{item.wechat,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.postCode,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
-  <select id="selectUserInfoListByCondition" resultType="com.lxyw.entity.UserInfo">
+  <select id="selectUserInfoListByCondition" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user_info
     where
     1=1
-    and
     <if test="condition.username != null">
      and USERNAME = #{username,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.password != null">
+      and  PASSWORD = #{password,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.name != null">
+      and NAME = #{name,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.state != null">
+      and STATE = #{state,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.sex != null">
+      and SEX = #{sex,jdbcType=CHAR},
+    </if>
+    <if test="condition.birthday != null">
+      and BIRTHDAY = #{birthday,jdbcType=DATE},
+    </if>
+    <if test="condition.greduateFrom != null">
+      and GREDUATE_FROM = #{greduateFrom,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.greduateLevel != null">
+      and GREDUATE_LEVEL = #{greduateLevel,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.idcardNo != null">
+      and IDCARD_NO = #{idcardNo,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.cellphoneNo != null">
+      and CELLPHONE_NO = #{cellphoneNo,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.wechat != null">
+      and WECHAT = #{wechat,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.address != null">
+      and ADDRESS = #{address,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.postCode != null">
+      and POST_CODE = #{postCode,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.createdBy != null">
+      and CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.createdDate != null">
+      and CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="condition.updateBy != null">
+      and  UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.updateDate != null">
+      and UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="condition.version != null">
+      and VERSION = #{version,jdbcType=BIGINT},
+    </if>
+  </select>
+
+  <select id="selectUserInfoCountByCondition" resultType="java.lang.Integer">
+    select
+    count(1)
+    from user_info
+    where
+    1=1
+    <if test="condition.username != null">
+      and USERNAME = #{username,jdbcType=VARCHAR},
     </if>
     <if test="condition.password != null">
       and  PASSWORD = #{password,jdbcType=VARCHAR},

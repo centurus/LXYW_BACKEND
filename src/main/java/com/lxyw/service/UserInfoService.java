@@ -21,7 +21,7 @@ public interface UserInfoService {
 
     int batchInsert( List<UserInfo> list);
 
-   // PageBean<UserInfo> getUserInfoPageInfo(UserInfo record);
+   PageBean<UserInfo> getUserInfoPageInfo(UserInfo record);
 
 
 }

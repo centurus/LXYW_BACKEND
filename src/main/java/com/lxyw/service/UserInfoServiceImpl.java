@@ -49,11 +49,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.batchInsert(list);
     }
 
-    /*@Override
+    @Override
     public PageBean<UserInfo> getUserInfoPageInfo(UserInfo record) {
         PageBean<UserInfo> userPageInfo=new PageBean<UserInfo>();
-        userInfoMapper.
-        userPageInfo.setData()
-        return null;
-    }*/
+        List<UserInfo> userInfoList=userInfoMapper.selectUserInfoListByCondition(record);
+        int userInfoCount=userInfoMapper.selectUserInfoCountByCondition(record);
+        userPageInfo.setList(userInfoList);
+        userPageInfo.setTotalSize(userInfoCount);
+        return userPageInfo;
+    }
 }

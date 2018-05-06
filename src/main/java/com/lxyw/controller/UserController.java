@@ -2,6 +2,7 @@ package com.lxyw.controller;
 
 import com.lxyw.entity.UserInfo;
 import com.lxyw.service.UserInfoService;
+import com.lxyw.util.PageBean;
 import com.lxyw.util.Response;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,16 @@ public class UserController {
         Response response=new Response();
         String userId = request.getParameter("id");
         this.userInfoService.deleteByPrimaryKey(userId);
+        return response;
+    }
+
+    @RequestMapping("/getUserInfoPageInfo")
+    @ResponseBody
+    public Response getUserInfoPageInfo(HttpServletRequest request){
+        Response response=new Response();
+        UserInfo userInfo=new UserInfo();
+        PageBean<UserInfo> userInfoPageInfo= this.userInfoService.getUserInfoPageInfo(userInfo);
+        response.setData(userInfoPageInfo);
         return response;
     }
 
