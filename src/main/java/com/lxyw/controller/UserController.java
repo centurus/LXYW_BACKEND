@@ -114,5 +114,26 @@ public class UserController {
         return response;
     }
 
+    /**
+     * 根据ID查询用户信息
+     * @param request
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value="/findUserByPrimaryKey", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Response findUserByPrimaryKey(HttpServletRequest request,UserInfo userInfo){
+        Response response=new Response();
+        UserInfo user = this.userInfoService.selectByPrimaryKey(userInfo.getId());
+        if(null != user){
+            response.setCode(ResponseCode.SUCCESS.getCode());
+            response.setMessage(ResponseCode.SUCCESS.getMessage());
+            response.setData(user);
+        }else{
+           //TODO 错误信息待规划
+        }
+        return response;
+    }
+
 
 }

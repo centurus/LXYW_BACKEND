@@ -5,6 +5,7 @@
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="USERNAME" jdbcType="VARCHAR" property="username" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="STATE" jdbcType="VARCHAR" property="state" />
     <result column="SEX" jdbcType="CHAR" property="sex" />
@@ -25,7 +26,7 @@
   <sql id="Base_Column_List">
     ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL, 
     IDCARD_NO, CELLPHONE_NO, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, 
-    UPDATE_DATE, VERSION
+    UPDATE_DATE, VERSION, EMAIL
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -44,14 +45,15 @@
       GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, 
       CELLPHONE_NO, WECHAT, ADDRESS, 
       POST_CODE, CREATED_BY, CREATED_DATE, 
-      UPDATE_BY, UPDATE_DATE, VERSION
+      UPDATE_BY, UPDATE_DATE, VERSION, EMAIL
       )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, 
       #{greduateFrom,jdbcType=VARCHAR}, #{greduateLevel,jdbcType=VARCHAR}, #{idcardNo,jdbcType=VARCHAR}, 
       #{cellphoneNo,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{postCode,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT}
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT},
+      #{email,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lxyw.entity.UserInfo">
@@ -65,6 +67,9 @@
       </if>
       <if test="password != null">
         PASSWORD,
+      </if>
+      <if test="email != null">
+        EMAIL,
       </if>
       <if test="name != null">
         NAME,
@@ -125,6 +130,9 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -184,6 +192,9 @@
       <if test="password != null">
         PASSWORD = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
@@ -239,6 +250,7 @@
     update user_info
     set USERNAME = #{username,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
       STATE = #{state,jdbcType=VARCHAR},
       SEX = #{sex,jdbcType=CHAR},
@@ -258,10 +270,10 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="batchInsert" parameterType="java.util.List">
-    insert into user_info (ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, CELLPHONE_NO, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    insert into user_info (ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, CELLPHONE_NO, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION, EMAIL)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.sex,jdbcType=CHAR}, #{item.birthday,jdbcType=DATE}, #{item.greduateFrom,jdbcType=VARCHAR}, #{item.greduateLevel,jdbcType=VARCHAR}, #{item.idcardNo,jdbcType=VARCHAR}, #{item.cellphoneNo,jdbcType=VARCHAR}, #{item.wechat,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.postCode,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+       (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.sex,jdbcType=CHAR}, #{item.birthday,jdbcType=DATE}, #{item.greduateFrom,jdbcType=VARCHAR}, #{item.greduateLevel,jdbcType=VARCHAR}, #{item.idcardNo,jdbcType=VARCHAR}, #{item.cellphoneNo,jdbcType=VARCHAR}, #{item.wechat,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.postCode,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT}, #{item.email,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <select id="selectUserInfoListByCondition" resultMap="BaseResultMap">
@@ -281,6 +293,9 @@
     </if>
     <if test="condition.state != null and condition.state !=''">
       and STATE = #{condition.state,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.email != null and condition.email !=''">
+      and EMAIL = #{condition.email,jdbcType=VARCHAR}
     </if>
     <if test="condition.sex != null and condition.sex !=''">
       and SEX = #{condition.sex,jdbcType=CHAR}
@@ -347,6 +362,9 @@
     <if test="condition.sex != null and condition.sex !=''">
       and SEX = #{condition.sex,jdbcType=CHAR}
     </if>
+    <if test="condition.email != null and condition.email !=''">
+      and EMAIL = #{condition.email,jdbcType=VARCHAR}
+    </if>
     <if test="condition.birthday != null ">
       and BIRTHDAY = #{condition.birthday,jdbcType=DATE}
     </if>
@@ -399,6 +417,9 @@
     </if>
     <if test="condition.password != null and condition.password !=''">
       and  PASSWORD = #{condition.password,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.email != null and condition.email !=''">
+      and EMAIL = #{condition.email,jdbcType=VARCHAR}
     </if>
     <if test="condition.name != null and condition.name !=''">
       and NAME = #{condition.name,jdbcType=VARCHAR}

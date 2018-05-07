@@ -11,6 +11,8 @@ public class UserInfo {
 
     private String name;
 
+    private String email;
+
     private String state;
 
     private String sex;
@@ -191,5 +193,13 @@ public class UserInfo {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 }
