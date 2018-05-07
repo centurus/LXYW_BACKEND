@@ -7,6 +7,7 @@ import com.lxyw.util.PageBean;
 import com.lxyw.util.Response;
 import com.lxyw.util.ResponseCode;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,16 +21,29 @@ public class UserController {
     @Resource
     private UserInfoService userInfoService;
 
+    /**
+     * 根据id查询用户信息
+     * @param request
+     * @param userId
+     * @return
+     */
     @RequestMapping(value="/showUserInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response showUser(HttpServletRequest request){
-        String userId = request.getParameter("id");
+    public Response showUser(HttpServletRequest request,String userId){
+        if(StringUtils.isEmpty(userId)){
+            userId = request.getParameter("id");
+        }
         Response response=new Response();
         UserInfo user=this.userInfoService.selectByPrimaryKey(userId);
         response.setData(user);
         return response;
     }
 
+    /**
+     * 新增用户
+     * @param userInfo
+     * @return
+     */
     @RequestMapping(value="/addUserInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
     public Response addUser(UserInfo userInfo){
@@ -38,6 +52,11 @@ public class UserController {
         return response;
     }
 
+    /**
+     * 根据id和属性更新用户
+     * @param userInfo
+     * @return
+     */
     @RequestMapping(value="/updateUserInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
     public Response updateUserInfo(UserInfo userInfo){
@@ -46,11 +65,19 @@ public class UserController {
         return response;
     }
 
+    /**
+     * 根据ID删除用户
+     * @param request
+     * @param userId
+     * @return
+     */
     @RequestMapping(value="/deleteUserInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response deleteUserInfo(HttpServletRequest request){
+    public Response deleteUserInfo(HttpServletRequest request,String userId){
+        if(StringUtils.isEmpty(userId)){
+            userId = request.getParameter("id");
+        }
         Response response=new Response();
-        String userId = request.getParameter("id");
         this.userInfoService.deleteByPrimaryKey(userId);
         return response;
     }

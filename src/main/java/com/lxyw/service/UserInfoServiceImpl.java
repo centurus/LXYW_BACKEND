@@ -6,6 +6,7 @@ import com.lxyw.entity.UserInfo;
 import com.lxyw.entityVo.UserInfoVo;
 import com.lxyw.util.DateUtil;
 import com.lxyw.util.PageBean;
+import com.lxyw.util.PrimaryKeyGenerator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public int insertSelective(UserInfo record) {
+        String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
+        record.setId(primaryKey);
         return userInfoMapper.insertSelective(record);
     }
 
