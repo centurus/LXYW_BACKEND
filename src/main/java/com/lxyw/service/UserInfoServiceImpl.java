@@ -27,6 +27,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public int insert(UserInfo record) {
+        String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
+        record.setId(primaryKey);
+        record.setPassword("123456");
         return userInfoMapper.insert(record);
     }
 
