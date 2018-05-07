@@ -70,6 +70,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         userPageInfo.setList(userInfoVoList);
         userPageInfo.setTotalSize(userInfoCount);
+        //
         return userPageInfo;
     }
 
