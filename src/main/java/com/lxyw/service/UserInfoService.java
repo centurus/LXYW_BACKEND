@@ -14,7 +14,7 @@ public interface UserInfoService {
 
     int insertSelective(UserInfo record);
 
-    UserInfo selectByPrimaryKey(String id);
+    UserInfoVo selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(UserInfo record);
 

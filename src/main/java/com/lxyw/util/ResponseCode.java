@@ -4,7 +4,8 @@ public enum ResponseCode {
     SUCCESS(0,"成功"),
     FAIL(1,"失败,原因不明"),
     NOT_UNIQUE_USER(2,"注册用户不唯一"),
-    ERROR_PASSWORD(3,"用户名密码不匹配");
+    ERROR_PASSWORD(3,"用户名密码不匹配"),
+    INVALID_PARAM(4,"参数不正确");
 
     private int code;
 

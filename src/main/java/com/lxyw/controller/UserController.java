@@ -7,10 +7,10 @@ import com.lxyw.util.PageBean;
 import com.lxyw.util.Response;
 import com.lxyw.util.ResponseCode;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Controller
@@ -43,34 +43,41 @@ public class UserController {
     public Response updateUserInfo(@RequestBody UserInfo userInfo){
         Response response=new Response();
         userInfo.setUpdateDate(new Date());
-        this.userInfoService.updateByPrimaryKey(userInfo);
+        if(userInfo==null||StringUtils.isEmpty(userInfo.getId())){
+            response.setCode(ResponseCode.INVALID_PARAM.getCode());
+            response.setMessage(ResponseCode.INVALID_PARAM.getMessage());
+        }else{
+            this.userInfoService.updateByPrimaryKey(userInfo);
+        }
         return response;
     }
 
     /**
      * 根据ID删除用户
-     * @param request
-     * @param id
+     * @param userInfo
      * @return
      */
     @RequestMapping(value="/deleteUserInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response deleteUserInfo(HttpServletRequest request,@RequestParam(value = "id", required = true) String id){
+    public Response deleteUserInfo(@RequestBody UserInfo userInfo){
         Response response=new Response();
-        this.userInfoService.deleteByPrimaryKey(id);
+        if(userInfo==null||StringUtils.isEmpty(userInfo.getId())){
+            response.setCode(ResponseCode.INVALID_PARAM.getCode());
+            response.setMessage(ResponseCode.INVALID_PARAM.getMessage());
+        }else{
+            this.userInfoService.deleteByPrimaryKey(userInfo.getId());
+        }
         return response;
     }
 
     /**
      * 获取分页信息
-     * @param request
      * @param userInfoVo
      * @return
      */
     @RequestMapping(value="/getUserInfoPageInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response getUserInfoPageInfo(HttpServletRequest request,
-                                        @RequestBody UserInfoVo userInfoVo){
+    public Response getUserInfoPageInfo(@RequestBody UserInfoVo userInfoVo){
         Response response=new Response();
         UserInfo userInfo=new UserInfo();
         userInfo.setUsername(userInfoVo.getUsername());userInfo.setName(userInfoVo.getName());userInfo.setCellphoneNo(userInfoVo.getCellphoneNo());
@@ -81,13 +88,12 @@ public class UserController {
 
     /**
      * 用户名称是否为一
-     * @param request
      * @param userName
      * @return
      */
     @RequestMapping(value="/isUniqueUserName", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response isUniqueUserName(HttpServletRequest request, @RequestParam(value = "userName", required = true)String userName){
+    public Response isUniqueUserName( @RequestParam(value = "userName", required = true)String userName){
         Response response=new Response();
         boolean isUnique= this.userInfoService.isUniqueUserName(userName);
         if(!isUnique){
@@ -99,13 +105,12 @@ public class UserController {
 
     /**
      * 验证用户名密码是否匹配
-     * @param request
      * @param userInfo
      * @return
      */
     @RequestMapping(value="/validateLogin", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response validateLogin(HttpServletRequest request,UserInfo userInfo){
+    public Response validateLogin(UserInfo userInfo){
         Response response=new Response();
         boolean successLogIn= this.userInfoService.validateLogIn(userInfo);
         if(!successLogIn){
@@ -117,24 +122,18 @@ public class UserController {
 
     /**
      * 根据ID查询用户信息
-     * @param request
-     * @param id
+     * @param userInfo
      * @return
      */
     @RequestMapping(value="/findUserByPrimaryKey", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response findUserByPrimaryKey(HttpServletRequest request,@RequestParam(value = "id", required = true) String id){
+    public Response findUserByPrimaryKey(@RequestBody UserInfo userInfo){
         Response response=new Response();
-        UserInfo user = this.userInfoService.selectByPrimaryKey(id);
-        if(null != user){
-            response.setCode(ResponseCode.SUCCESS.getCode());
-            response.setMessage(ResponseCode.SUCCESS.getMessage());
-            response.setData(user);
-        }else{
-           //TODO 错误信息待规划
-        }
+        UserInfoVo user = this.userInfoService.selectByPrimaryKey(userInfo.getId());
+        response.setData(user);
         return response;
     }
+
 
 
 }

@@ -41,8 +41,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserInfo selectByPrimaryKey(String id) {
-        return userInfoMapper.selectByPrimaryKey(id);
+    public UserInfoVo selectByPrimaryKey(String id) {
+        UserInfoVo userInfoVo=new UserInfoVo();
+        UserInfo userInfo=userInfoMapper.selectByPrimaryKey(id);
+        BeanUtils.copyProperties(userInfo,userInfoVo);
+        userInfoVo.setBirthdayStr(DateUtil.DateFormat_YMD(userInfo.getBirthday()));
+        return userInfoVo;
     }
 
     @Override
