@@ -3,6 +3,7 @@ package com.lxyw.service;
 import com.lxyw.entity.UserInfo;
 import com.lxyw.entityVo.UserInfoVo;
 import com.lxyw.util.PageBean;
+import com.lxyw.util.Response;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ public interface UserInfoService {
 
     int deleteByPrimaryKey(String id);
 
-    int insert(UserInfo record);
+    Response insert(UserInfo record);
 
-    int insertSelective(UserInfo record);
+    //Response insertSelective(UserInfo record);
 
     UserInfoVo selectByPrimaryKey(String id);
 
@@ -27,6 +28,8 @@ public interface UserInfoService {
     boolean isUniqueUserName(String userName);
 
     boolean validateLogIn(UserInfo record);
+
+    Response modifyUserPassword(UserInfo record);
 
 
 }

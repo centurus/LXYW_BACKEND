@@ -44,8 +44,8 @@ public class UserController {
         Response response=new Response();
         userInfo.setUpdateDate(new Date());
         if(userInfo==null||StringUtils.isEmpty(userInfo.getId())){
-            response.setCode(ResponseCode.INVALID_PARAM.getCode());
-            response.setMessage(ResponseCode.INVALID_PARAM.getMessage());
+            response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
+            response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
         }else{
             this.userInfoService.updateByPrimaryKey(userInfo);
         }
@@ -62,8 +62,8 @@ public class UserController {
     public Response deleteUserInfo(@RequestBody UserInfo userInfo){
         Response response=new Response();
         if(userInfo==null||StringUtils.isEmpty(userInfo.getId())){
-            response.setCode(ResponseCode.INVALID_PARAM.getCode());
-            response.setMessage(ResponseCode.INVALID_PARAM.getMessage());
+            response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
+            response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
         }else{
             this.userInfoService.deleteByPrimaryKey(userInfo.getId());
         }

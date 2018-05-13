@@ -1,12 +1,11 @@
 package com.lxyw.service;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.lxyw.dao.UserInfoMapper;
 import com.lxyw.entity.UserInfo;
 import com.lxyw.entityVo.UserInfoVo;
-import com.lxyw.util.DateUtil;
-import com.lxyw.util.PageBean;
-import com.lxyw.util.PrimaryKeyGenerator;
+import com.lxyw.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -14,30 +13,46 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service("userService")
 public class UserInfoServiceImpl implements UserInfoService {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     private UserInfoMapper userInfoMapper;
+
+    @Resource
+    private SendMailService sendMailService;
 
     @Override
     public int deleteByPrimaryKey(String id) {
         return userInfoMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 新增用户，用户名必须唯一
+     * @param record
+     * @return
+     */
     @Override
-    public int insert(UserInfo record) {
+    public Response insert(UserInfo record) {
+        Response response=new Response();
+        if(!this.isUniqueUserName(record.getUsername())){
+            response.setCode(ResponseCode.NOT_UNIQUE_USER.getCode());
+            response.setMessage(ResponseCode.NOT_UNIQUE_USER.getMessage());
+        }
         String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
         record.setId(primaryKey);
-        record.setPassword("123456");
-        return userInfoMapper.insert(record);
-    }
-
-    @Override
-    public int insertSelective(UserInfo record) {
-        String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
-        record.setId(primaryKey);
-        return userInfoMapper.insertSelective(record);
+        String password="";
+        try {
+            password= MD5.encryption(record.getPassword());
+        } catch (LXYWException e) {
+            logger.error(e.getMessage()+"userId={},password={}",record.getId(),record.getPassword());
+        }
+        record.setPassword(password);
+        userInfoMapper.insert(record);
+        sendMailService.sendMail();
+        return response;
     }
 
     @Override
@@ -64,12 +79,19 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.batchInsert(list);
     }
 
+    /**
+     * 获取用户分页信息
+     * @param record
+     * @param startIndex
+     * @param limit
+     * @return
+     */
     @Override
     public PageBean<UserInfoVo> getUserInfoPageInfo(UserInfo record,int startIndex,int limit) {
-        PageBean<UserInfoVo> userPageInfo=new PageBean<UserInfoVo>();
+        PageBean<UserInfoVo> userPageInfo=new PageBean<>();
         List<UserInfo> userInfoList=userInfoMapper.selectUserInfoPageByCondition(record, startIndex, limit);
         int userInfoCount=userInfoMapper.selectUserInfoCountByCondition(record);
-        List<UserInfoVo> userInfoVoList=new ArrayList<UserInfoVo>();
+        List<UserInfoVo> userInfoVoList=new ArrayList<>();
         for (UserInfo user:userInfoList){
             UserInfoVo userInfoVo=new UserInfoVo();
             BeanUtils.copyProperties(user,userInfoVo);
@@ -80,10 +102,14 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         userPageInfo.setList(userInfoVoList);
         userPageInfo.setTotalSize(userInfoCount);
-        //
         return userPageInfo;
     }
 
+    /**
+     * 是否为唯一用户
+     * @param userName
+     * @return
+     */
     @Override
     public boolean isUniqueUserName(String userName){
         UserInfo userInfo=new UserInfo();
@@ -96,14 +122,48 @@ public class UserInfoServiceImpl implements UserInfoService {
        return isUnique;
     }
 
+    /**
+     * 登录
+     * @param record
+     * @return
+     */
     @Override
     public boolean validateLogIn(UserInfo record) {
         boolean logInSuccess=true;
+        String password="'";
+        try {
+             password=MD5.encryption(record.getPassword());
+        } catch (LXYWException e) {
+            logger.error(e.getMessage()+"userId={},password={}",record.getId(),record.getPassword());
+        }
+        record.setPassword(password);
         List<UserInfo> userInfoList= userInfoMapper.selectUserInfoListByCondition(record);
         if(userInfoList==null||userInfoList.size()==0){
             logInSuccess=false;
         }
-        userInfoMapper.selectUserInfoListByCondition(record);
         return logInSuccess;
+    }
+
+    /**
+     * 修改用户密码
+     * @param record
+     * @return
+     */
+    @Override
+    public Response modifyUserPassword(UserInfo record) {
+        Response response=new Response();
+        if(record.getId()==null||record.getPassword()==null){
+            response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
+            response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
+        }
+        String password="'";
+        try {
+            password=MD5.encryption(record.getPassword());
+        } catch (LXYWException e) {
+            logger.error(e.getMessage()+"userId={},password={}",record.getId(),record.getPassword());
+        }
+        record.setPassword(password);
+        userInfoMapper.updateByPrimaryKeySelective(record);
+        return response;
     }
 }
