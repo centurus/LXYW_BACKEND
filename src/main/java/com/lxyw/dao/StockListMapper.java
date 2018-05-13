@@ -16,5 +16,12 @@ public interface StockListMapper {
 
     int updateByPrimaryKey(StockList record);
 
+    /**
+     * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
+     * This method corresponds to the database table stock_list
+     *
+     * @mbg.generated
+     * @author hewei
+     */
     int batchInsert(@Param("list") java.util.List<StockList> list);
 }

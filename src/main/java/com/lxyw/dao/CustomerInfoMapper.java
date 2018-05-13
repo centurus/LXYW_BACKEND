@@ -3,6 +3,8 @@ package com.lxyw.dao;
 import com.lxyw.entity.CustomerInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface CustomerInfoMapper {
     int deleteByPrimaryKey(String id);
 
@@ -17,4 +19,8 @@ public interface CustomerInfoMapper {
     int updateByPrimaryKey(CustomerInfo record);
 
     int batchInsert(@Param("list") java.util.List<CustomerInfo> list);
+
+    List<CustomerInfo> selectCustomerInfoListByCondition(@Param("condition") CustomerInfo condition, @Param("startIndex")int startIndex, @Param("limit")int limit);
+
+    int selectCustomerInfoLCountByCondition(@Param("condition") CustomerInfo condition);
 }

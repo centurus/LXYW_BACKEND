@@ -20,6 +20,8 @@
     <result column="STOCK_PRODUCT_WASTAGE" jdbcType="DECIMAL" property="stockProductWastage" />
     <result column="STOCK_PRODUCT_STORAGE_FEE" jdbcType="DECIMAL" property="stockProductStorageFee" />
     <result column="STOCK_PRODUCT_SUPPLIER_SUBJECT_ID" jdbcType="VARCHAR" property="stockProductSupplierSubjectId" />
+    <result column="PRODUCE_DATE" jdbcType="TIMESTAMP" property="produceDate" />
+    <result column="EXPIRE_DATE" jdbcType="TIMESTAMP" property="expireDate" />
     <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy" />
     <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
     <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
@@ -31,8 +33,8 @@
     STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, 
     STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, STOCK_PRODUCT_SINGLE_CAPACITY, 
     STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, 
-    STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, CREATED_BY, CREATED_DATE, 
-    UPDATE_BY, UPDATE_DATE, VERSION
+    STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, PRODUCE_DATE, EXPIRE_DATE, 
+    CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -53,9 +55,10 @@
       STOCK_PRODUCT_SINGLE_CAPACITY, STOCK_PRODUCT_BATCH, 
       STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, 
       STOCK_PRODUCT_WASTAGE, STOCK_PRODUCT_STORAGE_FEE, 
-      STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, CREATED_BY, 
-      CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
-      VERSION)
+      STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, PRODUCE_DATE, 
+      EXPIRE_DATE, CREATED_BY, CREATED_DATE, 
+      UPDATE_BY, UPDATE_DATE, VERSION
+      )
     values (#{id,jdbcType=VARCHAR}, #{stockProductName,jdbcType=VARCHAR}, #{stockProductQno,jdbcType=VARCHAR}, 
       #{stockProductLocation,jdbcType=VARCHAR}, #{stockProductNum,jdbcType=DECIMAL}, 
       #{stockProductPosition,jdbcType=VARCHAR}, #{stockProductPlusNum,jdbcType=DECIMAL}, 
@@ -64,9 +67,10 @@
       #{stockProductSingleCapacity,jdbcType=DECIMAL}, #{stockProductBatch,jdbcType=VARCHAR}, 
       #{stockProductState,jdbcType=VARCHAR}, #{stockProductStorage,jdbcType=VARCHAR}, 
       #{stockProductWastage,jdbcType=DECIMAL}, #{stockProductStorageFee,jdbcType=DECIMAL}, 
-      #{stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
-      #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{version,jdbcType=BIGINT})
+      #{stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{produceDate,jdbcType=TIMESTAMP}, 
+      #{expireDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lxyw.entity.StockList">
     insert into stock_list
@@ -124,6 +128,12 @@
       </if>
       <if test="stockProductSupplierSubjectId != null">
         STOCK_PRODUCT_SUPPLIER_SUBJECT_ID,
+      </if>
+      <if test="produceDate != null">
+        PRODUCE_DATE,
+      </if>
+      <if test="expireDate != null">
+        EXPIRE_DATE,
       </if>
       <if test="createdBy != null">
         CREATED_BY,
@@ -196,6 +206,12 @@
       <if test="stockProductSupplierSubjectId != null">
         #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
       </if>
+      <if test="produceDate != null">
+        #{produceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null">
+        #{expireDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="createdBy != null">
         #{createdBy,jdbcType=VARCHAR},
       </if>
@@ -267,6 +283,12 @@
       <if test="stockProductSupplierSubjectId != null">
         STOCK_PRODUCT_SUPPLIER_SUBJECT_ID = #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
       </if>
+      <if test="produceDate != null">
+        PRODUCE_DATE = #{produceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null">
+        EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="createdBy != null">
         CREATED_BY = #{createdBy,jdbcType=VARCHAR},
       </if>
@@ -304,6 +326,8 @@
       STOCK_PRODUCT_WASTAGE = #{stockProductWastage,jdbcType=DECIMAL},
       STOCK_PRODUCT_STORAGE_FEE = #{stockProductStorageFee,jdbcType=DECIMAL},
       STOCK_PRODUCT_SUPPLIER_SUBJECT_ID = #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
+      PRODUCE_DATE = #{produceDate,jdbcType=TIMESTAMP},
+      EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
       CREATED_BY = #{createdBy,jdbcType=VARCHAR},
       CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
       UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
@@ -317,10 +341,10 @@
       这个节点为代码生成工具生成，请不要修改!
       @author hewei
     -->
-    insert into stock_list (ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, STOCK_PRODUCT_SINGLE_CAPACITY, STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    insert into stock_list (ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, STOCK_PRODUCT_SINGLE_CAPACITY, STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, PRODUCE_DATE, EXPIRE_DATE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.stockProductName,jdbcType=VARCHAR}, #{item.stockProductQno,jdbcType=VARCHAR}, #{item.stockProductLocation,jdbcType=VARCHAR}, #{item.stockProductNum,jdbcType=DECIMAL}, #{item.stockProductPosition,jdbcType=VARCHAR}, #{item.stockProductPlusNum,jdbcType=DECIMAL}, #{item.stockProductPlusPosition,jdbcType=VARCHAR}, #{item.stockProductFormatNum,jdbcType=DECIMAL}, #{item.stockProductGuaranteeTime,jdbcType=VARCHAR}, #{item.stockProductSingleNetweight,jdbcType=DECIMAL}, #{item.stockProductSingleCapacity,jdbcType=DECIMAL}, #{item.stockProductBatch,jdbcType=VARCHAR}, #{item.stockProductState,jdbcType=VARCHAR}, #{item.stockProductStorage,jdbcType=VARCHAR}, #{item.stockProductWastage,jdbcType=DECIMAL}, #{item.stockProductStorageFee,jdbcType=DECIMAL}, #{item.stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+       (#{item.id,jdbcType=VARCHAR}, #{item.stockProductName,jdbcType=VARCHAR}, #{item.stockProductQno,jdbcType=VARCHAR}, #{item.stockProductLocation,jdbcType=VARCHAR}, #{item.stockProductNum,jdbcType=DECIMAL}, #{item.stockProductPosition,jdbcType=VARCHAR}, #{item.stockProductPlusNum,jdbcType=DECIMAL}, #{item.stockProductPlusPosition,jdbcType=VARCHAR}, #{item.stockProductFormatNum,jdbcType=DECIMAL}, #{item.stockProductGuaranteeTime,jdbcType=VARCHAR}, #{item.stockProductSingleNetweight,jdbcType=DECIMAL}, #{item.stockProductSingleCapacity,jdbcType=DECIMAL}, #{item.stockProductBatch,jdbcType=VARCHAR}, #{item.stockProductState,jdbcType=VARCHAR}, #{item.stockProductStorage,jdbcType=VARCHAR}, #{item.stockProductWastage,jdbcType=DECIMAL}, #{item.stockProductStorageFee,jdbcType=DECIMAL}, #{item.stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{item.produceDate,jdbcType=TIMESTAMP}, #{item.expireDate,jdbcType=TIMESTAMP}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
 </mapper>
