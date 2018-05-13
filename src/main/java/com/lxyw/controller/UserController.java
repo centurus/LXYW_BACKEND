@@ -47,7 +47,7 @@ public class UserController {
             response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
             response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
         }else{
-            this.userInfoService.updateByPrimaryKey(userInfo);
+            this.userInfoService.updateByPrimaryKeySelective(userInfo);
         }
         return response;
     }

@@ -198,4 +198,94 @@
        (#{item.id,jdbcType=VARCHAR}, #{item.customerName,jdbcType=VARCHAR}, #{item.customerType,jdbcType=VARCHAR}, #{item.customerState,jdbcType=VARCHAR}, #{item.customerCellphone,jdbcType=VARCHAR}, #{item.customerEmail,jdbcType=VARCHAR}, #{item.customerAddress,jdbcType=VARCHAR}, #{item.customerRemark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <select id="selectCustomerInfoListByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from customer_info
+    where
+    1=1
+    <if test="condition.customerName != null and condition.customerName !=''">
+      AND CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerType != null and condition.customerType!=null">
+      AND CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerState != null and condition.customerState!=''">
+      AND CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerCellphone != null and condition.customerCellphone!=''">
+      AND CUSTOMER_CELLPHONE = #{customerCellphone,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerEmail != null and condition.customerEmail !=''">
+      AND CUSTOMER_EMAIL = #{customerEmail,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerAddress != null and condition.customerAddress!=''">
+      AND CUSTOMER_ADDRESS = #{customerAddress,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerRemark != null and condition.customerRemark!=''">
+      AND CUSTOMER_REMARK = #{customerRemark,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.createdBy != null and condition.createdBy!=''">
+      AND CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.createdDate != null">
+      AND CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="condition.updateBy != null">
+      AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.updateDate != null">
+      AND UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="condition.version != null">
+      AND VERSION = #{version,jdbcType=BIGINT},
+    </if>
+    limit #{startIndex},#{limit}
+  </select>
+
+  <select id="selectCustomerInfoLCountByCondition" resultType="java.lang.Integer">
+    select
+    count(1)
+    from customer_info
+    where
+    1=1
+    <if test="condition.customerName != null and condition.customerName !=''">
+      AND CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerType != null and condition.customerType!=null">
+      AND CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerState != null and condition.customerState!=''">
+      AND CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerCellphone != null and condition.customerCellphone!=''">
+      AND CUSTOMER_CELLPHONE = #{customerCellphone,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerEmail != null and condition.customerEmail !=''">
+      AND CUSTOMER_EMAIL = #{customerEmail,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerAddress != null and condition.customerAddress!=''">
+      AND CUSTOMER_ADDRESS = #{customerAddress,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.customerRemark != null and condition.customerRemark!=''">
+      AND CUSTOMER_REMARK = #{customerRemark,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.createdBy != null and condition.createdBy!=''">
+      AND CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.createdDate != null">
+      AND CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="condition.updateBy != null">
+      AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+    </if>
+    <if test="condition.updateDate != null">
+      AND UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="condition.version != null">
+      AND VERSION = #{version,jdbcType=BIGINT},
+    </if>
+  </select>
+
 </mapper>

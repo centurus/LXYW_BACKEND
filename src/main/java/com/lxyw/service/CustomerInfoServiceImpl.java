@@ -2,6 +2,9 @@ package com.lxyw.service;
 
 import com.lxyw.dao.CustomerInfoMapper;
 import com.lxyw.entity.CustomerInfo;
+import com.lxyw.util.PageBean;
+import com.lxyw.util.PrimaryKeyGenerator;
+import com.lxyw.util.Response;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,13 +21,12 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
     }
 
     @Override
-    public int insert(CustomerInfo record) {
-        return customerInfoMapper.insert(record);
-    }
-
-    @Override
-    public int insertSelective(CustomerInfo record) {
-        return customerInfoMapper.insertSelective(record);
+    public Response insert(CustomerInfo record) {
+        Response response=new Response();
+        String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
+        record.setId(primaryKey);
+        customerInfoMapper.insert(record);
+        return response;
     }
 
     @Override
@@ -45,5 +47,15 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
     @Override
     public int batchInsert(List<CustomerInfo> list) {
         return customerInfoMapper.batchInsert(list);
+    }
+
+    @Override
+    public PageBean<CustomerInfo> getCustomerInfoPageInfo(CustomerInfo record, int startIndex, int limit) {
+        PageBean<CustomerInfo> customerInfoPageBean=new PageBean<>();
+        List<CustomerInfo> customerInfoList=customerInfoMapper.selectCustomerInfoListByCondition(record,startIndex,limit);
+        int count=customerInfoMapper.selectCustomerInfoLCountByCondition(record);
+        customerInfoPageBean.setList(customerInfoList);
+        customerInfoPageBean.setTotalSize(count);
+        return customerInfoPageBean;
     }
 }

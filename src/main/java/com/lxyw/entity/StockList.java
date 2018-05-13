@@ -40,6 +40,10 @@ public class StockList {
 
     private String stockProductSupplierSubjectId;
 
+    private Date produceDate;
+
+    private Date expireDate;
+
     private String createdBy;
 
     private Date createdDate;
@@ -192,6 +196,22 @@ public class StockList {
 
     public void setStockProductSupplierSubjectId(String stockProductSupplierSubjectId) {
         this.stockProductSupplierSubjectId = stockProductSupplierSubjectId == null ? null : stockProductSupplierSubjectId.trim();
+    }
+
+    public Date getProduceDate() {
+        return produceDate;
+    }
+
+    public void setProduceDate(Date produceDate) {
+        this.produceDate = produceDate;
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
     }
 
     public String getCreatedBy() {
