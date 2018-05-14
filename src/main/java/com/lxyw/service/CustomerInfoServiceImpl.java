@@ -30,6 +30,15 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
     }
 
     @Override
+    public Response insertSelective(CustomerInfo record) {
+        Response response=new Response();
+        String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
+        record.setId(primaryKey);
+        customerInfoMapper.insert(record);
+        return response;
+    }
+
+    @Override
     public CustomerInfo selectByPrimaryKey(String id) {
         return customerInfoMapper.selectByPrimaryKey(id);
     }

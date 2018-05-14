@@ -18,9 +18,10 @@ public class CustomerInfoServiceImplTest {
     @Test
     public void deleteByPrimaryKey() {
         CustomerInfo ci=new CustomerInfo();
+        ci.setId("23456");
         ci.setCustomerName("1");
-        PageBean<CustomerInfo> lists= customerInfoService.getCustomerInfoPageInfo(ci,0,10);
-        System.out.print(lists);
+       ci.setCustomerCellphone("123456");ci.setCustomerType("2");ci.setCustomerName("222");
+        customerInfoService.insertSelective(ci);
     }
 
 }

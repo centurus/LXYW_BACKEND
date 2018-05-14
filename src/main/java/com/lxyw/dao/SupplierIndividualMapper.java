@@ -1,6 +1,7 @@
 package com.lxyw.dao;
 
 import com.lxyw.entity.SupplierIndividual;
+import org.apache.ibatis.annotations.Param;
 
 public interface SupplierIndividualMapper {
     int deleteByPrimaryKey(String id);

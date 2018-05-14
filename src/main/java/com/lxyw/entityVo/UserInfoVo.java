@@ -1,6 +1,8 @@
 package com.lxyw.entityVo;
 
-public class UserInfoVo {
+import com.lxyw.entity.UserInfo;
+
+public class UserInfoVo extends UserInfo {
 
     private String birthdayStr;
 

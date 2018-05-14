@@ -21,5 +21,7 @@ public interface CustomerInfoService {
 
     int batchInsert( List<CustomerInfo> list);
 
+    Response insertSelective(CustomerInfo record);
+
     PageBean<CustomerInfo> getCustomerInfoPageInfo(CustomerInfo record, int startIndex, int limit);
 }

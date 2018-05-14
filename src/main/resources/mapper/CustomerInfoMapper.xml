@@ -42,7 +42,7 @@
       #{customerState,jdbcType=VARCHAR}, #{customerCellphone,jdbcType=VARCHAR}, #{customerEmail,jdbcType=VARCHAR}, 
       #{customerAddress,jdbcType=VARCHAR}, #{customerRemark,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
       #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{version,jdbcType=BIGINT}),#{status,jdbcType=VARCHAR})
+      #{version,jdbcType=BIGINT},#{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lxyw.entity.CustomerInfo">
     insert into customer_info
@@ -131,7 +131,7 @@
         #{version,jdbcType=BIGINT},
       </if>
       <if test="status != null">
-        #{STATUS,jdbcType=BIGINT},
+        #{STATUS,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -175,7 +175,7 @@
         VERSION = #{version,jdbcType=BIGINT},
       </if>
       <if test="status != null">
-        STATUS=#{STATUS,jdbcType=BIGINT},
+        STATUS=#{STATUS,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
