@@ -29,6 +29,8 @@ public class SupplierIndividual {
 
     private Long version;
 
+    private String status;
+
     public String getId() {
         return id;
     }
@@ -131,5 +133,13 @@ public class SupplierIndividual {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 }

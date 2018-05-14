@@ -15,10 +15,11 @@
     <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
     <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="VERSION" jdbcType="BIGINT" property="version" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
     ID, SUPPLIER_SUBJECT_ID, NAME, POSITION, STATE, CELLPHONE, EMAIL, REMARK, CREATED_BY, 
-    CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION
+    CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION, STATUS
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -35,12 +36,12 @@
       POSITION, STATE, CELLPHONE, 
       EMAIL, REMARK, CREATED_BY, 
       CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
-      VERSION)
+      VERSION, STATUS)
     values (#{id,jdbcType=VARCHAR}, #{supplierSubjectId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{position,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
       #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
-      #{version,jdbcType=BIGINT})
+      #{version,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lxyw.entity.SupplierIndividual">
     insert into supplier_individual
@@ -84,6 +85,9 @@
       <if test="version != null">
         VERSION,
       </if>
+      <if test="status != null">
+        STATUS,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -124,6 +128,9 @@
       </if>
       <if test="version != null">
         #{version,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +173,9 @@
       <if test="version != null">
         VERSION = #{version,jdbcType=BIGINT},
       </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -182,7 +192,8 @@
       CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
       UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
       UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
-      VERSION = #{version,jdbcType=BIGINT}
+      VERSION = #{version,jdbcType=BIGINT},
+      STATUS = #{status,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="batchInsert" parameterType="java.util.List">
@@ -191,10 +202,10 @@
       这个节点为代码生成工具生成，请不要修改!
       @author hewei
     -->
-    insert into supplier_individual (ID, SUPPLIER_SUBJECT_ID, NAME, POSITION, STATE, CELLPHONE, EMAIL, REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    insert into supplier_individual (ID, SUPPLIER_SUBJECT_ID, NAME, POSITION, STATE, CELLPHONE, EMAIL, REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION, STATUS)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.supplierSubjectId,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.position,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+       (#{item.id,jdbcType=VARCHAR}, #{item.supplierSubjectId,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.position,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT}, #{item.status,jdbcType=VARCHAR})
     </foreach>
   </insert>
 </mapper>
