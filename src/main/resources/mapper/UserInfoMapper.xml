@@ -348,13 +348,13 @@
     where
     1=1
     <if test="condition.username != null and condition.username !=''">
-      and USERNAME = #{condition.username,jdbcType=VARCHAR}
+      and USERNAME LIKE "%${condition.username}"
     </if>
     <if test="condition.password != null and condition.password !=''">
       and  PASSWORD = #{condition.password,jdbcType=VARCHAR}
     </if>
     <if test="condition.name != null and condition.name !=''">
-      and NAME = #{condition.name,jdbcType=VARCHAR}
+      and NAME LIKE "%${condition.name}"
     </if>
     <if test="condition.state != null and condition.state !=''">
       and STATE = #{condition.state,jdbcType=VARCHAR}
@@ -378,7 +378,7 @@
       and IDCARD_NO = #{condition.idcardNo,jdbcType=VARCHAR}
     </if>
     <if test="condition.cellphoneNo != null and condition.cellphoneNo !=''">
-      and CELLPHONE_NO = #{condition.cellphoneNo,jdbcType=VARCHAR}
+      and CELLPHONE_NO LIKE "%${condition.cellphoneNo}"
     </if>
     <if test="condition.wechat != null and condition.wechat !=''">
       and WECHAT = #{condition.wechat,jdbcType=VARCHAR}
@@ -413,7 +413,7 @@
     where
     1=1
     <if test="condition.username != null and condition.username !=''">
-      and USERNAME = #{condition.username,jdbcType=VARCHAR}
+      and USERNAME LIKE "%${condition.username}"
     </if>
     <if test="condition.password != null and condition.password !=''">
       and  PASSWORD = #{condition.password,jdbcType=VARCHAR}
@@ -422,7 +422,7 @@
       and EMAIL = #{condition.email,jdbcType=VARCHAR}
     </if>
     <if test="condition.name != null and condition.name !=''">
-      and NAME = #{condition.name,jdbcType=VARCHAR}
+      and NAME = "%${condition.name}"
     </if>
     <if test="condition.state != null and condition.state !=''">
       and STATE = #{condition.state,jdbcType=VARCHAR}
@@ -443,7 +443,7 @@
       and IDCARD_NO = #{condition.idcardNo,jdbcType=VARCHAR}
     </if>
     <if test="condition.cellphoneNo != null and condition.cellphoneNo !=''">
-      and CELLPHONE_NO = #{condition.cellphoneNo,jdbcType=VARCHAR}
+      and CELLPHONE_NO = "%${condition.cellphoneNo}"
     </if>
     <if test="condition.wechat != null and condition.wechat !=''">
       and WECHAT = #{condition.wechat,jdbcType=VARCHAR}

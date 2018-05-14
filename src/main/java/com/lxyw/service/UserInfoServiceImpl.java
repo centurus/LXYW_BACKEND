@@ -41,11 +41,12 @@ public class UserInfoServiceImpl implements UserInfoService {
             response.setCode(ResponseCode.NOT_UNIQUE_USER.getCode());
             response.setMessage(ResponseCode.NOT_UNIQUE_USER.getMessage());
         }
+        String initPass="123456";
         String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
         record.setId(primaryKey);
         String password="";
         try {
-            password= MD5.encryption(record.getPassword());
+            password= MD5.encryption(initPass);
         } catch (LXYWException e) {
             logger.error(e.getMessage()+"userId={},password={}",record.getId(),record.getPassword());
         }

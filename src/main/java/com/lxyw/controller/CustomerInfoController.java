@@ -2,7 +2,9 @@ package com.lxyw.controller;
 
 
 import com.lxyw.entity.CustomerInfo;
+import com.lxyw.entityVo.CustomerInfoVo;
 import com.lxyw.service.CustomerInfoService;
+import com.lxyw.util.PageBean;
 import com.lxyw.util.Response;
 import com.lxyw.util.ResponseCode;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,7 @@ public class CustomerInfoController {
     }
 
     /**
-     * 添加供应商
+     * 添加客户
      * @param customerInfo
      * @return
      */
@@ -55,7 +57,7 @@ public class CustomerInfoController {
     }
 
     /**
-     * 通过主键更新供应商信息
+     * 通过主键更新客户信息
      * @param customerInfo
      * @return
      */
@@ -74,7 +76,7 @@ public class CustomerInfoController {
     }
 
     /**
-     * 通过主键删除供应商信息
+     * 通过主键删除客户信息
      * @param customerInfo
      * @return
      */
@@ -91,6 +93,22 @@ public class CustomerInfoController {
         return response;
     }
 
+    /**
+     * 客户信息分页查询
+     * @param customerInfoVo
+     * @return
+     */
+    @RequestMapping(value="/getCustomerPageInfo", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Response getCustomerPageInfo(@RequestBody CustomerInfoVo customerInfoVo){
+        Response response=new Response();
+        CustomerInfo customerInfo=new CustomerInfo();
+        customerInfo.setCustomerCellphone(customerInfoVo.getCustomerCellphone());customerInfo.setCustomerName(customerInfoVo.getCustomerName());
+        customerInfo.setCustomerType(customerInfoVo.getCustomerType());
+        PageBean<CustomerInfo> customerInfoPageInfos=customerInfoService.getCustomerInfoPageInfo(customerInfo,customerInfoVo.getPageIndex(),customerInfoVo.getPageSize());
+        response.setData(customerInfoPageInfos);
+        return response;
+    }
 
 
 

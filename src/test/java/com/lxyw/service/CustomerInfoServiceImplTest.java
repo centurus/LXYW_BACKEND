@@ -18,6 +18,7 @@ public class CustomerInfoServiceImplTest {
     @Test
     public void deleteByPrimaryKey() {
         CustomerInfo ci=new CustomerInfo();
+        ci.setCustomerName("1");
         PageBean<CustomerInfo> lists= customerInfoService.getCustomerInfoPageInfo(ci,0,10);
         System.out.print(lists);
     }

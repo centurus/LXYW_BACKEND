@@ -206,40 +206,40 @@
     where
     1=1
     <if test="condition.customerName != null and condition.customerName !=''">
-      AND CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      AND CUSTOMER_NAME LIKE "%${condition.customerName}"
     </if>
     <if test="condition.customerType != null and condition.customerType!=null">
-      AND CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      AND CUSTOMER_TYPE = #{condition.customerType,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerState != null and condition.customerState!=''">
-      AND CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+      AND CUSTOMER_STATE = #{condition.customerState,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerCellphone != null and condition.customerCellphone!=''">
-      AND CUSTOMER_CELLPHONE = #{customerCellphone,jdbcType=VARCHAR},
+      AND CUSTOMER_CELLPHONE LIKE "%${condition.customerCellphone}"
     </if>
     <if test="condition.customerEmail != null and condition.customerEmail !=''">
-      AND CUSTOMER_EMAIL = #{customerEmail,jdbcType=VARCHAR},
+      AND CUSTOMER_EMAIL = #{condition.customerEmail,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerAddress != null and condition.customerAddress!=''">
-      AND CUSTOMER_ADDRESS = #{customerAddress,jdbcType=VARCHAR},
+      AND CUSTOMER_ADDRESS = #{condition.customerAddress,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerRemark != null and condition.customerRemark!=''">
-      AND CUSTOMER_REMARK = #{customerRemark,jdbcType=VARCHAR},
+      AND CUSTOMER_REMARK = #{condition.customerRemark,jdbcType=VARCHAR}
     </if>
     <if test="condition.createdBy != null and condition.createdBy!=''">
-      AND CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      AND CREATED_BY = #{condition.createdBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.createdDate != null">
-      AND CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      AND CREATED_DATE = #{condition.createdDate,jdbcType=TIMESTAMP}
     </if>
     <if test="condition.updateBy != null">
-      AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      AND UPDATE_BY = #{condition.updateBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.updateDate != null">
-      AND UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      AND UPDATE_DATE = #{condition.updateDate,jdbcType=TIMESTAMP}
     </if>
     <if test="condition.version != null">
-      AND VERSION = #{version,jdbcType=BIGINT},
+      AND VERSION = #{condition.version,jdbcType=BIGINT}
     </if>
     limit #{startIndex},#{limit}
   </select>
@@ -251,40 +251,40 @@
     where
     1=1
     <if test="condition.customerName != null and condition.customerName !=''">
-      AND CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      AND CUSTOMER_NAME LIKE "%${condition.customerName}"
     </if>
     <if test="condition.customerType != null and condition.customerType!=null">
-      AND CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
+      AND CUSTOMER_TYPE = #{condition.customerType,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerState != null and condition.customerState!=''">
-      AND CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+      AND CUSTOMER_STATE = #{condition.customerState,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerCellphone != null and condition.customerCellphone!=''">
-      AND CUSTOMER_CELLPHONE = #{customerCellphone,jdbcType=VARCHAR},
+      AND CUSTOMER_CELLPHONE LIKE "%${condition.customerCellphone}"
     </if>
     <if test="condition.customerEmail != null and condition.customerEmail !=''">
-      AND CUSTOMER_EMAIL = #{customerEmail,jdbcType=VARCHAR},
+      AND CUSTOMER_EMAIL = #{condition.customerEmail,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerAddress != null and condition.customerAddress!=''">
-      AND CUSTOMER_ADDRESS = #{customerAddress,jdbcType=VARCHAR},
+      AND CUSTOMER_ADDRESS = #{condition.customerAddress,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerRemark != null and condition.customerRemark!=''">
-      AND CUSTOMER_REMARK = #{customerRemark,jdbcType=VARCHAR},
+      AND CUSTOMER_REMARK = #{condition.customerRemark,jdbcType=VARCHAR}
     </if>
     <if test="condition.createdBy != null and condition.createdBy!=''">
-      AND CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      AND CREATED_BY = #{condition.createdBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.createdDate != null">
-      AND CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
+      AND CREATED_DATE = #{condition.createdDate,jdbcType=TIMESTAMP}
     </if>
     <if test="condition.updateBy != null">
-      AND UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      AND UPDATE_BY = #{condition.updateBy,jdbcType=VARCHAR}
     </if>
     <if test="condition.updateDate != null">
-      AND UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      AND UPDATE_DATE = #{condition.updateDate,jdbcType=TIMESTAMP}
     </if>
     <if test="condition.version != null">
-      AND VERSION = #{version,jdbcType=BIGINT},
+      AND VERSION = #{condition.version,jdbcType=BIGINT}
     </if>
   </select>
 
