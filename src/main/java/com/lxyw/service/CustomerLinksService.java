@@ -19,4 +19,6 @@ public interface CustomerLinksService {
     int updateByPrimaryKey(CustomerLinks record);
 
     int batchInsert(List<CustomerLinks> list);
+
+    int deleteByCustomerId(String customerId);
 }

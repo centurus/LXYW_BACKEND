@@ -22,5 +22,5 @@ public interface CustomerInfoMapper {
 
     List<CustomerInfo> selectCustomerInfoListByCondition(@Param("condition") CustomerInfo condition, @Param("startIndex")int startIndex, @Param("limit")int limit);
 
-    int selectCustomerInfoLCountByCondition(@Param("condition") CustomerInfo condition);
+    int selectCustomerInfoCountByCondition(@Param("condition") CustomerInfo condition);
 }

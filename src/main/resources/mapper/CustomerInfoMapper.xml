@@ -258,7 +258,7 @@
     limit #{startIndex},#{limit}
   </select>
 
-  <select id="selectCustomerInfoLCountByCondition" resultType="java.lang.Integer">
+  <select id="selectCustomerInfoCountByCondition" resultType="java.lang.Integer">
     select
     count(1)
     from customer_info

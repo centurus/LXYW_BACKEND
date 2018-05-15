@@ -49,4 +49,9 @@ public class CustomerLinksServiceImpl implements CustomerLinksService{
         }
         return customerLinksMapper.batchInsert(list);
     }
+
+    @Override
+    public int deleteByCustomerId(String customerId) {
+        return customerLinksMapper.deteleByCustomerId(customerId);
+    }
 }
