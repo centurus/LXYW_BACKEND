@@ -134,6 +134,18 @@ public class UserController {
         return response;
     }
 
+    /**
+     * 修改登陆密码
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value="/modifyUserPassword", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Response modifyUserPassword(@RequestBody UserInfo userInfo){
+        Response response=this.userInfoService.modifyUserPassword(userInfo);
+        return response;
+    }
+
 
 
 }

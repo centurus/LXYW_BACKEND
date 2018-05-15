@@ -1,17 +1,4 @@
-CREATE TABLE `stock_list_fee` (
-  `ID` varchar(32) NOT NULL COMMENT '主键',
-  `FEE_TYPE` varchar(100) NOT NULL COMMENT '费用种类',
-  `FEE_NUM` decimal(12,2) DEFAULT '0.00' COMMENT '价格',
-  `STOCK_LIST_ID` varchar(32) NOT NULL COMMENT '关联库存',
-  `CREATED_BY` varchar(30) DEFAULT NULL,
-  `CREATED_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `UPDATE_BY` varchar(30) DEFAULT NULL,
-  `UPDATE_DATE` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `VERSION` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `STOCK_LIST_ID` (`STOCK_LIST_ID`),
-  CONSTRAINT `stock_list_fee_ibfk_1` FOREIGN KEY (`STOCK_LIST_ID`) REFERENCES `stock_list` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `customer_info` (
   `ID` varchar(32) NOT NULL COMMENT '主键',
@@ -27,6 +14,7 @@ CREATE TABLE `customer_info` (
   `UPDATE_BY` varchar(30) DEFAULT NULL,
   `UPDATE_DATE` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `VERSION` bigint(20) DEFAULT NULL,
+  `STATUS` varchar(2) DEFAULT NULL COMMENT '状态：0为正常、1为冻结、2为停用',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `customerName unique` (`CUSTOMER_NAME`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -82,6 +70,21 @@ CREATE TABLE `stock_list` (
   CONSTRAINT `stock_list_ibfk_1` FOREIGN KEY (`STOCK_PRODUCT_SUPPLIER_SUBJECT_ID`) REFERENCES `supplier_subject` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
 
+CREATE TABLE `stock_list_fee` (
+  `ID` varchar(32) NOT NULL COMMENT '主键',
+  `FEE_TYPE` varchar(100) NOT NULL COMMENT '费用种类',
+  `FEE_NUM` decimal(12,2) DEFAULT '0.00' COMMENT '价格',
+  `STOCK_LIST_ID` varchar(32) NOT NULL COMMENT '关联库存',
+  `CREATED_BY` varchar(30) DEFAULT NULL,
+  `CREATED_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `UPDATE_BY` varchar(30) DEFAULT NULL,
+  `UPDATE_DATE` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `VERSION` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `STOCK_LIST_ID` (`STOCK_LIST_ID`),
+  CONSTRAINT `stock_list_fee_ibfk_1` FOREIGN KEY (`STOCK_LIST_ID`) REFERENCES `stock_list` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 CREATE TABLE `supplier_individual` (
@@ -98,6 +101,7 @@ CREATE TABLE `supplier_individual` (
   `UPDATE_BY` varchar(30) DEFAULT NULL,
   `UPDATE_DATE` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `VERSION` bigint(20) DEFAULT NULL,
+  `STATUS` varchar(2) DEFAULT '0' COMMENT '状态：0为正常、1为冻结、2为停用',
   PRIMARY KEY (`ID`),
   KEY `SUPPLIER_SUBJECT_ID` (`SUPPLIER_SUBJECT_ID`),
   CONSTRAINT `supplier_individual_ibfk_1` FOREIGN KEY (`SUPPLIER_SUBJECT_ID`) REFERENCES `supplier_subject` (`ID`)
