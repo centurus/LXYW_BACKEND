@@ -17,4 +17,6 @@ public interface CustomerLinksMapper {
     int updateByPrimaryKey(CustomerLinks record);
 
     int batchInsert(@Param("list") java.util.List<CustomerLinks> list);
+
+    int deteleByCustomerId(@Param("customerId")String customerInfoId);
 }

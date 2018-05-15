@@ -1,6 +1,7 @@
 package com.lxyw.service;
 
 import com.lxyw.dao.CustomerInfoMapper;
+import com.lxyw.dao.CustomerLinksMapper;
 import com.lxyw.entity.CustomerInfo;
 import com.lxyw.entityVo.CustomerInfoAndLinksVo;
 import com.lxyw.util.PageBean;
@@ -43,7 +44,9 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
 
     @Override
     @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
-    public int updateByPrimaryKeySelective(CustomerInfo record) {
+    public int updateByPrimaryKeySelective(CustomerInfoAndLinksVo record) {
+        customerLinksService.deleteByCustomerId(record.getId());
+        customerLinksService.batchInsert(record.getCustomerLinks());
         return customerInfoMapper.updateByPrimaryKeySelective(record);
     }
 

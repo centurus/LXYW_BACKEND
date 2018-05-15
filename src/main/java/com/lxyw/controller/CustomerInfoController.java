@@ -64,7 +64,7 @@ public class CustomerInfoController {
      */
     @RequestMapping(value="/updateCustomerInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response updateCustomerInfo(@RequestBody CustomerInfo customerInfo){
+    public Response updateCustomerInfo(@RequestBody CustomerInfoAndLinksVo customerInfo){
         Response response=new Response();
         customerInfo.setUpdateDate(new Date());
         if(customerInfo==null|| StringUtils.isEmpty(customerInfo.getId())){

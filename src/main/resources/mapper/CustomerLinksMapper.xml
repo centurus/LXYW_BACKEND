@@ -192,4 +192,8 @@
        (#{item.id,jdbcType=VARCHAR}, #{item.customerInfoId,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
+  <delete id="deteleByCustomerId">
+    delete from customer_links
+    where CUSTOMER_INFO_ID = #{customerId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

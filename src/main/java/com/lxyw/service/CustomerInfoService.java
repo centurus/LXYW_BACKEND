@@ -16,7 +16,7 @@ public interface CustomerInfoService {
 
     CustomerInfo selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(CustomerInfo record);
+    int updateByPrimaryKeySelective(CustomerInfoAndLinksVo record);
 
     //int updateByPrimaryKey(CustomerInfo record);
 
