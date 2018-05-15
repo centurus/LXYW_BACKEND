@@ -2,6 +2,7 @@ package com.lxyw.controller;
 
 
 import com.lxyw.entity.CustomerInfo;
+import com.lxyw.entityVo.CustomerInfoAndLinksVo;
 import com.lxyw.entityVo.CustomerInfoVo;
 import com.lxyw.service.CustomerInfoService;
 import com.lxyw.util.PageBean;
@@ -45,7 +46,7 @@ public class CustomerInfoController {
      */
     @RequestMapping(value="/addCustomerInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response addCustomerInfo(@RequestBody CustomerInfo customerInfo){
+    public Response addCustomerInfo(@RequestBody CustomerInfoAndLinksVo customerInfo){
         Response response=new Response();
         if(customerInfo==null|| StringUtils.isEmpty(customerInfo.getCustomerName())||StringUtils.isEmpty(customerInfo.getCustomerType())){
             response.setCode(ResponseCode.INVALID_PAREMETER.getCode());

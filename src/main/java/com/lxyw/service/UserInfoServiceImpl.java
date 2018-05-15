@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @return
      */
     @Override
+    @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
     public Response insert(UserInfo record) {
         Response response=new Response();
         if(!this.isUniqueUserName(record.getUsername())){
@@ -66,6 +69,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
     public int updateByPrimaryKeySelective(UserInfo record) {
         return userInfoMapper.updateByPrimaryKeySelective(record);
     }
@@ -151,6 +155,7 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @return
      */
     @Override
+    @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
     public Response modifyUserPassword(UserInfo record) {
         Response response=new Response();
         if(record.getId()==null||record.getPassword()==null){

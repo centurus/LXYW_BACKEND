@@ -2,6 +2,7 @@ package com.lxyw.service;
 
 import com.lxyw.dao.CustomerLinksMapper;
 import com.lxyw.entity.CustomerLinks;
+import com.lxyw.util.PrimaryKeyGenerator;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -43,6 +44,9 @@ public class CustomerLinksServiceImpl implements CustomerLinksService{
 
     @Override
     public int batchInsert(List<CustomerLinks> list) {
+        for(CustomerLinks customerLink:list){
+            customerLink.setId(PrimaryKeyGenerator.getPrimaryKey());
+        }
         return customerLinksMapper.batchInsert(list);
     }
 }

@@ -2,10 +2,13 @@ package com.lxyw.service;
 
 import com.lxyw.dao.CustomerInfoMapper;
 import com.lxyw.entity.CustomerInfo;
+import com.lxyw.entityVo.CustomerInfoAndLinksVo;
 import com.lxyw.util.PageBean;
 import com.lxyw.util.PrimaryKeyGenerator;
 import com.lxyw.util.Response;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,26 +18,21 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
 
     @Resource
     private CustomerInfoMapper customerInfoMapper;
+
+    @Resource
+    private CustomerLinksService customerLinksService;
     @Override
     public int deleteByPrimaryKey(String id) {
         return customerInfoMapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public Response insert(CustomerInfo record) {
+    @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
+    public Response insertSelective(CustomerInfoAndLinksVo record) {
         Response response=new Response();
-        String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
-        record.setId(primaryKey);
-        customerInfoMapper.insert(record);
-        return response;
-    }
-
-    @Override
-    public Response insertSelective(CustomerInfo record) {
-        Response response=new Response();
-        String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
-        record.setId(primaryKey);
-        customerInfoMapper.insert(record);
+        record.setId(PrimaryKeyGenerator.getPrimaryKey());
+        customerInfoMapper.insertSelective(record);
+        customerLinksService.batchInsert(record.getCustomerLinks());
         return response;
     }
 
@@ -44,14 +42,15 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
     public int updateByPrimaryKeySelective(CustomerInfo record) {
         return customerInfoMapper.updateByPrimaryKeySelective(record);
     }
 
-    @Override
+    /*@Override
     public int updateByPrimaryKey(CustomerInfo record) {
         return customerInfoMapper.updateByPrimaryKey(record);
-    }
+    }*/
 
     @Override
     public int batchInsert(List<CustomerInfo> list) {

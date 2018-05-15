@@ -20,8 +20,8 @@ public class CustomerInfoServiceImplTest {
         CustomerInfo ci=new CustomerInfo();
         ci.setId("23456");
         ci.setCustomerName("1");
-       ci.setCustomerCellphone("123456");ci.setCustomerType("2");ci.setCustomerName("222");
-        customerInfoService.insertSelective(ci);
+        ci.setCustomerCellphone("123456");ci.setCustomerType("2");ci.setCustomerName("222");
+        //customerInfoService.insertSelective(ci);
     }
 
 }
