@@ -16,13 +16,13 @@ public interface CustomerInfoService {
 
     CustomerInfo selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(CustomerInfoAndLinksVo record);
+    int updateByPrimaryKeySelective(CustomerInfo record);
 
     //int updateByPrimaryKey(CustomerInfo record);
 
     int batchInsert( List<CustomerInfo> list);
 
-    Response insertSelective(CustomerInfoAndLinksVo record);
+    Response insertSelective(CustomerInfo record);
 
     PageBean<CustomerInfo> getCustomerInfoPageInfo(CustomerInfo record, int startIndex, int limit);
 }

@@ -34,19 +34,32 @@ public class CustomerInfoController {
     @ResponseBody
     public Response showCustomerInfo(@RequestBody CustomerInfo customerInfo){
         Response response=new Response();
+        //配置返回对
         CustomerInfo customerInfoResult=this.customerInfoService.selectByPrimaryKey(customerInfo.getId());
         response.setData(customerInfoResult);
         return response;
     }
 
-    /**
+   /* *
      * 添加客户
      * @param customerInfo
      * @return
-     */
     @RequestMapping(value="/addCustomerInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
     public Response addCustomerInfo(@RequestBody CustomerInfoAndLinksVo customerInfo){
+        Response response=new Response();
+        if(customerInfo==null|| StringUtils.isEmpty(customerInfo.getCustomerName())||StringUtils.isEmpty(customerInfo.getCustomerType())){
+            response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
+            response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
+        }else{
+            this.customerInfoService.insertSelective(customerInfo);
+        }
+        return response;
+    }*/
+
+    @RequestMapping(value="/addCustomerInfo", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Response addCustomerInfo(@RequestBody CustomerInfo customerInfo){
         Response response=new Response();
         if(customerInfo==null|| StringUtils.isEmpty(customerInfo.getCustomerName())||StringUtils.isEmpty(customerInfo.getCustomerType())){
             response.setCode(ResponseCode.INVALID_PAREMETER.getCode());

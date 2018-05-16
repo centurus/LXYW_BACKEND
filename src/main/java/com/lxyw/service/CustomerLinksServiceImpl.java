@@ -33,6 +33,11 @@ public class CustomerLinksServiceImpl implements CustomerLinksService{
     }
 
     @Override
+    public List<CustomerLinks> selectByCustomerId(String customerId) {
+        return customerLinksMapper.selectByCustomerId(customerId);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(CustomerLinks record) {
         return customerLinksMapper.updateByPrimaryKeySelective(record);
     }

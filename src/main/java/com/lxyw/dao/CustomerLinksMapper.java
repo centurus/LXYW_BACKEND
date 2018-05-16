@@ -3,6 +3,8 @@ package com.lxyw.dao;
 import com.lxyw.entity.CustomerLinks;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface CustomerLinksMapper {
     int deleteByPrimaryKey(String id);
 
@@ -12,6 +14,8 @@ public interface CustomerLinksMapper {
 
     CustomerLinks selectByPrimaryKey(String id);
 
+    List<CustomerLinks> selectByCustomerId(String customerId);
+
     int updateByPrimaryKeySelective(CustomerLinks record);
 
     int updateByPrimaryKey(CustomerLinks record);
@@ -19,4 +23,6 @@ public interface CustomerLinksMapper {
     int batchInsert(@Param("list") java.util.List<CustomerLinks> list);
 
     int deteleByCustomerId(@Param("customerId")String customerInfoId);
+
+
 }

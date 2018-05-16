@@ -14,6 +14,8 @@ public interface CustomerLinksService {
 
     CustomerLinks selectByPrimaryKey(String id);
 
+    List<CustomerLinks> selectByCustomerId(String customerId);
+
     int updateByPrimaryKeySelective(CustomerLinks record);
 
     int updateByPrimaryKey(CustomerLinks record);

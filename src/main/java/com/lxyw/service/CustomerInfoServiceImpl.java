@@ -3,6 +3,7 @@ package com.lxyw.service;
 import com.lxyw.dao.CustomerInfoMapper;
 import com.lxyw.dao.CustomerLinksMapper;
 import com.lxyw.entity.CustomerInfo;
+import com.lxyw.entity.CustomerLinks;
 import com.lxyw.entityVo.CustomerInfoAndLinksVo;
 import com.lxyw.util.PageBean;
 import com.lxyw.util.PrimaryKeyGenerator;
@@ -29,7 +30,7 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
 
     @Override
     @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
-    public Response insertSelective(CustomerInfoAndLinksVo record) {
+    public Response insertSelective(CustomerInfo record) {
         Response response=new Response();
         //生成设置用户主键
         String customerInfoId = PrimaryKeyGenerator.getPrimaryKey();
@@ -41,12 +42,17 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
 
     @Override
     public CustomerInfo selectByPrimaryKey(String id) {
-        return customerInfoMapper.selectByPrimaryKey(id);
+        //组装查询主子表内容
+        CustomerInfo cusInfo = customerInfoMapper.selectByPrimaryKey(id);
+        List<CustomerLinks> links = customerLinksService.selectByCustomerId(id);
+        //主子表关系对照属性设置
+        cusInfo.setCustomerLinks(links);
+        return cusInfo;
     }
 
     @Override
     @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
-    public int updateByPrimaryKeySelective(CustomerInfoAndLinksVo record) {
+    public int updateByPrimaryKeySelective(CustomerInfo record) {
         //更新客户子表数据
         customerLinksService.deleteByCustomerId(record.getId());
         //按照客户表id与子表建立关联关系

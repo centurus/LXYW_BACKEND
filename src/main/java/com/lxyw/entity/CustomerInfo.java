@@ -1,6 +1,7 @@
 package com.lxyw.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class CustomerInfo {
     private String id;
@@ -30,6 +31,18 @@ public class CustomerInfo {
     private Long version;
 
     private String status;
+
+    //联系人子表
+    private List<CustomerLinks> customerLinks;
+
+
+    public List<CustomerLinks> getCustomerLinks() {
+        return customerLinks;
+    }
+
+    public void setCustomerLinks(List<CustomerLinks> customerLinks) {
+        this.customerLinks = customerLinks;
+    }
 
     public String getStatus() {
         return status;
