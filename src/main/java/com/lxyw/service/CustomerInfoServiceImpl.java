@@ -31,9 +31,11 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
     @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
     public Response insertSelective(CustomerInfoAndLinksVo record) {
         Response response=new Response();
-        record.setId(PrimaryKeyGenerator.getPrimaryKey());
+        //生成设置用户主键
+        String customerInfoId = PrimaryKeyGenerator.getPrimaryKey();
+        record.setId(customerInfoId);
         customerInfoMapper.insertSelective(record);
-        customerLinksService.batchInsert(record.getCustomerLinks());
+        customerLinksService.batchInsert(record.getCustomerLinks(),customerInfoId);
         return response;
     }
 
@@ -45,8 +47,10 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
     @Override
     @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
     public int updateByPrimaryKeySelective(CustomerInfoAndLinksVo record) {
+        //更新客户子表数据
         customerLinksService.deleteByCustomerId(record.getId());
-        customerLinksService.batchInsert(record.getCustomerLinks());
+        //按照客户表id与子表建立关联关系
+        customerLinksService.batchInsert(record.getCustomerLinks(),record.getId());
         return customerInfoMapper.updateByPrimaryKeySelective(record);
     }
 

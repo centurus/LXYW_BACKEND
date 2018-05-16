@@ -1,7 +1,8 @@
 CREATE TABLE `user_info` (
   `ID` varchar(32) NOT NULL COMMENT '主键',
   `USERNAME` varchar(30) NOT NULL COMMENT '用户名',
-  `PASSWORD` varchar(30) NOT NULL COMMENT '密码',
+  `PASSWORD` varchar(512) NOT NULL COMMENT '密码',
+  `EMAIL` varchar(255) COMMENT '邮箱',
   `NAME` varchar(30) NOT NULL COMMENT '姓名',
   `STATE` varchar(2) DEFAULT '0' COMMENT '状态：0为正常、1为冻结、2为停用',
   `SEX` char(2) NOT NULL COMMENT '性别 F为女性、M为男性',

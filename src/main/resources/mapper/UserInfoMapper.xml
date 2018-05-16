@@ -24,7 +24,7 @@
     <result column="VERSION" jdbcType="BIGINT" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL, 
+    ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL,
     IDCARD_NO, CELLPHONE_NO, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, 
     UPDATE_DATE, VERSION, EMAIL
   </sql>
@@ -41,14 +41,14 @@
   </delete>
   <insert id="insert" parameterType="com.lxyw.entity.UserInfo">
     insert into user_info (ID, USERNAME, PASSWORD, 
-      NAME, STATE, SEX, BIRTHDAY, 
+      NAME, STATE, SEX, BIRTHDAY,
       GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, 
       CELLPHONE_NO, WECHAT, ADDRESS, 
       POST_CODE, CREATED_BY, CREATED_DATE, 
       UPDATE_BY, UPDATE_DATE, VERSION, EMAIL
       )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, 
+      #{name,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE},
       #{greduateFrom,jdbcType=VARCHAR}, #{greduateLevel,jdbcType=VARCHAR}, #{idcardNo,jdbcType=VARCHAR}, 
       #{cellphoneNo,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{postCode,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 

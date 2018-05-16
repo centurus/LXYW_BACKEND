@@ -14,5 +14,19 @@ public class PageBean<T> implements Serializable {
     @Getter@Setter
     private List<T> list;
 
+    public Integer getTotalSize() {
+        return totalSize;
+    }
 
+    public void setTotalSize(Integer totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
 }

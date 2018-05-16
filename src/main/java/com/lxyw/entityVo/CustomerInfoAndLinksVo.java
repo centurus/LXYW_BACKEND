@@ -12,4 +12,11 @@ public class CustomerInfoAndLinksVo extends CustomerInfo {
     @Getter@Setter
     List<CustomerLinks> customerLinks=new ArrayList<>();
 
+    public List<CustomerLinks> getCustomerLinks() {
+        return customerLinks;
+    }
+
+    public void setCustomerLinks(List<CustomerLinks> customerLinks) {
+        this.customerLinks = customerLinks;
+    }
 }

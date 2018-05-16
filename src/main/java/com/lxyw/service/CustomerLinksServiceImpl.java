@@ -43,9 +43,11 @@ public class CustomerLinksServiceImpl implements CustomerLinksService{
     }
 
     @Override
-    public int batchInsert(List<CustomerLinks> list) {
+    public int batchInsert(List<CustomerLinks> list,String customerInfoId) {
         for(CustomerLinks customerLink:list){
             customerLink.setId(PrimaryKeyGenerator.getPrimaryKey());
+            //子表关联主表ID
+            customerLink.setCustomerInfoId(customerInfoId);
         }
         return customerLinksMapper.batchInsert(list);
     }
