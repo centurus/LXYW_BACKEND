@@ -471,4 +471,14 @@
     </if>
        limit #{startIndex},#{limit}
   </select>
+
+  <update id="updateByUserName" parameterType="com.lxyw.entity.UserInfo">
+    update user_info
+    <set>
+      <if test="condition.password != null">
+        PASSWORD = #{condition.password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USERNAME = #{condition.username,jdbcType=VARCHAR}
+  </update>
 </mapper>

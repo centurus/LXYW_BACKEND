@@ -19,10 +19,6 @@ public class UserInfoServiceImplTest {
 
     @Test
     public void isUniqueUserName() {
-        UserInfo userInfo=new UserInfo();
-        userInfo.setId("245a951a89a642459cccf51d01a4fc01");
-        userInfo.setPassword("2789");
-        userInfoService.modifyUserPassword(userInfo);
         logger.info("1111");
 
     }

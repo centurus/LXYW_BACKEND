@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Resource
     private SendMailService sendMailService;
+
+    private final String initPass="123456";
 
     @Override
     public int deleteByPrimaryKey(String id) {
@@ -44,7 +47,6 @@ public class UserInfoServiceImpl implements UserInfoService {
             response.setCode(ResponseCode.NOT_UNIQUE_USER.getCode());
             response.setMessage(ResponseCode.NOT_UNIQUE_USER.getMessage());
         }
-        String initPass="123456";
         String primaryKey=PrimaryKeyGenerator.getPrimaryKey();
         record.setId(primaryKey);
         String password="";
@@ -139,7 +141,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         try {
              password=MD5.encryption(record.getPassword());
         } catch (LXYWException e) {
-            logger.error(e.getMessage()+"userId={},password={}",record.getId(),record.getPassword());
+            logger.error(e.getMessage()+"userName={},password={}",record.getName(),record.getPassword());
         }
         record.setPassword(password);
         List<UserInfo> userInfoList= userInfoMapper.selectUserInfoListByCondition(record);
@@ -150,26 +152,46 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     /**
-     * 修改用户密码
+     * 修改、重置用户密码
      * @param record
      * @return
      */
     @Override
     @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
-    public Response modifyUserPassword(UserInfo record) {
+    public Response modifyUserPassword(UserInfoVo record) {
         Response response=new Response();
-        if(record.getId()==null||record.getPassword()==null){
-            response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
-            response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
+        //newPass不为null设置新密码
+        if(!StringUtils.isEmpty(record.getNewPassword())){
+            if(record.getUsername()==null||record.getPassword()==null){
+                response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
+                response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
+            }
+            if(this.validateLogIn(record)){
+                String password="'";
+                try {
+                    password=MD5.encryption(record.getNewPassword());
+                } catch (LXYWException e) {
+                    logger.error(e.getMessage()+"userName={},password={}",record.getName(),record.getNewPassword());
+                }
+                record.setPassword(password);
+                userInfoMapper.updateByUserName(record);
+            }else{
+                response.setCode(ResponseCode.ERROR_PASSWORD.getCode());
+                response.setMessage(ResponseCode.ERROR_PASSWORD.getMessage());
+            }
+        //重置密码，设置为初始化密码
+        }else{
+            if(record.getUsername()==null){
+                response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
+                response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
+            }
+            try {
+                record.setPassword(MD5.encryption(initPass));
+            } catch (LXYWException e) {
+                logger.error(e.getMessage()+"userName={},password={}",record.getName(),record.getNewPassword());
+            }
+            userInfoMapper.updateByUserName(record);
         }
-        String password="'";
-        try {
-            password=MD5.encryption(record.getPassword());
-        } catch (LXYWException e) {
-            logger.error(e.getMessage()+"userId={},password={}",record.getId(),record.getPassword());
-        }
-        record.setPassword(password);
-        userInfoMapper.updateByPrimaryKeySelective(record);
         return response;
     }
 }

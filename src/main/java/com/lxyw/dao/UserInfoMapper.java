@@ -1,6 +1,7 @@
 package com.lxyw.dao;
 
 import com.lxyw.entity.UserInfo;
+import com.lxyw.entityVo.UserInfoVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface UserInfoMapper {
     List<UserInfo> selectUserInfoPageByCondition(@Param("condition") UserInfo userInfo,@Param("startIndex")int startIndex,@Param("limit")int limit);
 
     int selectUserInfoCountByCondition(@Param("condition") UserInfo userInfo);
+
+    int updateByUserName(@Param("condition")UserInfo userInfo);
 }

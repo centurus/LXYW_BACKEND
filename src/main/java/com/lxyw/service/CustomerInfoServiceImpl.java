@@ -63,11 +63,6 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
         return customerInfoMapper.updateByPrimaryKeySelective(record);
     }
 
-    /*@Override
-    public int updateByPrimaryKey(CustomerInfo record) {
-        return customerInfoMapper.updateByPrimaryKey(record);
-    }*/
-
     @Override
     public int batchInsert(List<CustomerInfo> list) {
         return customerInfoMapper.batchInsert(list);

@@ -21,7 +21,7 @@ public class CustomerInfoServiceImplTest {
         ci.setId("23456");
         ci.setCustomerName("1");
         ci.setCustomerCellphone("123456");ci.setCustomerType("2");ci.setCustomerName("222");
-        //customerInfoService.insertSelective(ci);
+        customerInfoService.insertSelective(ci);
     }
 
 }

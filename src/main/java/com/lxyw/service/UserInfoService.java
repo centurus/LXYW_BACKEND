@@ -29,7 +29,7 @@ public interface UserInfoService {
 
     boolean validateLogIn(UserInfo record);
 
-    Response modifyUserPassword(UserInfo record);
+    Response modifyUserPassword(UserInfoVo record);
 
 
 }
