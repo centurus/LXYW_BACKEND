@@ -135,14 +135,35 @@ public class UserController {
     }
 
     /**
-     * 修改登陆密码
-     * @param userInfo
-     * @return
+     * 修改用户密码
+     * @param username 用户名
+     * @param password 旧密码
+     * @param newPassword 新密码
+     * @return 修改结果
      */
     @RequestMapping(value="/modifyUserPassword", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response modifyUserPassword(@RequestBody UserInfo userInfo){
-        Response response=this.userInfoService.modifyUserPassword(userInfo);
+    public Response modifyUserPassword(@RequestParam(value="username",required=true) String username,
+                                       @RequestParam(value="password",required=true) String password,
+                                       @RequestParam(value="newPassword",required=true) String newPassword){
+        
+        Response response=null;
+        return response;
+    }
+
+
+    /**
+     * 重置用户密码
+     * @param username 重置用户名
+     * @param email 重置密码发送EMAIL
+     * @return 重置密码结果
+     */
+    @RequestMapping(value="/resetUserPassword", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Response resetUserPassword(@RequestParam(value="username",required=true) String username,
+                                      @RequestParam(value="email",required=true) String email){
+
+        Response response=null;
         return response;
     }
 
