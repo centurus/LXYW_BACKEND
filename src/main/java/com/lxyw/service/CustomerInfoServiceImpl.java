@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service("customerInfoService")
@@ -25,6 +26,7 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
     private CustomerLinksService customerLinksService;
     @Override
     public int deleteByPrimaryKey(String id) {
+        //TODO：先删除子表记录再删除主表
         return customerInfoMapper.deleteByPrimaryKey(id);
     }
 
@@ -35,6 +37,7 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
         //生成设置用户主键
         String customerInfoId = PrimaryKeyGenerator.getPrimaryKey();
         record.setId(customerInfoId);
+        record.setUpdateDate(new Date());
         customerInfoMapper.insertSelective(record);
         customerLinksService.batchInsert(record.getCustomerLinks(),customerInfoId);
         return response;
