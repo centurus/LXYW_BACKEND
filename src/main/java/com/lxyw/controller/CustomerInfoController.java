@@ -77,10 +77,10 @@ public class CustomerInfoController {
      */
     @RequestMapping(value="/updateCustomerInfo", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Response updateCustomerInfo(@RequestBody CustomerInfoAndLinksVo customerInfo){
+    public Response updateCustomerInfo(@RequestBody CustomerInfo customerInfo){
         Response response=new Response();
         customerInfo.setUpdateDate(new Date());
-        if(customerInfo==null|| StringUtils.isEmpty(customerInfo.getId())){
+        if(customerInfo.getCustomerLinks()==null|| StringUtils.isEmpty(customerInfo.getId())){
             response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
             response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
         }else{
