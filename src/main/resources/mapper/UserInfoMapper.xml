@@ -7,13 +7,13 @@
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="SEX" jdbcType="CHAR" property="sex" />
     <result column="BIRTHDAY" jdbcType="DATE" property="birthday" />
     <result column="GREDUATE_FROM" jdbcType="VARCHAR" property="greduateFrom" />
     <result column="GREDUATE_LEVEL" jdbcType="VARCHAR" property="greduateLevel" />
     <result column="IDCARD_NO" jdbcType="VARCHAR" property="idcardNo" />
-    <result column="CELLPHONE_NO" jdbcType="VARCHAR" property="cellphoneNo" />
+    <result column="CELLPHONE" jdbcType="VARCHAR" property="cellphone" />
     <result column="WECHAT" jdbcType="VARCHAR" property="wechat" />
     <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
     <result column="POST_CODE" jdbcType="VARCHAR" property="postCode" />
@@ -24,8 +24,8 @@
     <result column="VERSION" jdbcType="BIGINT" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL,
-    IDCARD_NO, CELLPHONE_NO, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, 
+    ID, USERNAME, PASSWORD, NAME, STATUS, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL,
+    IDCARD_NO, CELLPHONE, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, 
     UPDATE_DATE, VERSION, EMAIL
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -41,16 +41,16 @@
   </delete>
   <insert id="insert" parameterType="com.lxyw.entity.UserInfo">
     insert into user_info (ID, USERNAME, PASSWORD, 
-      NAME, STATE, SEX, BIRTHDAY,
+      NAME, STATUS, SEX, BIRTHDAY,
       GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, 
-      CELLPHONE_NO, WECHAT, ADDRESS, 
+      CELLPHONE, WECHAT, ADDRESS, 
       POST_CODE, CREATED_BY, CREATED_DATE, 
       UPDATE_BY, UPDATE_DATE, VERSION, EMAIL
       )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE},
+      #{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE},
       #{greduateFrom,jdbcType=VARCHAR}, #{greduateLevel,jdbcType=VARCHAR}, #{idcardNo,jdbcType=VARCHAR}, 
-      #{cellphoneNo,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{cellphone,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{postCode,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
       #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT},
       #{email,jdbcType=VARCHAR}
@@ -74,8 +74,8 @@
       <if test="name != null">
         NAME,
       </if>
-      <if test="state != null">
-        STATE,
+      <if test="status != null">
+        STATUS,
       </if>
       <if test="sex != null">
         SEX,
@@ -92,8 +92,8 @@
       <if test="idcardNo != null">
         IDCARD_NO,
       </if>
-      <if test="cellphoneNo != null">
-        CELLPHONE_NO,
+      <if test="cellphone != null">
+        CELLPHONE,
       </if>
       <if test="wechat != null">
         WECHAT,
@@ -136,8 +136,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        #{state,jdbcType=VARCHAR},
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
         #{sex,jdbcType=CHAR},
@@ -154,8 +154,8 @@
       <if test="idcardNo != null">
         #{idcardNo,jdbcType=VARCHAR},
       </if>
-      <if test="cellphoneNo != null">
-        #{cellphoneNo,jdbcType=VARCHAR},
+      <if test="cellphone != null">
+        #{cellphone,jdbcType=VARCHAR},
       </if>
       <if test="wechat != null">
         #{wechat,jdbcType=VARCHAR},
@@ -198,8 +198,8 @@
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        STATE = #{state,jdbcType=VARCHAR},
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
         SEX = #{sex,jdbcType=CHAR},
@@ -216,8 +216,8 @@
       <if test="idcardNo != null">
         IDCARD_NO = #{idcardNo,jdbcType=VARCHAR},
       </if>
-      <if test="cellphoneNo != null">
-        CELLPHONE_NO = #{cellphoneNo,jdbcType=VARCHAR},
+      <if test="cellphone != null">
+        CELLPHONE = #{cellphone,jdbcType=VARCHAR},
       </if>
       <if test="wechat != null">
         WECHAT = #{wechat,jdbcType=VARCHAR},
@@ -252,13 +252,13 @@
       PASSWORD = #{password,jdbcType=VARCHAR},
       EMAIL = #{email,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
-      STATE = #{state,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
       SEX = #{sex,jdbcType=CHAR},
       BIRTHDAY = #{birthday,jdbcType=DATE},
       GREDUATE_FROM = #{greduateFrom,jdbcType=VARCHAR},
       GREDUATE_LEVEL = #{greduateLevel,jdbcType=VARCHAR},
       IDCARD_NO = #{idcardNo,jdbcType=VARCHAR},
-      CELLPHONE_NO = #{cellphoneNo,jdbcType=VARCHAR},
+      CELLPHONE = #{cellphone,jdbcType=VARCHAR},
       WECHAT = #{wechat,jdbcType=VARCHAR},
       ADDRESS = #{address,jdbcType=VARCHAR},
       POST_CODE = #{postCode,jdbcType=VARCHAR},
@@ -270,10 +270,10 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="batchInsert" parameterType="java.util.List">
-    insert into user_info (ID, USERNAME, PASSWORD, NAME, STATE, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, CELLPHONE_NO, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION, EMAIL)
+    insert into user_info (ID, USERNAME, PASSWORD, NAME, STATUS, SEX, BIRTHDAY, GREDUATE_FROM, GREDUATE_LEVEL, IDCARD_NO, CELLPHONE, WECHAT, ADDRESS, POST_CODE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION, EMAIL)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.sex,jdbcType=CHAR}, #{item.birthday,jdbcType=DATE}, #{item.greduateFrom,jdbcType=VARCHAR}, #{item.greduateLevel,jdbcType=VARCHAR}, #{item.idcardNo,jdbcType=VARCHAR}, #{item.cellphoneNo,jdbcType=VARCHAR}, #{item.wechat,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.postCode,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT}, #{item.email,jdbcType=VARCHAR})
+       (#{item.id,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.sex,jdbcType=CHAR}, #{item.birthday,jdbcType=DATE}, #{item.greduateFrom,jdbcType=VARCHAR}, #{item.greduateLevel,jdbcType=VARCHAR}, #{item.idcardNo,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, #{item.wechat,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.postCode,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT}, #{item.email,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <select id="selectUserInfoListByCondition" resultMap="BaseResultMap">
@@ -291,8 +291,8 @@
     <if test="condition.name != null and condition.name !=''">
       and NAME = #{condition.name,jdbcType=VARCHAR}
     </if>
-    <if test="condition.state != null and condition.state !=''">
-      and STATE = #{condition.state,jdbcType=VARCHAR}
+    <if test="condition.status != null and condition.status !=''">
+      and STATUS = #{condition.status,jdbcType=VARCHAR}
     </if>
     <if test="condition.email != null and condition.email !=''">
       and EMAIL = #{condition.email,jdbcType=VARCHAR}
@@ -312,8 +312,8 @@
     <if test="condition.idcardNo != null and condition.idcardNo !=''">
       and IDCARD_NO = #{condition.idcardNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.cellphoneNo != null and condition.cellphoneNo !=''">
-      and CELLPHONE_NO = #{condition.cellphoneNo,jdbcType=VARCHAR}
+    <if test="condition.cellphone != null and condition.cellphone !=''">
+      and CELLPHONE = #{condition.cellphone,jdbcType=VARCHAR}
     </if>
     <if test="condition.wechat != null and condition.wechat !=''">
       and WECHAT = #{condition.wechat,jdbcType=VARCHAR}
@@ -348,16 +348,16 @@
     where
     1=1
     <if test="condition.username != null and condition.username !=''">
-      and USERNAME LIKE "%${condition.username}"
+      and USERNAME LIKE "%"#{condition.username}
     </if>
     <if test="condition.password != null and condition.password !=''">
       and  PASSWORD = #{condition.password,jdbcType=VARCHAR}
     </if>
     <if test="condition.name != null and condition.name !=''">
-      and NAME LIKE "%${condition.name}"
+      and NAME LIKE "%"#{condition.name}
     </if>
-    <if test="condition.state != null and condition.state !=''">
-      and STATE = #{condition.state,jdbcType=VARCHAR}
+    <if test="condition.status != null and condition.status !=''">
+      and STATUS = #{condition.status,jdbcType=VARCHAR}
     </if>
     <if test="condition.sex != null and condition.sex !=''">
       and SEX = #{condition.sex,jdbcType=CHAR}
@@ -377,8 +377,8 @@
     <if test="condition.idcardNo != null and condition.idcardNo !=''">
       and IDCARD_NO = #{condition.idcardNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.cellphoneNo != null and condition.cellphoneNo !=''">
-      and CELLPHONE_NO LIKE "%${condition.cellphoneNo}"
+    <if test="condition.cellphone != null and condition.cellphone !=''">
+      and CELLPHONE LIKE "%"#{condition.cellphone}
     </if>
     <if test="condition.wechat != null and condition.wechat !=''">
       and WECHAT = #{condition.wechat,jdbcType=VARCHAR}
@@ -413,7 +413,7 @@
     where
     1=1
     <if test="condition.username != null and condition.username !=''">
-      and USERNAME LIKE "%${condition.username}"
+      and USERNAME LIKE #{condition.username}"%"
     </if>
     <if test="condition.password != null and condition.password !=''">
       and  PASSWORD = #{condition.password,jdbcType=VARCHAR}
@@ -422,10 +422,10 @@
       and EMAIL = #{condition.email,jdbcType=VARCHAR}
     </if>
     <if test="condition.name != null and condition.name !=''">
-      and NAME = "%${condition.name}"
+      and NAME LIKE #{condition.name}"%"
     </if>
-    <if test="condition.state != null and condition.state !=''">
-      and STATE = #{condition.state,jdbcType=VARCHAR}
+    <if test="condition.status != null and condition.status !=''">
+      and STATUS = #{condition.status,jdbcType=VARCHAR}
     </if>
     <if test="condition.sex != null and condition.sex !=''">
       and SEX = #{condition.sex,jdbcType=CHAR}
@@ -442,8 +442,8 @@
     <if test="condition.idcardNo != null and condition.idcardNo !=''">
       and IDCARD_NO = #{condition.idcardNo,jdbcType=VARCHAR}
     </if>
-    <if test="condition.cellphoneNo != null and condition.cellphoneNo !=''">
-      and CELLPHONE_NO = "%${condition.cellphoneNo}"
+    <if test="condition.cellphone != null and condition.cellphone !=''">
+      and CELLPHONE LIKE  #{condition.cellphone}"%"
     </if>
     <if test="condition.wechat != null and condition.wechat !=''">
       and WECHAT = #{condition.wechat,jdbcType=VARCHAR}
@@ -469,7 +469,9 @@
     <if test="condition.version != null ">
       and VERSION = #{condition.version,jdbcType=BIGINT}
     </if>
-       limit #{startIndex},#{limit}
+     ORDER BY CREATED_DATE DESC
+     limit #{startIndex},#{limit}
+
   </select>
 
   <update id="updateByUserName" parameterType="com.lxyw.entity.UserInfo">

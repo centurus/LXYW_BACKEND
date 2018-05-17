@@ -9,7 +9,7 @@ public class CustomerLinks {
 
     private String name;
 
-    private String state;
+    private String status;
 
     private String cellphone;
 
@@ -53,12 +53,12 @@ public class CustomerLinks {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getState() {
-        return state;
+    public String getStatus() {
+        return status;
     }
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getCellphone() {

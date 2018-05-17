@@ -13,11 +13,9 @@ public class SupplierSubject {
 
     private String supplierLocation;
 
-    private String supplierPhone;
+    private String supplierCellphone;
 
     private String supplierAddress;
-
-    private String supplierState;
 
     private String supplierRemark;
 
@@ -30,6 +28,8 @@ public class SupplierSubject {
     private Date updateDate;
 
     private Long version;
+
+    private String status;
 
     public String getId() {
         return id;
@@ -71,12 +71,12 @@ public class SupplierSubject {
         this.supplierLocation = supplierLocation == null ? null : supplierLocation.trim();
     }
 
-    public String getSupplierPhone() {
-        return supplierPhone;
+    public String getSupplierCellphone() {
+        return supplierCellphone;
     }
 
-    public void setSupplierPhone(String supplierPhone) {
-        this.supplierPhone = supplierPhone == null ? null : supplierPhone.trim();
+    public void setSupplierCellphone(String supplierCellphone) {
+        this.supplierCellphone = supplierCellphone == null ? null : supplierCellphone.trim();
     }
 
     public String getSupplierAddress() {
@@ -85,14 +85,6 @@ public class SupplierSubject {
 
     public void setSupplierAddress(String supplierAddress) {
         this.supplierAddress = supplierAddress == null ? null : supplierAddress.trim();
-    }
-
-    public String getSupplierState() {
-        return supplierState;
-    }
-
-    public void setSupplierState(String supplierState) {
-        this.supplierState = supplierState == null ? null : supplierState.trim();
     }
 
     public String getSupplierRemark() {
@@ -141,5 +133,13 @@ public class SupplierSubject {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 }

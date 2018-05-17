@@ -26,7 +26,7 @@ public class CustomerInfoServiceImpl implements  CustomerInfoService {
     private CustomerLinksService customerLinksService;
     @Override
     public int deleteByPrimaryKey(String id) {
-        //TODO：先删除子表记录再删除主表
+        customerLinksService.deleteByCustomerId(id);
         return customerInfoMapper.deleteByPrimaryKey(id);
     }
 

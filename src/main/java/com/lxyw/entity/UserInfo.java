@@ -13,7 +13,7 @@ public class UserInfo {
 
     private String email;
 
-    private String state;
+    private String status;
 
     private String sex;
 
@@ -25,7 +25,7 @@ public class UserInfo {
 
     private String idcardNo;
 
-    private String cellphoneNo;
+    private String cellphone;
 
     private String wechat;
 
@@ -75,14 +75,6 @@ public class UserInfo {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
-    }
-
     public String getSex() {
         return sex;
     }
@@ -123,12 +115,12 @@ public class UserInfo {
         this.idcardNo = idcardNo == null ? null : idcardNo.trim();
     }
 
-    public String getCellphoneNo() {
-        return cellphoneNo;
+    public String getCellphone() {
+        return cellphone;
     }
 
-    public void setCellphoneNo(String cellphoneNo) {
-        this.cellphoneNo = cellphoneNo == null ? null : cellphoneNo.trim();
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone == null ? null : cellphone.trim();
     }
 
     public String getWechat() {
@@ -201,5 +193,13 @@ public class UserInfo {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

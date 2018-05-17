@@ -5,7 +5,7 @@
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="CUSTOMER_INFO_ID" jdbcType="VARCHAR" property="customerInfoId" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="CELLPHONE" jdbcType="VARCHAR" property="cellphone" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
@@ -17,7 +17,7 @@
     <result column="VERSION" jdbcType="BIGINT" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, CUSTOMER_INFO_ID, NAME, STATE, CELLPHONE, EMAIL, ADDRESS, REMARK, CREATED_BY, 
+    ID, CUSTOMER_INFO_ID, NAME, STATUS, CELLPHONE, EMAIL, ADDRESS, REMARK, CREATED_BY, 
     CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -38,12 +38,12 @@
   </delete>
   <insert id="insert" parameterType="com.lxyw.entity.CustomerLinks">
     insert into customer_links (ID, CUSTOMER_INFO_ID, NAME, 
-      STATE, CELLPHONE, EMAIL, 
+      STATUS, CELLPHONE, EMAIL, 
       ADDRESS, REMARK, CREATED_BY, 
       CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
       VERSION)
     values (#{id,jdbcType=VARCHAR}, #{customerInfoId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{state,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
       #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{version,jdbcType=BIGINT})
@@ -60,8 +60,8 @@
       <if test="name != null">
         NAME,
       </if>
-      <if test="state != null">
-        STATE,
+      <if test="status != null">
+        STATUS,
       </if>
       <if test="cellphone != null">
         CELLPHONE,
@@ -101,8 +101,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        #{state,jdbcType=VARCHAR},
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="cellphone != null">
         #{cellphone,jdbcType=VARCHAR},
@@ -142,8 +142,8 @@
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        STATE = #{state,jdbcType=VARCHAR},
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
       </if>
       <if test="cellphone != null">
         CELLPHONE = #{cellphone,jdbcType=VARCHAR},
@@ -179,7 +179,7 @@
     update customer_links
     set CUSTOMER_INFO_ID = #{customerInfoId,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
-      STATE = #{state,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
       CELLPHONE = #{cellphone,jdbcType=VARCHAR},
       EMAIL = #{email,jdbcType=VARCHAR},
       ADDRESS = #{address,jdbcType=VARCHAR},
@@ -192,13 +192,13 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="batchInsert" parameterType="java.util.List">
-    insert into customer_links (ID, CUSTOMER_INFO_ID, NAME, STATE, CELLPHONE, EMAIL, ADDRESS, REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    insert into customer_links (ID, CUSTOMER_INFO_ID, NAME, STATUS, CELLPHONE, EMAIL, ADDRESS, REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.customerInfoId,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+       (#{item.id,jdbcType=VARCHAR}, #{item.customerInfoId,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
-  <delete id="deteleByCustomerId">
+  <delete id="detleteByCustomerId">
     delete from customer_links
     where CUSTOMER_INFO_ID = #{customerId,jdbcType=VARCHAR}
   </delete>

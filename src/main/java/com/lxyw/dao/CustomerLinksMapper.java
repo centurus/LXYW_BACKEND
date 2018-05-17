@@ -22,7 +22,7 @@ public interface CustomerLinksMapper {
 
     int batchInsert(@Param("list") java.util.List<CustomerLinks> list);
 
-    int deteleByCustomerId(@Param("customerId")String customerInfoId);
+    int detleteByCustomerId(@Param("customerId")String customerInfoId);
 
 
 }

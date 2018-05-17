@@ -5,7 +5,7 @@
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="CUSTOMER_NAME" jdbcType="VARCHAR" property="customerName" />
     <result column="CUSTOMER_TYPE" jdbcType="VARCHAR" property="customerType" />
-    <result column="CUSTOMER_STATE" jdbcType="VARCHAR" property="customerState" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="CUSTOMER_CELLPHONE" jdbcType="VARCHAR" property="customerCellphone" />
     <result column="CUSTOMER_EMAIL" jdbcType="VARCHAR" property="customerEmail" />
     <result column="CUSTOMER_ADDRESS" jdbcType="VARCHAR" property="customerAddress" />
@@ -18,7 +18,7 @@
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, CUSTOMER_NAME, CUSTOMER_TYPE, CUSTOMER_STATE, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, 
+    ID, CUSTOMER_NAME, CUSTOMER_TYPE, STATUS, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, 
     CUSTOMER_ADDRESS, CUSTOMER_REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
     VERSION,STATUS
   </sql>
@@ -34,12 +34,12 @@
   </delete>
   <insert id="insert" parameterType="com.lxyw.entity.CustomerInfo">
     insert into customer_info (ID, CUSTOMER_NAME, CUSTOMER_TYPE, 
-      CUSTOMER_STATE, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, 
+      STATUS, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, 
       CUSTOMER_ADDRESS, CUSTOMER_REMARK, CREATED_BY, 
       CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
       VERSION,STATUS)
     values (#{id,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{customerType,jdbcType=VARCHAR}, 
-      #{customerState,jdbcType=VARCHAR}, #{customerCellphone,jdbcType=VARCHAR}, #{customerEmail,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{customerCellphone,jdbcType=VARCHAR}, #{customerEmail,jdbcType=VARCHAR}, 
       #{customerAddress,jdbcType=VARCHAR}, #{customerRemark,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
       #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{version,jdbcType=BIGINT},#{status,jdbcType=VARCHAR})
@@ -56,8 +56,8 @@
       <if test="customerType != null">
         CUSTOMER_TYPE,
       </if>
-      <if test="customerState != null">
-        CUSTOMER_STATE,
+      <if test="status != null">
+        STATUS,
       </if>
       <if test="customerCellphone != null">
         CUSTOMER_CELLPHONE,
@@ -100,8 +100,8 @@
       <if test="customerType != null">
         #{customerType,jdbcType=VARCHAR},
       </if>
-      <if test="customerState != null">
-        #{customerState,jdbcType=VARCHAR},
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="customerCellphone != null">
         #{customerCellphone,jdbcType=VARCHAR},
@@ -144,8 +144,8 @@
       <if test="customerType != null">
         CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
       </if>
-      <if test="customerState != null">
-        CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
       </if>
       <if test="customerCellphone != null">
         CUSTOMER_CELLPHONE = #{customerCellphone,jdbcType=VARCHAR},
@@ -184,7 +184,7 @@
     update customer_info
     set CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
       CUSTOMER_TYPE = #{customerType,jdbcType=VARCHAR},
-      CUSTOMER_STATE = #{customerState,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
       CUSTOMER_CELLPHONE = #{customerCellphone,jdbcType=VARCHAR},
       CUSTOMER_EMAIL = #{customerEmail,jdbcType=VARCHAR},
       CUSTOMER_ADDRESS = #{customerAddress,jdbcType=VARCHAR},
@@ -203,10 +203,10 @@
       这个节点为代码生成工具生成，请不要修改!
       @author hewei
     -->
-    insert into customer_info (ID, CUSTOMER_NAME, CUSTOMER_TYPE, CUSTOMER_STATE, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, CUSTOMER_ADDRESS, CUSTOMER_REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION,STATUS)
+    insert into customer_info (ID, CUSTOMER_NAME, CUSTOMER_TYPE, STATUS, CUSTOMER_CELLPHONE, CUSTOMER_EMAIL, CUSTOMER_ADDRESS, CUSTOMER_REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION,STATUS)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.customerName,jdbcType=VARCHAR}, #{item.customerType,jdbcType=VARCHAR}, #{item.customerState,jdbcType=VARCHAR}, #{item.customerCellphone,jdbcType=VARCHAR}, #{item.customerEmail,jdbcType=VARCHAR}, #{item.customerAddress,jdbcType=VARCHAR}, #{item.customerRemark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT}, #{item.status,jdbcType=VARCHAR})
+       (#{item.id,jdbcType=VARCHAR}, #{item.customerName,jdbcType=VARCHAR}, #{item.customerType,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.customerCellphone,jdbcType=VARCHAR}, #{item.customerEmail,jdbcType=VARCHAR}, #{item.customerAddress,jdbcType=VARCHAR}, #{item.customerRemark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT}, #{item.status,jdbcType=VARCHAR})
     </foreach>
   </insert>
 
@@ -217,16 +217,16 @@
     where
     1=1
     <if test="condition.customerName != null and condition.customerName !=''">
-      AND CUSTOMER_NAME LIKE "%${condition.customerName}"
+      AND CUSTOMER_NAME LIKE #{condition.customerName}"%"
     </if>
     <if test="condition.customerType != null and condition.customerType!=null">
       AND CUSTOMER_TYPE = #{condition.customerType,jdbcType=VARCHAR}
     </if>
-    <if test="condition.customerState != null and condition.customerState!=''">
-      AND CUSTOMER_STATE = #{condition.customerState,jdbcType=VARCHAR}
+    <if test="condition.status != null and condition.status!=''">
+      AND STATUS = #{condition.status,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerCellphone != null and condition.customerCellphone!=''">
-      AND CUSTOMER_CELLPHONE LIKE "%${condition.customerCellphone}"
+      AND CUSTOMER_CELLPHONE LIKE #{condition.customerCellphone}"%"
     </if>
     <if test="condition.customerEmail != null and condition.customerEmail !=''">
       AND CUSTOMER_EMAIL = #{condition.customerEmail,jdbcType=VARCHAR}
@@ -255,6 +255,7 @@
     <if test="condition.status != null">
       AND STATUS = #{condition.status,jdbcType=VARCHAR}
     </if>
+    ORDER BY CREATED_DATE DESC
     limit #{startIndex},#{limit}
   </select>
 
@@ -265,16 +266,16 @@
     where
     1=1
     <if test="condition.customerName != null and condition.customerName !=''">
-      AND CUSTOMER_NAME LIKE "%${condition.customerName}"
+      AND CUSTOMER_NAME LIKE #{condition.customerName}"%"
     </if>
     <if test="condition.customerType != null and condition.customerType!=null">
       AND CUSTOMER_TYPE = #{condition.customerType,jdbcType=VARCHAR}
     </if>
-    <if test="condition.customerState != null and condition.customerState!=''">
-      AND CUSTOMER_STATE = #{condition.customerState,jdbcType=VARCHAR}
+    <if test="condition.status != null and condition.status!=''">
+      AND STATUS = #{condition.status,jdbcType=VARCHAR}
     </if>
     <if test="condition.customerCellphone != null and condition.customerCellphone!=''">
-      AND CUSTOMER_CELLPHONE LIKE "%${condition.customerCellphone}"
+      AND CUSTOMER_CELLPHONE LIKE #{condition.customerCellphone}"%"
     </if>
     <if test="condition.customerEmail != null and condition.customerEmail !=''">
       AND CUSTOMER_EMAIL = #{condition.customerEmail,jdbcType=VARCHAR}

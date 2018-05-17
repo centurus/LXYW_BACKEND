@@ -80,7 +80,7 @@ public class UserController {
     public Response getUserInfoPageInfo(@RequestBody UserInfoVo userInfoVo){
         Response response=new Response();
         UserInfo userInfo=new UserInfo();
-        userInfo.setUsername(userInfoVo.getUsername());userInfo.setName(userInfoVo.getName());userInfo.setCellphoneNo(userInfoVo.getCellphoneNo());
+        userInfo.setUsername(userInfoVo.getUsername());userInfo.setName(userInfoVo.getName());userInfo.setCellphone(userInfoVo.getCellphone());
         PageBean<UserInfoVo> userInfoPageInfo= this.userInfoService.getUserInfoPageInfo(userInfo,userInfoVo.getPageIndex(),userInfoVo.getPageSize());
         response.setData(userInfoPageInfo);
         return response;

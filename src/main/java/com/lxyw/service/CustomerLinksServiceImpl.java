@@ -59,6 +59,6 @@ public class CustomerLinksServiceImpl implements CustomerLinksService{
 
     @Override
     public int deleteByCustomerId(String customerId) {
-        return customerLinksMapper.deteleByCustomerId(customerId);
+        return customerLinksMapper.detleteByCustomerId(customerId);
     }
 }

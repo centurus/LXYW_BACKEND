@@ -2,6 +2,7 @@ package com.lxyw.service;
 
 import com.lxyw.dao.SupplierSubjectMapper;
 import com.lxyw.entity.SupplierSubject;
+import com.lxyw.util.PageBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,9 +34,7 @@ public class SupplierSubjectServiceImpl implements  SupplierSubjectService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(SupplierSubject record) {
-        return supplierSubjectMapper.updateByPrimaryKeySelective(record);
-    }
+    public int updateByPrimaryKeySelective(SupplierSubject record) {return supplierSubjectMapper.updateByPrimaryKeySelective(record);}
 
     @Override
     public int updateByPrimaryKey(SupplierSubject record) {
@@ -45,5 +44,15 @@ public class SupplierSubjectServiceImpl implements  SupplierSubjectService {
     @Override
     public int batchInsert(List<SupplierSubject> list) {
         return supplierSubjectMapper.batchInsert(list);
+    }
+
+    @Override
+    public PageBean<SupplierSubject> getSupplierSubjectPageInfo(SupplierSubject record, int startIndex, int limit) {
+        PageBean<SupplierSubject> supplierSubjectPageBean=new PageBean<>();
+        List<SupplierSubject> supplierSubjectList=supplierSubjectMapper.selectSupplierSubjectoListByCondition(record,startIndex,limit);
+        int count=supplierSubjectMapper.selectSupplierSubjectCountByCondition(record);
+        supplierSubjectPageBean.setList(supplierSubjectList);
+        supplierSubjectPageBean.setTotalSize(count);
+        return supplierSubjectPageBean;
     }
 }
