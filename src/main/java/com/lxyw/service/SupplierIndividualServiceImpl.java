@@ -44,7 +44,15 @@ public class SupplierIndividualServiceImpl implements  SupplierIndividualService
     }
 
     @Override
-    public int batchInsert(List<SupplierIndividual> list) {
+    public int batchInsert(List<SupplierIndividual> list,String supplierSubjectID) {
+        for(SupplierIndividual si:list){
+            si.setSupplierSubjectId(supplierSubjectID);
+        }
         return supplierIndividualMapper.batchInsert(list);
+    }
+
+    @Override
+    public int deleteBySupplierSubjectId(String supplierSubjectId) {
+        return supplierIndividualMapper.deleteBySupplierSubjectId(supplierSubjectId);
     }
 }

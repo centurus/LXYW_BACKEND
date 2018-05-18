@@ -24,4 +24,6 @@ public interface SupplierIndividualMapper {
      * @author hewei
      */
     int batchInsert(@Param("list") java.util.List<SupplierIndividual> list);
+
+    int deleteBySupplierSubjectId(@Param("supplierSubjectId")String supplierSubjectId);
 }
