@@ -1,6 +1,6 @@
 package com.lxyw.service;
-
 import com.lxyw.dao.SupplierSubjectMapper;
+import com.lxyw.entity.SupplierIndividual;
 import com.lxyw.entity.SupplierSubject;
 import com.lxyw.util.PageBean;
 import com.lxyw.util.PrimaryKeyGenerator;
@@ -43,16 +43,26 @@ public class SupplierSubjectServiceImpl implements  SupplierSubjectService {
     @Override
     public int insertSelective(SupplierSubject record) {
         String supplierSubjectId = PrimaryKeyGenerator.getPrimaryKey();
-        if(!record.getSupplierIndividualList().isEmpty()){
+        record.setId(supplierSubjectId);
+        int result=supplierSubjectMapper.insertSelective(record);
+        if(record.getSupplierIndividualList()!=null&&!record.getSupplierIndividualList().isEmpty()){
             supplierIndividualService.batchInsert(record.getSupplierIndividualList(),supplierSubjectId);
         }
-        record.setId(supplierSubjectId);
-        return supplierSubjectMapper.insertSelective(record);
+        return result;
     }
 
+    /**
+     * 通过供应商主表主键查询供应商主子表信息
+     * @param id
+     * @return
+     */
     @Override
     public SupplierSubject selectByPrimaryKey(String id) {
-        return supplierSubjectMapper.selectByPrimaryKey(id);
+        SupplierSubject supplierSubject;
+        supplierSubject= supplierSubjectMapper.selectByPrimaryKey(id);
+        List<SupplierIndividual> supplierIndividualList=supplierIndividualService.getSupplierIndividualListBySubjectId(id);
+        supplierSubject.setSupplierIndividualList(supplierIndividualList);
+        return supplierSubject;
     }
 
     /**

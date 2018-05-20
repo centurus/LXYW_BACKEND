@@ -6,7 +6,6 @@
     <result column="SUPPLIER_SUBJECT_ID" jdbcType="VARCHAR" property="supplierSubjectId" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="POSITION" jdbcType="VARCHAR" property="position" />
-    <result column="STATE" jdbcType="VARCHAR" property="state" />
     <result column="CELLPHONE" jdbcType="VARCHAR" property="cellphone" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
@@ -18,7 +17,7 @@
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, SUPPLIER_SUBJECT_ID, NAME, POSITION, STATE, CELLPHONE, EMAIL, REMARK, CREATED_BY, 
+    ID, SUPPLIER_SUBJECT_ID, NAME, POSITION, CELLPHONE, EMAIL, REMARK, CREATED_BY,
     CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION, STATUS
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -33,12 +32,12 @@
   </delete>
   <insert id="insert" parameterType="com.lxyw.entity.SupplierIndividual">
     insert into supplier_individual (ID, SUPPLIER_SUBJECT_ID, NAME, 
-      POSITION, STATE, CELLPHONE, 
+      POSITION, CELLPHONE,
       EMAIL, REMARK, CREATED_BY, 
       CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
       VERSION, STATUS)
     values (#{id,jdbcType=VARCHAR}, #{supplierSubjectId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{position,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
       #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{version,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR})
@@ -57,9 +56,6 @@
       </if>
       <if test="position != null">
         POSITION,
-      </if>
-      <if test="state != null">
-        STATE,
       </if>
       <if test="cellphone != null">
         CELLPHONE,
@@ -102,8 +98,8 @@
       <if test="position != null">
         #{position,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        #{state,jdbcType=VARCHAR},
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="cellphone != null">
         #{cellphone,jdbcType=VARCHAR},
@@ -146,9 +142,6 @@
       <if test="position != null">
         POSITION = #{position,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        STATE = #{state,jdbcType=VARCHAR},
-      </if>
       <if test="cellphone != null">
         CELLPHONE = #{cellphone,jdbcType=VARCHAR},
       </if>
@@ -184,7 +177,6 @@
     set SUPPLIER_SUBJECT_ID = #{supplierSubjectId,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
       POSITION = #{position,jdbcType=VARCHAR},
-      STATE = #{state,jdbcType=VARCHAR},
       CELLPHONE = #{cellphone,jdbcType=VARCHAR},
       EMAIL = #{email,jdbcType=VARCHAR},
       REMARK = #{remark,jdbcType=VARCHAR},
@@ -197,14 +189,20 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="batchInsert" parameterType="java.util.List">
-    insert into supplier_individual (ID, SUPPLIER_SUBJECT_ID, NAME, POSITION, STATE, CELLPHONE, EMAIL, REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION, STATUS)
+    insert into supplier_individual (ID, SUPPLIER_SUBJECT_ID, NAME, POSITION, CELLPHONE, EMAIL, REMARK, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION, STATUS)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.supplierSubjectId,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.position,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT}, #{item.status,jdbcType=VARCHAR})
+       (#{item.id,jdbcType=VARCHAR}, #{item.supplierSubjectId,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.position,jdbcType=VARCHAR}, #{item.cellphone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT}, #{item.status,jdbcType=VARCHAR})
     </foreach>
   </insert>
   <delete id="deleteBySupplierSubjectId" parameterType="java.lang.String">
     delete from supplier_individual
     where SUPPLIER_SUBJECT_ID = #{supplierSubjectId,jdbcType=VARCHAR}
   </delete>
+  <select id="getSupplierIndividualListBySubjectId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from supplier_individual
+    where SUPPLIER_SUBJECT_ID = #{supplierSubjectId,jdbcType=VARCHAR}
+  </select>
 </mapper>

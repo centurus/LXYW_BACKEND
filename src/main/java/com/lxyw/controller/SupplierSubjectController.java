@@ -47,11 +47,13 @@ public class SupplierSubjectController {
     @ResponseBody
     public Response addSupplierSubject(@RequestBody SupplierSubject supplierSubject){
         Response response=new Response();
-        if(supplierSubject==null||StringUtils.isEmpty(supplierSubject.getSupplierName())){
+        //供应商姓名和供应商字表内容不能为空
+        if(supplierSubject==null||StringUtils.isEmpty(supplierSubject.getSupplierName())||
+                supplierSubject.getSupplierIndividualList()==null||supplierSubject.getSupplierIndividualList().isEmpty()){
             response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
             response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
         }else{
-            this.supplierSubjectService.insert(supplierSubject);
+            this.supplierSubjectService.insertSelective(supplierSubject);
         }
         return response;
     }
@@ -88,6 +90,25 @@ public class SupplierSubjectController {
             response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
         }else{
             this.supplierSubjectService.deleteByPrimaryKey(supplierSubject.getId());
+        }
+        return response;
+    }
+
+    /**
+     * 通过id查找供应商信息
+     * @param supplierSubject
+     * @return
+     */
+    @RequestMapping(value="/getSupplierSubjectById", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Response getSupplierSubjectById(@RequestBody SupplierSubject supplierSubject){
+        Response response=new Response();
+        if(supplierSubject==null||StringUtils.isEmpty(supplierSubject.getId())){
+            response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
+            response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
+        }else{
+            SupplierSubject result=this.supplierSubjectService.selectByPrimaryKey(supplierSubject.getId());
+            response.setData(result);
         }
         return response;
     }

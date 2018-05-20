@@ -55,4 +55,9 @@ public class SupplierIndividualServiceImpl implements  SupplierIndividualService
     public int deleteBySupplierSubjectId(String supplierSubjectId) {
         return supplierIndividualMapper.deleteBySupplierSubjectId(supplierSubjectId);
     }
+
+    @Override
+    public List<SupplierIndividual> getSupplierIndividualListBySubjectId(String supplierSubjectId) {
+        return supplierIndividualMapper.getSupplierIndividualListBySubjectId(supplierSubjectId);
+    }
 }

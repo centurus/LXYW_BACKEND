@@ -32,22 +32,22 @@ public class SupplierSubject {
 
     private String status;
 
-    private List<SupplierIndividual> SupplierIndividualList;
+    private List<SupplierIndividual> supplierIndividualList;
 
     public String getId() {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
     public List<SupplierIndividual> getSupplierIndividualList() {
-        return SupplierIndividualList;
+        return supplierIndividualList;
     }
 
     public void setSupplierIndividualList(List<SupplierIndividual> supplierIndividualList) {
-        SupplierIndividualList = supplierIndividualList;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.supplierIndividualList = supplierIndividualList;
     }
 
     public String getSupplierName() {
