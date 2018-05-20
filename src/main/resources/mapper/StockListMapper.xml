@@ -15,13 +15,13 @@
     <result column="STOCK_PRODUCT_SINGLE_NETWEIGHT" jdbcType="DECIMAL" property="stockProductSingleNetweight" />
     <result column="STOCK_PRODUCT_SINGLE_CAPACITY" jdbcType="DECIMAL" property="stockProductSingleCapacity" />
     <result column="STOCK_PRODUCT_BATCH" jdbcType="VARCHAR" property="stockProductBatch" />
-    <result column="STOCK_PRODUCT_STATE" jdbcType="VARCHAR" property="stockProductState" />
+    <result column="STOCK_PRODUCT_STATUS" jdbcType="VARCHAR" property="stockProductStatus" />
     <result column="STOCK_PRODUCT_STORAGE" jdbcType="VARCHAR" property="stockProductStorage" />
     <result column="STOCK_PRODUCT_WASTAGE" jdbcType="DECIMAL" property="stockProductWastage" />
     <result column="STOCK_PRODUCT_STORAGE_FEE" jdbcType="DECIMAL" property="stockProductStorageFee" />
     <result column="STOCK_PRODUCT_SUPPLIER_SUBJECT_ID" jdbcType="VARCHAR" property="stockProductSupplierSubjectId" />
-    <result column="PRODUCE_DATE" jdbcType="TIMESTAMP" property="produceDate" />
-    <result column="EXPIRE_DATE" jdbcType="TIMESTAMP" property="expireDate" />
+    <result column="STOCK_MANUFACTURE_DATE" jdbcType="DATE" property="stockManufactureDate" />
+    <result column="STOCK_EXPIRE_DATE" jdbcType="DATE" property="stockExpireDate" />
     <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy" />
     <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
     <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
@@ -32,9 +32,9 @@
     ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, 
     STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, 
     STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, STOCK_PRODUCT_SINGLE_CAPACITY, 
-    STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, 
-    STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, PRODUCE_DATE, EXPIRE_DATE, 
-    CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION
+    STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATUS, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, 
+    STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, STOCK_MANUFACTURE_DATE, 
+    STOCK_EXPIRE_DATE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -46,32 +46,6 @@
     delete from stock_list
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.lxyw.entity.StockList">
-    insert into stock_list (ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, 
-      STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, 
-      STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, 
-      STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, 
-      STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, 
-      STOCK_PRODUCT_SINGLE_CAPACITY, STOCK_PRODUCT_BATCH, 
-      STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, 
-      STOCK_PRODUCT_WASTAGE, STOCK_PRODUCT_STORAGE_FEE, 
-      STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, PRODUCE_DATE, 
-      EXPIRE_DATE, CREATED_BY, CREATED_DATE, 
-      UPDATE_BY, UPDATE_DATE, VERSION
-      )
-    values (#{id,jdbcType=VARCHAR}, #{stockProductName,jdbcType=VARCHAR}, #{stockProductQno,jdbcType=VARCHAR}, 
-      #{stockProductLocation,jdbcType=VARCHAR}, #{stockProductNum,jdbcType=DECIMAL}, 
-      #{stockProductPosition,jdbcType=VARCHAR}, #{stockProductPlusNum,jdbcType=DECIMAL}, 
-      #{stockProductPlusPosition,jdbcType=VARCHAR}, #{stockProductFormatNum,jdbcType=DECIMAL}, 
-      #{stockProductGuaranteeTime,jdbcType=VARCHAR}, #{stockProductSingleNetweight,jdbcType=DECIMAL}, 
-      #{stockProductSingleCapacity,jdbcType=DECIMAL}, #{stockProductBatch,jdbcType=VARCHAR}, 
-      #{stockProductState,jdbcType=VARCHAR}, #{stockProductStorage,jdbcType=VARCHAR}, 
-      #{stockProductWastage,jdbcType=DECIMAL}, #{stockProductStorageFee,jdbcType=DECIMAL}, 
-      #{stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{produceDate,jdbcType=TIMESTAMP}, 
-      #{expireDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.lxyw.entity.StockList">
     insert into stock_list
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -114,8 +88,8 @@
       <if test="stockProductBatch != null">
         STOCK_PRODUCT_BATCH,
       </if>
-      <if test="stockProductState != null">
-        STOCK_PRODUCT_STATE,
+      <if test="stockProductStatus != null">
+        STOCK_PRODUCT_STATUS,
       </if>
       <if test="stockProductStorage != null">
         STOCK_PRODUCT_STORAGE,
@@ -129,11 +103,11 @@
       <if test="stockProductSupplierSubjectId != null">
         STOCK_PRODUCT_SUPPLIER_SUBJECT_ID,
       </if>
-      <if test="produceDate != null">
-        PRODUCE_DATE,
+      <if test="stockManufactureDate != null">
+        STOCK_MANUFACTURE_DATE,
       </if>
-      <if test="expireDate != null">
-        EXPIRE_DATE,
+      <if test="stockExpireDate != null">
+        STOCK_EXPIRE_DATE,
       </if>
       <if test="createdBy != null">
         CREATED_BY,
@@ -191,8 +165,8 @@
       <if test="stockProductBatch != null">
         #{stockProductBatch,jdbcType=VARCHAR},
       </if>
-      <if test="stockProductState != null">
-        #{stockProductState,jdbcType=VARCHAR},
+      <if test="stockProductStatus != null">
+        #{stockProductStatus,jdbcType=VARCHAR},
       </if>
       <if test="stockProductStorage != null">
         #{stockProductStorage,jdbcType=VARCHAR},
@@ -206,11 +180,11 @@
       <if test="stockProductSupplierSubjectId != null">
         #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
       </if>
-      <if test="produceDate != null">
-        #{produceDate,jdbcType=TIMESTAMP},
+      <if test="stockManufactureDate != null">
+        #{stockManufactureDate,jdbcType=DATE},
       </if>
-      <if test="expireDate != null">
-        #{expireDate,jdbcType=TIMESTAMP},
+      <if test="stockExpireDate != null">
+        #{stockExpireDate,jdbcType=DATE},
       </if>
       <if test="createdBy != null">
         #{createdBy,jdbcType=VARCHAR},
@@ -268,8 +242,8 @@
       <if test="stockProductBatch != null">
         STOCK_PRODUCT_BATCH = #{stockProductBatch,jdbcType=VARCHAR},
       </if>
-      <if test="stockProductState != null">
-        STOCK_PRODUCT_STATE = #{stockProductState,jdbcType=VARCHAR},
+      <if test="stockProductStatus != null">
+        STOCK_PRODUCT_STATUS = #{stockProductStatus,jdbcType=VARCHAR},
       </if>
       <if test="stockProductStorage != null">
         STOCK_PRODUCT_STORAGE = #{stockProductStorage,jdbcType=VARCHAR},
@@ -283,11 +257,11 @@
       <if test="stockProductSupplierSubjectId != null">
         STOCK_PRODUCT_SUPPLIER_SUBJECT_ID = #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
       </if>
-      <if test="produceDate != null">
-        PRODUCE_DATE = #{produceDate,jdbcType=TIMESTAMP},
+      <if test="stockManufactureDate != null">
+        STOCK_MANUFACTURE_DATE = #{stockManufactureDate,jdbcType=DATE},
       </if>
-      <if test="expireDate != null">
-        EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      <if test="stockExpireDate != null">
+        STOCK_EXPIRE_DATE = #{stockExpireDate,jdbcType=DATE},
       </if>
       <if test="createdBy != null">
         CREATED_BY = #{createdBy,jdbcType=VARCHAR},
@@ -321,13 +295,13 @@
       STOCK_PRODUCT_SINGLE_NETWEIGHT = #{stockProductSingleNetweight,jdbcType=DECIMAL},
       STOCK_PRODUCT_SINGLE_CAPACITY = #{stockProductSingleCapacity,jdbcType=DECIMAL},
       STOCK_PRODUCT_BATCH = #{stockProductBatch,jdbcType=VARCHAR},
-      STOCK_PRODUCT_STATE = #{stockProductState,jdbcType=VARCHAR},
+      STOCK_PRODUCT_STATUS = #{stockProductStatus,jdbcType=VARCHAR},
       STOCK_PRODUCT_STORAGE = #{stockProductStorage,jdbcType=VARCHAR},
       STOCK_PRODUCT_WASTAGE = #{stockProductWastage,jdbcType=DECIMAL},
       STOCK_PRODUCT_STORAGE_FEE = #{stockProductStorageFee,jdbcType=DECIMAL},
       STOCK_PRODUCT_SUPPLIER_SUBJECT_ID = #{stockProductSupplierSubjectId,jdbcType=VARCHAR},
-      PRODUCE_DATE = #{produceDate,jdbcType=TIMESTAMP},
-      EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      STOCK_MANUFACTURE_DATE = #{stockManufactureDate,jdbcType=DATE},
+      STOCK_EXPIRE_DATE = #{stockExpireDate,jdbcType=DATE},
       CREATED_BY = #{createdBy,jdbcType=VARCHAR},
       CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
       UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
@@ -336,15 +310,170 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   <insert id="batchInsert" parameterType="java.util.List">
-    <!--
-      WARNING - @mbg.generated
-      这个节点为代码生成工具生成，请不要修改!
-      @author hewei
-    -->
-    insert into stock_list (ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, STOCK_PRODUCT_SINGLE_CAPACITY, STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATE, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, PRODUCE_DATE, EXPIRE_DATE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    insert into stock_list (ID, STOCK_PRODUCT_NAME, STOCK_PRODUCT_QNO, STOCK_PRODUCT_LOCATION, STOCK_PRODUCT_NUM, STOCK_PRODUCT_POSITION, STOCK_PRODUCT_PLUS_NUM, STOCK_PRODUCT_PLUS_POSITION, STOCK_PRODUCT_FORMAT_NUM, STOCK_PRODUCT_GUARANTEE_TIME, STOCK_PRODUCT_SINGLE_NETWEIGHT, STOCK_PRODUCT_SINGLE_CAPACITY, STOCK_PRODUCT_BATCH, STOCK_PRODUCT_STATUS, STOCK_PRODUCT_STORAGE, STOCK_PRODUCT_WASTAGE, STOCK_PRODUCT_STORAGE_FEE, STOCK_PRODUCT_SUPPLIER_SUBJECT_ID, STOCK_MANUFACTURE_DATE, STOCK_EXPIRE_DATE, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.stockProductName,jdbcType=VARCHAR}, #{item.stockProductQno,jdbcType=VARCHAR}, #{item.stockProductLocation,jdbcType=VARCHAR}, #{item.stockProductNum,jdbcType=DECIMAL}, #{item.stockProductPosition,jdbcType=VARCHAR}, #{item.stockProductPlusNum,jdbcType=DECIMAL}, #{item.stockProductPlusPosition,jdbcType=VARCHAR}, #{item.stockProductFormatNum,jdbcType=DECIMAL}, #{item.stockProductGuaranteeTime,jdbcType=VARCHAR}, #{item.stockProductSingleNetweight,jdbcType=DECIMAL}, #{item.stockProductSingleCapacity,jdbcType=DECIMAL}, #{item.stockProductBatch,jdbcType=VARCHAR}, #{item.stockProductState,jdbcType=VARCHAR}, #{item.stockProductStorage,jdbcType=VARCHAR}, #{item.stockProductWastage,jdbcType=DECIMAL}, #{item.stockProductStorageFee,jdbcType=DECIMAL}, #{item.stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{item.produceDate,jdbcType=TIMESTAMP}, #{item.expireDate,jdbcType=TIMESTAMP}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+       (#{item.id,jdbcType=VARCHAR}, #{item.stockProductName,jdbcType=VARCHAR}, #{item.stockProductQno,jdbcType=VARCHAR}, #{item.stockProductLocation,jdbcType=VARCHAR}, #{item.stockProductNum,jdbcType=DECIMAL}, #{item.stockProductPosition,jdbcType=VARCHAR}, #{item.stockProductPlusNum,jdbcType=DECIMAL}, #{item.stockProductPlusPosition,jdbcType=VARCHAR}, #{item.stockProductFormatNum,jdbcType=DECIMAL}, #{item.stockProductGuaranteeTime,jdbcType=VARCHAR}, #{item.stockProductSingleNetweight,jdbcType=DECIMAL}, #{item.stockProductSingleCapacity,jdbcType=DECIMAL}, #{item.stockProductBatch,jdbcType=VARCHAR}, #{item.stockProductStatus,jdbcType=VARCHAR}, #{item.stockProductStorage,jdbcType=VARCHAR}, #{item.stockProductWastage,jdbcType=DECIMAL}, #{item.stockProductStorageFee,jdbcType=DECIMAL}, #{item.stockProductSupplierSubjectId,jdbcType=VARCHAR}, #{item.stockManufactureDate,jdbcType=DATE}, #{item.stockExpireDate,jdbcType=DATE}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <select id="selectStockListByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock_list
+    where 1=1
+    <if test="condition.stockProductName != null and condition.stockProductName!=''">
+      AND STOCK_PRODUCT_NAME = #{condition.stockProductName,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductQno != null and condition.stockProductQno !=''">
+      AND STOCK_PRODUCT_QNO = #{condition.stockProductQno,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductLocation != null and condition.stockProductLocation!=''">
+      AND STOCK_PRODUCT_LOCATION = #{condition.stockProductLocation,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductNum != null and condition.stockProductNum !=''">
+      AND STOCK_PRODUCT_NUM = #{condition.stockProductNum,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductPosition != null and condition.stockProductPosition !=''">
+      AND STOCK_PRODUCT_POSITION = #{condition.stockProductPosition,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductPlusNum != null">
+      AND STOCK_PRODUCT_PLUS_NUM = #{condition.stockProductPlusNum,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductPlusPosition != null and condition.stockProductPlusPosition!=''">
+      AND STOCK_PRODUCT_PLUS_POSITION = #{condition.stockProductPlusPosition,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductFormatNum != null">
+      AND STOCK_PRODUCT_FORMAT_NUM = #{condition.stockProductFormatNum,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductGuaranteeTime != null">
+      AND STOCK_PRODUCT_GUARANTEE_TIME = #{condition.stockProductGuaranteeTime,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductSingleNetweight != null and condition.stockProductSingleNetweight!=''">
+      AND STOCK_PRODUCT_SINGLE_NETWEIGHT = #{condition.stockProductSingleNetweight,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductSingleCapacity != null and ondition.stockProductSingleCapacity!=''">
+      AND STOCK_PRODUCT_SINGLE_CAPACITY = #{condition.stockProductSingleCapacity,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductBatch != null">
+      AND STOCK_PRODUCT_BATCH = #{condition.stockProductBatch,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductStatus != null">
+      AND STOCK_PRODUCT_STATUS = #{condition.stockProductStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductStorage != null">
+      AND STOCK_PRODUCT_STORAGE = #{condition.stockProductStorage,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductWastage != null">
+      AND STOCK_PRODUCT_WASTAGE = #{condition.stockProductWastage,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductStorageFee != null">
+      AND STOCK_PRODUCT_STORAGE_FEE = #{condition.stockProductStorageFee,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductSupplierSubjectId != null">
+      AND STOCK_PRODUCT_SUPPLIER_SUBJECT_ID = #{condition.stockProductSupplierSubjectId,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockManufactureDate != null">
+      AND STOCK_MANUFACTURE_DATE = #{condition.stockManufactureDate,jdbcType=DATE}
+    </if>
+    <if test="condition.stockExpireDate != null">
+      AND STOCK_EXPIRE_DATE = #{condition.stockExpireDate,jdbcType=DATE}
+    </if>
+    <if test="condition.createdBy != null">
+      AND CREATED_BY = #{condition.createdBy,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.startDate != null and condition.startDate != ''and condition.endDate != null and condition.endDate != ''">
+      AND CREATED_DATE BETWEEN #{condition.startDate} AND #{condition.endDate}
+    </if>
+    <if test="condition.updateBy != null">
+      AND UPDATE_BY = #{condition.updateBy,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.updateDate != null">
+      AND UPDATE_DATE = #{condition.updateDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="condition.version != null">
+      AND VERSION = #{condition.version,jdbcType=BIGINT}
+    </if>
+    ORDER BY CREATED_DATE DESC
+    limit #{startIndex},#{pageSize}
+  </select>
+
+  <select id="selectStockListCountByCondition" resultType="java.lang.Integer">
+    select
+    count(1)
+    from stock_list
+    where 1=1
+    <if test="condition.stockProductName != null and condition.stockProductName!=''">
+      AND STOCK_PRODUCT_NAME = #{condition.stockProductName,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductQno != null and condition.stockProductQno !=''">
+      AND STOCK_PRODUCT_QNO = #{condition.stockProductQno,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductLocation != null and condition.stockProductLocation!=''">
+      AND STOCK_PRODUCT_LOCATION = #{condition.stockProductLocation,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductNum != null and condition.stockProductNum !=''">
+      AND STOCK_PRODUCT_NUM = #{condition.stockProductNum,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductPosition != null and condition.stockProductPosition !=''">
+      AND STOCK_PRODUCT_POSITION = #{condition.stockProductPosition,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductPlusNum != null">
+      AND STOCK_PRODUCT_PLUS_NUM = #{condition.stockProductPlusNum,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductPlusPosition != null and condition.stockProductPlusPosition!=''">
+      AND STOCK_PRODUCT_PLUS_POSITION = #{condition.stockProductPlusPosition,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductFormatNum != null">
+      AND STOCK_PRODUCT_FORMAT_NUM = #{condition.stockProductFormatNum,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductGuaranteeTime != null">
+      AND STOCK_PRODUCT_GUARANTEE_TIME = #{condition.stockProductGuaranteeTime,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductSingleNetweight != null and condition.stockProductSingleNetweight!=''">
+      AND STOCK_PRODUCT_SINGLE_NETWEIGHT = #{condition.stockProductSingleNetweight,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductSingleCapacity != null and ondition.stockProductSingleCapacity!=''">
+      AND STOCK_PRODUCT_SINGLE_CAPACITY = #{condition.stockProductSingleCapacity,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductBatch != null">
+      AND STOCK_PRODUCT_BATCH = #{condition.stockProductBatch,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductStatus != null">
+      AND STOCK_PRODUCT_STATUS = #{condition.stockProductStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductStorage != null">
+      AND STOCK_PRODUCT_STORAGE = #{condition.stockProductStorage,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockProductWastage != null">
+      AND STOCK_PRODUCT_WASTAGE = #{condition.stockProductWastage,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductStorageFee != null">
+      AND STOCK_PRODUCT_STORAGE_FEE = #{condition.stockProductStorageFee,jdbcType=DECIMAL}
+    </if>
+    <if test="condition.stockProductSupplierSubjectId != null">
+      AND STOCK_PRODUCT_SUPPLIER_SUBJECT_ID = #{condition.stockProductSupplierSubjectId,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stockManufactureDate != null">
+      AND STOCK_MANUFACTURE_DATE = #{condition.stockManufactureDate,jdbcType=DATE}
+    </if>
+    <if test="condition.stockExpireDate != null">
+      AND STOCK_EXPIRE_DATE = #{condition.stockExpireDate,jdbcType=DATE}
+    </if>
+    <if test="condition.createdBy != null">
+      AND CREATED_BY = #{condition.createdBy,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.startDate != null and condition.startDate != ''and condition.endDate != null and condition.endDate != ''">
+      AND CREATED_DATE BETWEEN #{condition.startDate} AND #{condition.endDate}
+    </if>
+    <if test="condition.updateBy != null">
+      AND UPDATE_BY = #{condition.updateBy,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.updateDate != null">
+      AND UPDATE_DATE = #{condition.updateDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="condition.version != null">
+      AND VERSION = #{condition.version,jdbcType=BIGINT}
+    </if>
+  </select>
 </mapper>

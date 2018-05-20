@@ -7,15 +7,20 @@ import java.util.List;
 public interface StockListFeeService {
     int deleteByPrimaryKey(String id);
 
-    int insert(StockListFee record);
-
     int insertSelective(StockListFee record);
 
     StockListFee selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(StockListFee record);
 
-    int updateByPrimaryKey(StockListFee record);
+    int batchInsert(List<StockListFee> list,String stockListId);
 
-    int batchInsert(List<StockListFee> list);
+    List<StockListFee> getStockListFeeByStockListId(String id);
+
+    /**
+     * 通过主表主键删除
+     * @param id
+     * @return
+     */
+    int deleteByStockListId(String id);
 }

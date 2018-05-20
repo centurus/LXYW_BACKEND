@@ -30,11 +30,6 @@ public class SupplierSubjectServiceImpl implements  SupplierSubjectService {
         return supplierSubjectMapper.deleteByPrimaryKey(id);
     }
 
-    @Override
-    public int insert(SupplierSubject record) {
-        return supplierSubjectMapper.insert(record);
-    }
-
     /**
      * 供应商主子表新增
      * @param record
@@ -54,14 +49,17 @@ public class SupplierSubjectServiceImpl implements  SupplierSubjectService {
     /**
      * 通过供应商主表主键查询供应商主子表信息
      * @param id
+     * @param showSubInfo 是否需要查询字表信息
      * @return
      */
     @Override
-    public SupplierSubject selectByPrimaryKey(String id) {
+    public SupplierSubject selectByPrimaryKey(String id,boolean showSubInfo) {
         SupplierSubject supplierSubject;
         supplierSubject= supplierSubjectMapper.selectByPrimaryKey(id);
-        List<SupplierIndividual> supplierIndividualList=supplierIndividualService.getSupplierIndividualListBySubjectId(id);
-        supplierSubject.setSupplierIndividualList(supplierIndividualList);
+        if(showSubInfo){
+            List<SupplierIndividual> supplierIndividualList=supplierIndividualService.getSupplierIndividualListBySubjectId(id);
+            supplierSubject.setSupplierIndividualList(supplierIndividualList);
+        }
         return supplierSubject;
     }
 
@@ -78,11 +76,6 @@ public class SupplierSubjectServiceImpl implements  SupplierSubjectService {
         supplierIndividualService.batchInsert(record.getSupplierIndividualList(),record.getId());
         //最后更新主表
         return supplierSubjectMapper.updateByPrimaryKeySelective(record);}
-
-    @Override
-    public int updateByPrimaryKey(SupplierSubject record) {
-        return supplierSubjectMapper.updateByPrimaryKey(record);
-    }
 
     @Override
     public int batchInsert(List<SupplierSubject> list) {

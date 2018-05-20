@@ -3,6 +3,8 @@ package com.lxyw.dao;
 import com.lxyw.entity.StockListFee;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface StockListFeeMapper {
     int deleteByPrimaryKey(String id);
 
@@ -16,12 +18,19 @@ public interface StockListFeeMapper {
 
     int updateByPrimaryKey(StockListFee record);
 
-    /**
-     * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
-     * This method corresponds to the database table stock_list_fee
-     *
-     * @mbg.generated
-     * @author hewei
-     */
     int batchInsert(@Param("list") java.util.List<StockListFee> list);
+
+    /**
+     * 通过stockList主键删除
+     * @param id
+     * @return
+     */
+    int deleteByStockListId(@Param("stockListId")String stockListId);
+
+    /**
+     * 通过stockListid获取stockListFee对象
+     * @param id
+     * @return
+     */
+    List<StockListFee> getStockListFeeByStockListId(@Param("stockListId")String stockListId);
 }

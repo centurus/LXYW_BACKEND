@@ -107,7 +107,7 @@ public class SupplierSubjectController {
             response.setCode(ResponseCode.INVALID_PAREMETER.getCode());
             response.setMessage(ResponseCode.INVALID_PAREMETER.getMessage());
         }else{
-            SupplierSubject result=this.supplierSubjectService.selectByPrimaryKey(supplierSubject.getId());
+            SupplierSubject result=this.supplierSubjectService.selectByPrimaryKey(supplierSubject.getId(),true);
             response.setData(result);
         }
         return response;

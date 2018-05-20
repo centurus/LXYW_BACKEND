@@ -5,6 +5,7 @@
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="FEE_TYPE" jdbcType="VARCHAR" property="feeType" />
     <result column="FEE_NUM" jdbcType="DECIMAL" property="feeNum" />
+    <result column="PAY_DATE" jdbcType="TIMESTAMP" property="payDate" />
     <result column="STOCK_LIST_ID" jdbcType="VARCHAR" property="stockListId" />
     <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy" />
     <result column="CREATED_DATE" jdbcType="TIMESTAMP" property="createdDate" />
@@ -13,8 +14,8 @@
     <result column="VERSION" jdbcType="BIGINT" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, FEE_TYPE, FEE_NUM, STOCK_LIST_ID, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
-    VERSION
+    ID, FEE_TYPE, FEE_NUM, PAY_DATE, STOCK_LIST_ID, CREATED_BY, CREATED_DATE, UPDATE_BY, 
+    UPDATE_DATE, VERSION
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -28,13 +29,13 @@
   </delete>
   <insert id="insert" parameterType="com.lxyw.entity.StockListFee">
     insert into stock_list_fee (ID, FEE_TYPE, FEE_NUM, 
-      STOCK_LIST_ID, CREATED_BY, CREATED_DATE, 
-      UPDATE_BY, UPDATE_DATE, VERSION
-      )
+      PAY_DATE, STOCK_LIST_ID, CREATED_BY, 
+      CREATED_DATE, UPDATE_BY, UPDATE_DATE, 
+      VERSION)
     values (#{id,jdbcType=VARCHAR}, #{feeType,jdbcType=VARCHAR}, #{feeNum,jdbcType=DECIMAL}, 
-      #{stockListId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{version,jdbcType=BIGINT}
-      )
+      #{payDate,jdbcType=TIMESTAMP}, #{stockListId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.lxyw.entity.StockListFee">
     insert into stock_list_fee
@@ -47,6 +48,9 @@
       </if>
       <if test="feeNum != null">
         FEE_NUM,
+      </if>
+      <if test="payDate != null">
+        PAY_DATE,
       </if>
       <if test="stockListId != null">
         STOCK_LIST_ID,
@@ -77,6 +81,9 @@
       <if test="feeNum != null">
         #{feeNum,jdbcType=DECIMAL},
       </if>
+      <if test="payDate != null">
+        #{payDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="stockListId != null">
         #{stockListId,jdbcType=VARCHAR},
       </if>
@@ -106,6 +113,9 @@
       <if test="feeNum != null">
         FEE_NUM = #{feeNum,jdbcType=DECIMAL},
       </if>
+      <if test="payDate != null">
+        PAY_DATE = #{payDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="stockListId != null">
         STOCK_LIST_ID = #{stockListId,jdbcType=VARCHAR},
       </if>
@@ -131,6 +141,7 @@
     update stock_list_fee
     set FEE_TYPE = #{feeType,jdbcType=VARCHAR},
       FEE_NUM = #{feeNum,jdbcType=DECIMAL},
+      PAY_DATE = #{payDate,jdbcType=TIMESTAMP},
       STOCK_LIST_ID = #{stockListId,jdbcType=VARCHAR},
       CREATED_BY = #{createdBy,jdbcType=VARCHAR},
       CREATED_DATE = #{createdDate,jdbcType=TIMESTAMP},
@@ -145,10 +156,22 @@
       这个节点为代码生成工具生成，请不要修改!
       @author hewei
     -->
-    insert into stock_list_fee (ID, FEE_TYPE, FEE_NUM, STOCK_LIST_ID, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
+    insert into stock_list_fee (ID, FEE_TYPE, FEE_NUM, PAY_DATE, STOCK_LIST_ID, CREATED_BY, CREATED_DATE, UPDATE_BY, UPDATE_DATE, VERSION)
     values
     <foreach collection="list" item="item" separator=",">
-       (#{item.id,jdbcType=VARCHAR}, #{item.feeType,jdbcType=VARCHAR}, #{item.feeNum,jdbcType=DECIMAL}, #{item.stockListId,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
+       (#{item.id,jdbcType=VARCHAR}, #{item.feeType,jdbcType=VARCHAR}, #{item.feeNum,jdbcType=DECIMAL}, #{item.payDate,jdbcType=TIMESTAMP}, #{item.stockListId,jdbcType=VARCHAR}, #{item.createdBy,jdbcType=VARCHAR}, #{item.createdDate,jdbcType=TIMESTAMP}, #{item.updateBy,jdbcType=VARCHAR}, #{item.updateDate,jdbcType=TIMESTAMP}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <delete id="deleteByStockListId" parameterType="java.lang.String">
+    delete from stock_list_fee
+    where STOCK_LIST_ID = #{stockListId,jdbcType=VARCHAR}
+  </delete>
+
+  <select id="getStockListFeeByStockListId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock_list_fee
+    where STOCK_LIST_ID = #{stockListId,jdbcType=VARCHAR}
+  </select>
 </mapper>
