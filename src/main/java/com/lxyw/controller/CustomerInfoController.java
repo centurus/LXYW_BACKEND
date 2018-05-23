@@ -2,7 +2,6 @@ package com.lxyw.controller;
 
 
 import com.lxyw.entity.CustomerInfo;
-import com.lxyw.entityVo.CustomerInfoAndLinksVo;
 import com.lxyw.entityVo.CustomerInfoVo;
 import com.lxyw.service.CustomerInfoService;
 import com.lxyw.util.PageBean;

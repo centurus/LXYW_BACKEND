@@ -10,6 +10,8 @@ public class StockListFee {
 
     private BigDecimal feeNum;
 
+    private Date payDate;
+
     private String stockListId;
 
     private String createdBy;
@@ -21,6 +23,16 @@ public class StockListFee {
     private Date updateDate;
 
     private Long version;
+
+    public String getPayDateStr() {
+        return payDateStr;
+    }
+
+    public void setPayDateStr(String payDateStr) {
+        this.payDateStr = payDateStr;
+    }
+
+    private String payDateStr;
 
     public String getId() {
         return id;
@@ -44,6 +56,14 @@ public class StockListFee {
 
     public void setFeeNum(BigDecimal feeNum) {
         this.feeNum = feeNum;
+    }
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
     }
 
     public String getStockListId() {

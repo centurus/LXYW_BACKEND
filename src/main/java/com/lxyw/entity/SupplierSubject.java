@@ -1,6 +1,7 @@
 package com.lxyw.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class SupplierSubject {
     private String id;
@@ -31,12 +32,22 @@ public class SupplierSubject {
 
     private String status;
 
+    private List<SupplierIndividual> supplierIndividualList;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public List<SupplierIndividual> getSupplierIndividualList() {
+        return supplierIndividualList;
+    }
+
+    public void setSupplierIndividualList(List<SupplierIndividual> supplierIndividualList) {
+        this.supplierIndividualList = supplierIndividualList;
     }
 
     public String getSupplierName() {

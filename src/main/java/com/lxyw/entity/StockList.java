@@ -2,6 +2,7 @@ package com.lxyw.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class StockList {
     private String id;
@@ -30,7 +31,7 @@ public class StockList {
 
     private String stockProductBatch;
 
-    private String stockProductState;
+    private String stockProductStatus;
 
     private String stockProductStorage;
 
@@ -40,9 +41,9 @@ public class StockList {
 
     private String stockProductSupplierSubjectId;
 
-    private Date produceDate;
+    private Date stockManufactureDate;
 
-    private Date expireDate;
+    private Date stockExpireDate;
 
     private String createdBy;
 
@@ -53,6 +54,47 @@ public class StockList {
     private Date updateDate;
 
     private Long version;
+
+    private List<StockListFee> stockListFeeList;
+
+    private String supplierSubjectName;
+
+    private String startDate;
+
+    private String endDate;
+
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getSupplierSubjectName() {
+        return supplierSubjectName;
+    }
+
+    public void setSupplierSubjectName(String supplierSubjectName) {
+        this.supplierSubjectName = supplierSubjectName;
+    }
+
+    public List<StockListFee> getStockListFeeList() {
+        return stockListFeeList;
+    }
+
+    public void setStockListFeeList(List<StockListFee> stockListFeeList) {
+        this.stockListFeeList = stockListFeeList;
+    }
 
     public String getId() {
         return id;
@@ -158,12 +200,12 @@ public class StockList {
         this.stockProductBatch = stockProductBatch == null ? null : stockProductBatch.trim();
     }
 
-    public String getStockProductState() {
-        return stockProductState;
+    public String getStockProductStatus() {
+        return stockProductStatus;
     }
 
-    public void setStockProductState(String stockProductState) {
-        this.stockProductState = stockProductState == null ? null : stockProductState.trim();
+    public void setStockProductStatus(String stockProductStatus) {
+        this.stockProductStatus = stockProductStatus == null ? null : stockProductStatus.trim();
     }
 
     public String getStockProductStorage() {
@@ -198,20 +240,20 @@ public class StockList {
         this.stockProductSupplierSubjectId = stockProductSupplierSubjectId == null ? null : stockProductSupplierSubjectId.trim();
     }
 
-    public Date getProduceDate() {
-        return produceDate;
+    public Date getStockManufactureDate() {
+        return stockManufactureDate;
     }
 
-    public void setProduceDate(Date produceDate) {
-        this.produceDate = produceDate;
+    public void setStockManufactureDate(Date stockManufactureDate) {
+        this.stockManufactureDate = stockManufactureDate;
     }
 
-    public Date getExpireDate() {
-        return expireDate;
+    public Date getStockExpireDate() {
+        return stockExpireDate;
     }
 
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
+    public void setStockExpireDate(Date stockExpireDate) {
+        this.stockExpireDate = stockExpireDate;
     }
 
     public String getCreatedBy() {

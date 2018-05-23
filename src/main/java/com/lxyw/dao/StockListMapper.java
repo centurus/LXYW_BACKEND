@@ -3,10 +3,10 @@ package com.lxyw.dao;
 import com.lxyw.entity.StockList;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface StockListMapper {
     int deleteByPrimaryKey(String id);
-
-    int insert(StockList record);
 
     int insertSelective(StockList record);
 
@@ -16,12 +16,9 @@ public interface StockListMapper {
 
     int updateByPrimaryKey(StockList record);
 
-    /**
-     * 这是Mybatis Generator拓展插件生成的方法(请勿删除).
-     * This method corresponds to the database table stock_list
-     *
-     * @mbg.generated
-     * @author hewei
-     */
     int batchInsert(@Param("list") java.util.List<StockList> list);
+
+    List<StockList> selectStockListByCondition(@Param("condition")StockList stockList,@Param("startIndex")int startIndex,@Param("pageSize")int pageSize);
+
+    int selectStockListCountByCondition(@Param("condition")StockList stockList);
 }

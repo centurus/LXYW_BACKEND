@@ -17,5 +17,9 @@ public interface SupplierIndividualService {
 
     int updateByPrimaryKey(SupplierIndividual record);
 
-    int batchInsert(List<SupplierIndividual> list);
+    int batchInsert(List<SupplierIndividual> list,String supplierSubjectID);
+
+    int deleteBySupplierSubjectId(String supplierSubjectId);
+
+    List<SupplierIndividual> getSupplierIndividualListBySubjectId(String supplierSubjectId);
 }
